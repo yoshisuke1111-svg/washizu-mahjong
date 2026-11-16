@@ -135,6 +135,135 @@ body {
 }
 #centerPlate .center-hole {overflow:visible}
 @media (prefers-reduced-motion:reduce) {.draw-flight {filter:none}}
+
+/* v0.7 visual cleanup: readable souzu + clearer opponent transparent tiles */
+.tile .sou-art{width:96%;height:98%;flex:none;display:block;overflow:visible;filter:drop-shadow(0 0 .35px #0d292c)}
+.tile.clear .sou-art,.tile.clear .pip-art{filter:drop-shadow(0 0 1px #efffff) contrast(1.18) saturate(1.18)}
+.tile.clear{background:linear-gradient(123deg,#f7fffdba 0%,#d0eee2a8 24%,#edf9f4ad 58%,#c7e7dca6 100%);border-color:#effffd;box-shadow:inset 2px 2px 3px #ffffffea,inset -2px -2px 3px #6aa69642,0 1px 0 #effff9d6,1px 3px 4px #35563a59;backdrop-filter:blur(.35px) saturate(1.16)}
+.tile.clear .face{color:#072c29;position:relative;filter:contrast(1.14)}
+.tile.clear .face::before{content:'';position:absolute;inset:4% 5%;z-index:0;border-radius:4px;background:linear-gradient(180deg,rgba(250,255,252,.58),rgba(238,248,243,.28));box-shadow:inset 0 0 0 1px rgba(255,255,255,.58)}
+.tile.clear .face>*{position:relative;z-index:1}
+.seat-opponent .tile.clear{background:linear-gradient(123deg,#fbfffdce 0%,#e1f4ecbc 28%,#f7fdfabc 60%,#d2ece2ba 100%);border-color:#f6fffd;box-shadow:inset 2px 2px 3px #ffffffef,inset -2px -2px 3px #73af9e40,0 1px 0 #f4fffb,1px 3px 4px #2e4f3950}
+.seat-opponent .tile.clear .face::before{background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(246,255,250,.42));box-shadow:inset 0 0 0 1px rgba(255,255,255,.72),0 0 0 1px rgba(124,178,159,.2)}
+.peek-tiles .tile{--tile-width:26px;--tile-height:37px}
+.peek-tiles .tile.peek-opaque .sou-art,.peek-tiles .tile.peek-opaque .pip-art{filter:contrast(1.17) saturate(1.12)}
+
+/* v0.8: mahjong table: deeper green cloth, raised wooden bed and front apron. */
+.arena-wrap {
+  background:linear-gradient(155deg,#4d6945,#314938 75%,#243b2e);
+  border:1px solid #6e9166;
+  padding:8px;
+  box-shadow:inset 0 0 0 1px #bad3a944,0 15px 45px #08161083;
+}
+.arena {
+  background:radial-gradient(ellipse at 50% 40%,#789f71 0%,#557d58 68%,#3c6147 100%);
+  overflow:hidden;
+}
+.table-underbody {
+  position:absolute;
+  z-index:0;
+  inset:11% 7.5% 5.5%;
+  border-radius:30px 30px 22px 22px;
+  border:5px solid #483124;
+  background:linear-gradient(92deg,#503722 0%,#97724d 10%,#6d5035 25%,#76583d 73%,#493324 94%,#30261e 100%);
+  box-shadow:0 19px 22px #12271a99,0 4px 0 #301d16,inset 0 -12px 14px #261b1490,inset 0 4px 8px #dfbe7a44;
+  transform:perspective(850px) rotateX(-3deg);
+  pointer-events:none;
+}
+.table-underbody:before {
+  content:'';position:absolute;bottom:0;left:5%;right:5%;height:9%;
+  border-top:2px solid #b19061aa;
+  border-bottom:3px solid #2f231b;
+  background:linear-gradient(180deg,#8c6c43,#61432b 48%,#33291f 100%);
+  box-shadow:0 5px 6px #192c1bcc,inset 0 2px 4px #e5c4914a;
+  border-radius:3px 3px 16px 16px;
+}
+.base-leg {position:absolute;bottom:-5%;width:4.5%;height:14%;z-index:-1;
+  border-radius:0 0 7px 7px;background:linear-gradient(90deg,#33251c,#7b5738 45%,#4b3322 100%);
+  border:1px solid #3e2c20;box-shadow:5px 9px 10px #1324166a;}
+.base-leg-left{left:8%}.base-leg-right{right:8%}
+.table-wood {
+  z-index:1;
+  inset:5.5% 5.5% 13.5%;
+  border-radius:34px;
+  border:8px solid #54422f;
+  background:linear-gradient(145deg,#876447 0%,#503828 19%,#7d6045 49%,#513b2a 85%,#37291f 100%);
+  transform:perspective(1000px) rotateX(4deg);
+  box-shadow:0 12px 13px #1a33245c,0 0 0 2px #cbaa78a6,
+    inset 0 0 0 2px #b18d60a6,inset 0 0 9px 5px #281f1892;
+}
+.table-felt {
+  inset:13px;
+  border-radius:21px;
+  border:2px solid #2f754a;
+  background:radial-gradient(ellipse at 45% 35%,#79be7a 0%,#65ad68 31%,#519758 70%,#3e7f4c 100%);
+  box-shadow:inset 0 0 63px #22562b5c,inset 0 0 0 3px #a1df8744;
+}
+.table-felt:after{opacity:.14;}
+.table-vignette{z-index:2;background:linear-gradient(#a3ca8940,transparent 17%,transparent 82%,#2c59331f);}
+.table-engraving{color:#e0c28b;text-shadow:0 1px 2px #24180e;opacity:.84}
+.table-corner{box-shadow:0 1px 4px #1e180e80,inset 0 1px 2px #ffdb9866}
+/* The hands rest ON the cloth, not outside the table rim. */
+.seat-top{top:8%;left:13%;width:74%;}
+.seat-bottom{bottom:17.7%;left:2.5%;width:95%;}
+.seat-left{top:41%;left:-8%;width:48%;}
+.seat-right{top:41%;right:-8%;width:48%;}
+.seat-hand .tile{box-shadow:inset 2px 2px 3px #ffffff8a,inset -2px -2px 3px #66705029,
+  0 2px 0 #8d9082,0 5px 5px #1a3e2555;}
+.seat-hand .tile.clear{box-shadow:inset 2px 2px 3px #faffffda,inset -2px -2px 3px #6baea345,
+  0 2px 0 #b9d4c5ca,0 5px 5px #204e3152;}
+.seat-name{color:#163b28;text-shadow:0 1px 2px #b7f0a7cc,0 -1px 0 #b7f0a777;font-weight:800}
+.seat-name.rep{color:#4c252a;text-shadow:0 1px #dce3a8}
+.seat-indicator{color:#213e27;background:#ddf0b785;border-color:#4977508a;text-shadow:none;font-weight:700}
+.seat-head{text-shadow:none}
+.river-top{top:24%;}
+.river-bottom{bottom:33.5%;}
+.river .tile{box-shadow:0 2px 3px #214b2f52,0 1px 0 #6f806d;}
+.center-status{color:#193b29;text-shadow:0 1px 1px #9fcd8d}
+/* Keep translucent tile faces readable against the new green cloth. */
+.seat-opponent .tile.clear .face:before{background:linear-gradient(180deg,#ffffffab,#f0fff27b)}
+@media(max-width:850px){
+  .table-wood{inset:6.2% 4.2% 13.5%;}
+  .table-underbody{inset:10% 6% 5.5%;}
+  .seat-bottom{bottom:18.2%;}
+  .seat-left{left:-9.8%;}
+  .seat-right{right:-9.8%;}
+}
+@media(max-width:530px){
+  .arena-wrap{padding:4px;}
+  .arena{height:470px;min-height:470px;max-height:none;}
+  .table-wood{inset:7.7% 3.3% 12.7%;border-width:5px;border-radius:21px;}
+  .table-felt{inset:8px;border-radius:14px;}
+  .table-underbody{inset:11% 5% 5%;border-width:3px;border-radius:18px;}
+  .table-underbody:before{height:9%;}
+  .table-corner{width:15px;height:15px;}
+  .seat-top{top:10.3%;left:0;width:100%;}
+  .seat-bottom{bottom:17.6%;left:0;width:100%;}
+  .seat-left{top:40.6%;left:-17%;width:80%;}
+  .seat-right{top:40.6%;right:-17%;width:80%;}
+  .seat-bottom .tile{--tile-width:clamp(17px,5.35vw,25px);}
+  .seat-top .tile{--tile-width:clamp(13px,3.7vw,21px);}
+  .seat-left .tile,.seat-right .tile{--tile-width:clamp(12px,3.05vw,18px);}
+  .river-top{top:25.5%;}
+  .river-bottom{bottom:34.5%;}
+  .river-left{left:13%;top:45%;}
+  .river-right{right:13%;top:45%;}
+  .seat-name{font-size:9px;}
+  .seat-bottom .seat-name{font-size:11px;}
+}
+@media(max-height:550px) and (min-width:600px){
+  .table-wood{inset:6% 4.5% 13.5%;border-width:5px;}
+  .table-felt{inset:8px;}
+  .table-underbody{inset:10% 6% 5%;}
+  .seat-top{top:8%;}
+  .seat-bottom{bottom:17.5%;}
+  .seat-left{left:-11.5%;top:41%;}
+  .seat-right{right:-11.5%;top:41%;}
+  .seat-bottom .tile{--tile-width:clamp(20px,3vw,34px);}
+  .seat-top .tile{--tile-width:clamp(14px,2.2vw,22px);}
+  .seat-left .tile,.seat-right .tile{--tile-width:clamp(12px,1.8vw,20px);}
+}
+
 </style>
 </head>
 <body>
@@ -149,6 +278,7 @@ body {
       <div class="status-strip"><span id="phaseLabel" class="phase-label">対局準備</span><span id="doraLabel" class="dora-label">ドラ表示 <span class="mini-empty">—</span></span></div>
       <div class="arena-wrap">
         <div id="tableArena" class="arena">
+          <div class="table-underbody" aria-hidden="true"><i class="base-leg base-leg-left"></i><i class="base-leg base-leg-right"></i></div>
           <div class="table-wood" aria-hidden="true"><div class="table-felt"></div><div class="table-engraving">透 牌</div><span class="table-corner c1"></span><span class="table-corner c2"></span><span class="table-corner c3"></span><span class="table-corner c4"></span></div>
           <div class="table-vignette" aria-hidden="true"></div>
           <div class="decor-rail decor-rail-top" aria-hidden="true"></div>
@@ -186,7 +316,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">鷲巣麻雀</span><span class="test-pill">v0.6</span></div>
+    <div class="setup-title-row"><span class="label-caps">鷲巣麻雀</span><span class="test-pill">v0.8</span></div>
     <div class="setup-intro"><div class="setup-crests">透<span>牌</span></div><div><h1 id="setupTitle">鷲巣式 <em>透明麻雀</em></h1></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
@@ -747,14 +877,37 @@ function pinzuVector(n){
  }
  return `<svg class="pip-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 84" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${n}筒">${marks}</svg>`;
 }
+function souzuStick(cx,cy,rot=0,color='green',scale=1){
+ const palette={green:{body:'#17805b',edge:'#0b4b35',hi:'#86ddb4'},blue:{body:'#1e7190',edge:'#18445f',hi:'#9cd6e8'},red:{body:'#be3e49',edge:'#7b2531',hi:'#f0b0ae'}}[color];
+ const leaf=color==='red' ? '#d75d66' : '#3a9969';
+ const w=8.4*scale,h=22*scale,cap=3.2*scale;
+ return `<g transform="translate(${cx} ${cy}) rotate(${rot})"><rect x="${(-w/2).toFixed(2)}" y="${(-h/2).toFixed(2)}" rx="${cap.toFixed(2)}" ry="${cap.toFixed(2)}" width="${w.toFixed(2)}" height="${h.toFixed(2)}" fill="${palette.body}" stroke="${palette.edge}" stroke-width="1.1"/><line x1="0" y1="${(-h/2+1.8*scale).toFixed(2)}" x2="0" y2="${(h/2-1.8*scale).toFixed(2)}" stroke="${palette.hi}" stroke-width="1.15" opacity=".9"/><line x1="${(-w/2+1.3*scale).toFixed(2)}" y1="${(-h/6).toFixed(2)}" x2="${(w/2-1.3*scale).toFixed(2)}" y2="${(-h/6).toFixed(2)}" stroke="${palette.edge}" stroke-width=".9" opacity=".55"/><line x1="${(-w/2+1.3*scale).toFixed(2)}" y1="${(h/6).toFixed(2)}" x2="${(w/2-1.3*scale).toFixed(2)}" y2="${(h/6).toFixed(2)}" stroke="${palette.edge}" stroke-width=".9" opacity=".55"/><path d="M ${(-w/2-1.5*scale).toFixed(2)} ${(-2.8*scale).toFixed(2)} q ${(-4.7*scale).toFixed(2)} ${(-3.5*scale).toFixed(2)} ${(-1.2*scale).toFixed(2)} ${(-7.1*scale).toFixed(2)}" fill="none" stroke="${leaf}" stroke-width="1.5" stroke-linecap="round" opacity=".82"/><path d="M ${(w/2+1.5*scale).toFixed(2)} ${(2.8*scale).toFixed(2)} q ${(4.7*scale).toFixed(2)} ${(3.5*scale).toFixed(2)} ${(1.2*scale).toFixed(2)} ${(7.1*scale).toFixed(2)}" fill="none" stroke="${leaf}" stroke-width="1.5" stroke-linecap="round" opacity=".72"/></g>`;
+}
+function souzuVector(n){
+ const pat={
+  1:[['bird']],
+  2:[[30,24,0,'green'],[30,60,0,'green']],
+  3:[[30,19,0,'green'],[18,45,-24,'green'],[42,45,24,'green']],
+  4:[[18,22,-8,'green'],[42,22,8,'green'],[18,60,8,'green'],[42,60,-8,'green']],
+  5:[[18,22,-8,'green'],[42,22,8,'green'],[30,41,0,'red'],[18,60,8,'green'],[42,60,-8,'green']],
+  6:[[18,18,-10,'green'],[42,18,10,'green'],[18,42,-10,'green'],[42,42,10,'green'],[18,66,-10,'green'],[42,66,10,'green']],
+  7:[[18,16,-10,'red'],[42,16,10,'green'],[18,36,-10,'green'],[42,36,10,'green'],[30,48,0,'red'],[18,68,-10,'green'],[42,68,10,'green']],
+  8:[[18,14,-10,'green'],[42,14,10,'green'],[18,31,-10,'green'],[42,31,10,'green'],[18,49,-10,'red'],[42,49,10,'red'],[18,68,-10,'green'],[42,68,10,'green']],
+  9:[[12,16,-8,'green'],[30,16,0,'green'],[48,16,8,'green'],[12,42,-8,'green'],[30,42,0,'red'],[48,42,8,'green'],[12,68,-8,'green'],[30,68,0,'green'],[48,68,8,'green']]
+ };
+ if(n===1){
+  const bird=`<g transform="translate(30 42)"><ellipse cx="0" cy="6" rx="8.5" ry="14" fill="#2a7d58" stroke="#134131" stroke-width="1.2"/><ellipse cx="0" cy="5" rx="4.2" ry="10.2" fill="#a8e3c6" opacity=".85"/><circle cx="0" cy="-10" r="6" fill="#be404a" stroke="#6d232f" stroke-width="1.1"/><circle cx="-1.5" cy="-11" r="1.2" fill="#fff" opacity=".95"/><circle cx="-1.5" cy="-11" r=".55" fill="#162f2a"/><path d="M 5 -10 L 11 -8 L 5 -6 Z" fill="#e0be62" stroke="#8d6c1b" stroke-width=".8"/><path d="M -3 20 Q 0 28 3 20" fill="none" stroke="#165643" stroke-width="2" stroke-linecap="round"/><path d="M -7 9 Q -15 4 -11 -6" fill="none" stroke="#2f8e66" stroke-width="1.5" stroke-linecap="round"/><path d="M 7 9 Q 15 4 11 -6" fill="none" stroke="#2f8e66" stroke-width="1.5" stroke-linecap="round"/><path d="M -2 -20 Q 0 -26 2 -20" fill="none" stroke="#2f8e66" stroke-width="1.4" stroke-linecap="round"/></g>`;
+  return `<svg class="sou-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 84" preserveAspectRatio="xMidYMid meet" role="img" aria-label="1索">${bird}</svg>`;
+ }
+ const marks=pat[n].map(item=>souzuStick(item[0],item[1],item[2],item[3]||'green', n>=7?0.9:1)).join('');
+ return `<svg class="sou-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 84" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${n}索">${marks}</svg>`;
+}
 function mahjongTileFace(type){
  const s=L.suit(type),n=L.num(type);
  if(s==='m')return `<span class="face"><span class="wan-number">${NUM[n]}</span><span class="wan-unit">萬</span></span>`;
  if(s==='z')return `<span class="face"><span class="honor ${n===7?'red':n===6?'green':n===5?'white':''}">${n===5?'□':L.HONORS[n-1]}</span></span>`;
  if(s==='p') return `<span class="face">${pinzuVector(n)}</span>`;
- const bamboo={1:[[2,2]],2:[[1,2],[3,2]],3:[[1,2],[2,1],[3,3]],4:[[1,1],[1,3],[3,1],[3,3]],5:[[1,1],[1,3],[2,2],[3,1],[3,3]],6:[[1,1],[1,3],[2,1],[2,3],[3,1],[3,3]],7:[[1,1],[1,2],[1,3],[2,1],[2,3],[3,1],[3,3]],8:[[1,1],[1,2],[1,3],[2,1],[2,3],[3,1],[3,2],[3,3]],9:[[1,1],[1,2],[1,3],[2,1],[2,2],[2,3],[3,1],[3,2],[3,3]]}[n];
- if(n===1)return '<span class="face"><span class="bam-one">❁</span></span>';
- return `<span class="face"><span class="bamboos">${bamboo.map(([r,c],i)=>`<i class="bam ${i%4===0?'red':''}" style="grid-row:${r};grid-column:${c}"></i>`).join('')}</span></span>`;
+ return `<span class="face">${souzuVector(n)}</span>`;
 }
 function tileHtml(tile,{hide=false,mini=false,small=false,selectable=false,selected=false,locked=false,drawn=false,arriving=false,opaquePreview=false}={}){
  if(!tile)return '';
