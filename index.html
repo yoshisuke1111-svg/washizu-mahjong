@@ -295,15 +295,15 @@ body {
 .tile .pip-art,.tile .sou-art{filter:drop-shadow(0 0 .25px #0d2725) saturate(1.02)}
 @media(max-width:530px){.seat-body{gap:4px}.seat-top .tile{--tile-width:clamp(16px,4.4vw,24px)!important}.seat-left .tile,.seat-right .tile{--tile-width:clamp(15px,3.7vw,21px)!important}.seat-bottom .tile{--tile-width:clamp(23px,6.45vw,32px)!important}.river .tile{--tile-width:clamp(14px,3.5vw,19px)!important}.meld-pile .tile{--tile-width:16px;--tile-height:23px}.seat-left .meld-pile .tile,.seat-right .meld-pile .tile{--tile-width:14px;--tile-height:21px}}
 
-/* v0.18: normal backs / clearer rivers / title + transparent count + normal pinzu */
+/* v0.19: normal backs / clearer rivers / title + transparent count + normal pinzu */
 .tile.hidden{background:linear-gradient(128deg,#385057,#21343a 48%,#486064)!important;border-color:#8da3a2!important;box-shadow:inset 1px 1px 1px #f6fff25b,1px 2px 1px #081112,0 3px 4px #0009!important}.tile.hidden:after{content:''!important;position:absolute;inset:5px!important;border-radius:3px;border:1px solid rgba(233,242,240,.32);background:radial-gradient(circle at 50% 50%,rgba(244,251,249,.22) 0 16%,transparent 18%),repeating-linear-gradient(45deg,rgba(235,245,244,.08) 0 2px,transparent 2px 6px),linear-gradient(135deg,rgba(255,255,255,.06),rgba(0,0,0,.06))!important;display:block!important}
 .river{background:none!important;border:none!important;box-shadow:none!important;padding:0!important;gap:1px!important}.river .tile{box-shadow:inset 1px 1px 2px #fff8,inset -1px -1px 2px #69674e1c,1px 2px 0 #9ea093,0 2px 3px #0007!important}.peek-legend{font-size:10px;color:#8ea8a0;margin:0 0 6px}
 .setup-crests{font-size:52px}.setup-crests span{font-size:21px;margin-top:34px}.setup-intro h1{margin-bottom:4px}
 
-/* v0.18: standard-ish souzu layouts, smaller suit art to avoid overlap */
+/* v0.19: standard-ish souzu layouts, smaller suit art to avoid overlap */
 .seat-bottom .seat-hand{gap:2px}.seat-opponent .seat-hand{gap:2px}.tile.clear .sou-art,.tile.clear .pip-art{transform:scale(.97);transform-origin:center center}.tile .honor.white::before,.tile .honor.white::after{content:none!important}
 
-/* v0.18: larger side tiles + opponent hand strip below table + tap-to-swap */
+/* v0.19: larger side tiles + opponent hand strip below table + tap-to-swap */
 .peek-card-bottom{margin-top:12px;padding:12px 14px;background:linear-gradient(170deg,#182523,#101c1d);border:1px solid #859b8840;border-radius:12px}
 .peek-card-bottom #peekInfo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .peek-card-bottom .peek-line{margin:0;padding:10px;border:1px solid #2b4541;background:linear-gradient(180deg,#102220,#122726);border-radius:9px}
@@ -318,13 +318,13 @@ body {
 .seat-left,.seat-right{width:52%}
 @media(max-width:980px){.peek-card-bottom #peekInfo{grid-template-columns:1fr}.peek-card-bottom .peek-tiles .tile{--tile-width:26px;--tile-height:37px}.seat-top .tile{--tile-width:clamp(20px,3.2vw,31px)!important}.seat-left .tile,.seat-right .tile{--tile-width:clamp(18px,3vw,28px)!important}.seat-left,.seat-right{width:49%}}
 
-/* v0.18: use user-provided tile sample sheet directly */
+/* v0.19: use user-provided tile sample sheet directly */
 .tile.sprite-card{background:transparent;border:none;box-shadow:0 2px 4px rgba(0,0,0,.45);overflow:visible}.tile.sprite-card::before{display:none}.tile.sprite-card .face{width:100%;height:100%;display:block}.tile-card-img{display:block;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none}.tile.sprite-card.clear .tile-card-img{opacity:.58;filter:saturate(1.06) brightness(1.03)}.tile.sprite-card.clear:after{content:'';position:absolute;inset:1px;border-radius:4px;border:1px solid rgba(196,243,255,.68);background:linear-gradient(120deg,rgba(255,255,255,.12),rgba(103,198,210,.08) 46%,rgba(255,255,255,.14));box-shadow:inset 0 0 0 1px rgba(116,224,229,.16),0 0 0 1px rgba(231,250,255,.12)}.tile.sprite-card.opaque{filter:drop-shadow(0 1px 0 rgba(255,255,255,.2))}.tile.hidden{background:linear-gradient(128deg,#31474d,#20343a 48%,#405860)!important;border:1px solid #879899!important;box-shadow:inset 1px 1px 1px #ecf5ed58,1px 2px 1px #060c0b,0 3px 4px #0009!important}.tile.hidden:after{content:''!important;position:absolute;inset:5px;border-radius:3px;border:1px solid rgba(233,242,240,.32);background:radial-gradient(circle at 50% 50%,rgba(244,251,249,.22) 0 16%,transparent 18%),repeating-linear-gradient(45deg,rgba(235,245,244,.08) 0 2px,transparent 2px 6px),linear-gradient(135deg,rgba(255,255,255,.06),rgba(0,0,0,.06))!important;display:block!important}.tile.hidden .face{display:none!important}
 /* larger readable side hands and opponent strip */
 .seat-top .tile{--tile-width:clamp(24px,3.2vw,40px)!important;--tile-height:calc(var(--tile-width)*1.38)}.seat-left .tile,.seat-right .tile{--tile-width:clamp(22px,3vw,36px)!important;--tile-height:calc(var(--tile-width)*1.38)}.peek-card-bottom #peekInfo{grid-template-columns:1fr}.peek-card-bottom .peek-line{padding:10px 12px}.peek-card-bottom .peek-tiles{gap:4px;flex-wrap:wrap}.peek-card-bottom .peek-tiles .tile{--tile-width:34px;--tile-height:46px}.peek-card-bottom .peek-name{font-size:13px;font-weight:700}.peek-heading h3{font-size:14px}.peek-legend{font-size:11px}
 @media(max-width:980px){.seat-top .tile{--tile-width:clamp(19px,4.6vw,28px)!important}.seat-left .tile,.seat-right .tile{--tile-width:clamp(18px,4.2vw,25px)!important}.peek-card-bottom .peek-tiles .tile{--tile-width:28px;--tile-height:39px}}
 
-/* v0.18 - vector-drawn symbols, clean glass and solid ivory backs. No face veil. */
+/* v0.19 - vector-drawn symbols, clean glass and solid ivory backs. No face veil. */
 .tile.v17-face{border:1px solid #d6d2c4!important;border-radius:5px!important;background:linear-gradient(119deg,#fcfaf3 0%,#f0f1e9 47%,#fffdf8 80%,#d9dbd0 100%)!important;box-shadow:inset 1px 1px 1px #ffffff, inset -2px -2px 2px #92918238,1px 2px 0 #a2a89a,0 3px 5px #0b272760!important;backdrop-filter:none!important;overflow:hidden!important}
 .tile.v17-face.opaque{border-top-color:#ffffff!important;border-left-color:#e6e9df!important}
 .tile.v17-face.clear{border:2px solid #47b5c4!important;border-left-color:#b2f7f0!important;border-top-color:#d1ffff!important;background:linear-gradient(116deg,rgba(240,255,254,.36) 0%,rgba(148,229,227,.26) 23%,rgba(227,255,252,.22) 59%,rgba(110,214,211,.29) 100%)!important;box-shadow:inset 2px 2px 2px #ffffffa8,inset -2px -2px 2px #288b9760,1px 2px 0 #4d9295aa,0 3px 5px #0b26266f!important;backdrop-filter:none!important}
@@ -346,7 +346,7 @@ body {
 
 
 
-/* v0.18: room creator and hosted P2P lobby */
+/* v0.19: room creator and hosted P2P lobby */
 .online-setup{border-top:1px solid #667f756b;margin-top:14px;padding-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:7px 10px}
 .online-setup label{display:block;color:#c9d8ca;font-size:11px;grid-column:span 1}.online-setup input,.online-setup select{min-width:0;width:100%;border:1px solid #6c887a;border-radius:7px;background:#e5f0e3;color:#203729;padding:9px 10px;font-size:13px}
 .online-buttons{grid-column:1/-1;display:flex;gap:10px;margin-top:5px}.online-buttons button,.room-actions button,.room-link-row button{flex:1;min-height:43px;border-radius:8px;border:1px solid #70917e;background:#243d33;color:#e8f2e9;font-weight:700}
@@ -357,6 +357,77 @@ body {
 .room-link-row{display:flex;gap:6px}.room-link-row input{min-width:0;flex:1;background:#e0eee2;color:#1b3930;font-size:13px;border:1px solid #8daf98;padding:9px;border-radius:7px}.room-link-row button{flex:0 0 76px}
 .room-members{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:17px 0}.room-member{background:#172b28;border:1px solid #5f7f6d;border-radius:9px;padding:10px}.room-member strong{display:block;color:#f0f4e9;font-size:13px;min-height:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.room-member small{color:#b0c7bc;font-size:10px}.room-member.offline{opacity:.7}.room-rules-summary{font-size:11px;color:#a8bdad;line-height:1.7}.room-actions{display:flex;gap:8px;margin-top:12px}.room-caution{font-size:10px;color:#829c8d;line-height:1.55;margin:14px 0 0}
 @media(max-width:550px){.online-setup{grid-template-columns:1fr}.online-setup label,.online-setup input{grid-column:1}.online-setup label:nth-of-type(2){margin-top:4px}.room-lobby{padding:20px 15px}.room-member{padding:8px 6px}.room-lobby h2{font-size:22px}}
+
+
+/* v0.19: smartphone game layout -- readable tiles rather than shrinking 14 cards
+   onto a single 350px row. Desktop/tabletop interactions stay unchanged. */
+.mobile-hand-panel{display:none}
+@media(max-width:600px){
+  .app{padding-left:4px!important;padding-right:4px!important}
+  .game-grid{gap:8px!important;margin-top:7px!important}
+  .status-strip{height:29px!important;padding:0 7px!important}
+  .arena-wrap{padding:3px!important;border-radius:9px!important}
+  .arena{height:457px!important;min-height:457px!important;max-height:none!important;border-radius:7px!important}
+  .table-wood{inset:6.8% 2.4% 12%!important;border-width:5px!important;border-radius:22px!important}
+  .table-felt{inset:7px!important}
+  .table-underbody{inset:10% 4% 4%!important}
+  .seat-top{top:8.6%!important;left:0!important;width:100%!important}
+  .seat-top .seat-head{margin-bottom:3px!important}
+  .seat-top .seat-hand{gap:1px!important}
+  .seat-top .tile{--tile-width:clamp(20px,6.05vw,25px)!important;--tile-height:calc(var(--tile-width)*1.40)!important}
+  /* Raise the side hands in size while keeping them on the green tabletop. */
+  .seat-left,.seat-right{top:43.5%!important;width:75%!important}
+  .seat-left{left:-15.2%!important;right:auto!important}
+  .seat-right{right:-15.2%!important;left:auto!important}
+  .seat-left .tile,.seat-right .tile{--tile-width:clamp(18px,5.15vw,22px)!important;--tile-height:calc(var(--tile-width)*1.40)!important}
+  .seat-left .seat-hand,.seat-right .seat-hand{gap:1px!important}
+  .seat-bottom{bottom:16.2%!important;left:0!important;width:100%!important}
+  .seat-bottom .tile{--tile-width:clamp(19px,5.9vw,24px)!important;--tile-height:calc(var(--tile-width)*1.43)!important}
+  .seat-bottom .seat-hand{gap:1px!important}
+  .seat-bottom .seat-head{margin-bottom:3px!important}
+  .seat-name{font-size:11px!important}
+  .seat-indicator{font-size:9px!important;padding:2px 4px!important}
+  .center-plate{top:43.4%!important}
+  .center-rim{width:68px!important;height:68px!important}
+  .center-status{font-size:10px!important}
+  .center-dora{font-size:10px!important}
+  /* Select/discard using a large tile row directly below the table.
+     Horizontal scrolling works with a thumb and does not require a long press. */
+  .mobile-hand-panel{display:block;margin-top:8px;border:1px solid #7b9b76;border-radius:11px;
+    background:linear-gradient(180deg,#274632,#172b22);box-shadow:inset 0 1px 0 #ffffff18,0 5px 12px #081a1340;
+    padding:9px 7px 7px;min-width:0}
+  .mobile-hand-panel.is-turn{border-color:#e1cf88;box-shadow:inset 0 1px 0 #ffffff24,0 0 0 1px #9d9a5c33}
+  .mobile-hand-title{display:flex;justify-content:space-between;align-items:center;padding:0 4px 7px;gap:10px}
+  .mobile-hand-title strong{font-size:14px;letter-spacing:.06em;color:#f2e9d2}
+  .mobile-hand-title span{font-size:11px;color:#bbcbb9}
+  .mobile-hand-row{display:flex;align-items:flex-end;gap:4px;overflow-x:auto;overflow-y:hidden;min-width:0;
+    padding:14px 5px 8px;touch-action:pan-x;overscroll-behavior-x:contain;scrollbar-width:thin;
+    scrollbar-color:#9dbb92 #19372a;-webkit-overflow-scrolling:touch}
+  .mobile-hand-row .tile{--tile-width:clamp(38px,11vw,46px)!important;--tile-height:calc(var(--tile-width)*1.43)!important;
+    flex:0 0 var(--tile-width);touch-action:pan-x;cursor:pointer}
+  .mobile-hand-row .tile.selectable:hover{transform:none;filter:none}
+  .mobile-hand-row .tile.selected{transform:translateY(-7px)!important;box-shadow:0 0 0 2px #f5d27b,0 5px 10px #000a!important}
+  .mobile-hand-row .tile.just-drawn{margin-left:5px}
+  .mobile-hand-row .tile .v17-art{width:100%!important;height:100%!important}
+  /* Opponents' exposed/hidden tiles remain readable below, one swipeable row each. */
+  .peek-card-bottom{margin-top:9px!important;padding:12px 8px!important}
+  .peek-card-bottom .peek-line{padding:10px 7px!important}
+  .peek-card-bottom .peek-tiles{display:flex!important;flex-wrap:nowrap!important;gap:4px!important;overflow-x:auto!important;
+    padding:6px 3px 9px;touch-action:pan-x;-webkit-overflow-scrolling:touch}
+  .peek-card-bottom #peekInfo{grid-template-columns:minmax(0,1fr)!important;min-width:0!important;max-width:100%!important}
+  .peek-card-bottom .peek-line{min-width:0!important;max-width:100%!important;width:100%!important;overflow:hidden!important}
+  .peek-card-bottom .peek-tiles{min-width:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box}
+  .peek-card-bottom .peek-tiles .tile{--tile-width:39px!important;--tile-height:55px!important;flex:0 0 39px!important}
+  .peek-card-bottom .peek-name{font-size:13px!important}
+  .action-bar:not(.is-empty){margin-top:7px!important}
+  .action-btn{min-height:43px;font-size:14px!important}
+  .phase-label{font-size:12px!important}
+}
+@media(max-width:350px){
+  .seat-top .tile{--tile-width:20px!important}
+  .seat-left .tile,.seat-right .tile{--tile-width:18px!important}
+  .mobile-hand-row .tile{--tile-width:38px!important}
+}
 
 </style>
 </head>
@@ -392,6 +463,10 @@ body {
           <div id="effectLayer" class="effect-layer" aria-hidden="true"></div>
         </div>
       </div>
+      <section id="mobileHandPanel" class="mobile-hand-panel" aria-label="自分の手牌">
+        <div class="mobile-hand-title"><strong>手牌</strong><span>横にスワイプ</span></div>
+        <div id="mobileHandRow" class="mobile-hand-row" aria-label="大きく表示した自分の手牌"></div>
+      </section>
       <div id="reactPanel" class="react-panel" hidden></div>
       <div id="actionBar" class="action-bar">
         <div class="selected-copy" id="selectedHint"></div>
@@ -410,7 +485,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.18</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.19</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1><p>卓・牌・見え方を現実寄りに寄せた試作版。</p></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
@@ -1191,6 +1266,24 @@ function renderSeat(seat,id){const p=G.players[seat],yourTurn=G.turn===seat&&['d
  const role=seat===0||seat===1?'代表':'補佐';
  el.innerHTML=`<div class="seat-head"><span class="seat-name ${role==='代表'?'rep':''}">${esc(p.name)}</span><span class="seat-indicator">${seat===G.dealer?'東 · 親':L.HONORS[(seat-G.dealer+4)%4]} / ${role} ${p.riichi?' · 立直':''}</span></div><div class="seat-body"><div class="seat-hand">${tiles}</div>${melds?`<div class="seat-meld">${melds}</div>`:''}</div>`;
 }
+// The smartphone hand is a second view of the same tiles: no sort, no extra game state.
+// The tabletop hand stays in place as the destination for the central draw animation.
+function renderMobileHand(){
+ const row=$('mobileHandRow'),panel=$('mobileHandPanel');
+ if(!row||!panel||!G)return;
+ const scroll=row.scrollLeft;
+ const seat=localSeat(),p=G.players[seat];
+ row.innerHTML=p.hand.map(t=>tileHtml(t,{
+  hide:false,
+  selectable:canSelectMyTile(t.id),
+  selected:t.id===G.selectedId,
+  locked:p.riichi&&p.justDrawn?.id!==t.id,
+  drawn:G.phase!=='drawing'&&p.justDrawn?.id===t.id&&p.hand[p.hand.length-1]?.id===t.id,
+  arriving:G.phase==='drawing'&&G.drawTileId===t.id&&seat===G.turn
+ })).join('');
+ row.scrollLeft=scroll;
+ panel.classList.toggle('is-turn',G.turn===seat&&G.phase==='discard');
+}
 function renderRivers(){const refs=['riverBottom','riverRight','riverTop','riverLeft'];G.players.forEach((p,seat)=>{const rel=relativeSeat(seat);$(refs[rel]).innerHTML=p.discards.slice(-30).map(t=>tileHtml(t,{small:true})).join('');});}
 function renderBlood(){const blood=G.blood[0],pct=Math.min(100,Math.max(0,blood/G.settings.bloodInit*100)),other=G.blood[1],otherPct=Math.max(0,Math.min(100,other/G.settings.bloodInit*100));
  const my=`<div class="blood-card"><div class="blood-label">挑戦者 · 血液</div><div class="blood-amount">${format(blood)} <small>mL</small></div><div class="blood-track"><div class="blood-fill" style="width:${pct}%"></div></div><div class="blood-caption">初期 ${format(G.settings.bloodInit)} mL</div></div>`;
@@ -1239,7 +1332,7 @@ function render(){if(!G)return;
  const doraHtml=`ドラ ${G.dora.map(t=>tileHtml({type:t,clear:false,id:'dora'}, {mini:true})).join('')}`;
  $('doraLabel').innerHTML=`${doraHtml} <span style="font-size:9px;color:#a3b5a9">→ ${G.dora.map(L.nextDora).map(L.tileName).join(' / ')}</span>`;
  $('centerDora').innerHTML=doraHtml;
- renderSeat((localSeat()+2)%4,'seatTop');renderSeat((localSeat()+3)%4,'seatLeft');renderSeat((localSeat()+1)%4,'seatRight');renderSeat(localSeat(),'seatBottom');renderRivers();
+ renderSeat((localSeat()+2)%4,'seatTop');renderSeat((localSeat()+3)%4,'seatLeft');renderSeat((localSeat()+1)%4,'seatRight');renderSeat(localSeat(),'seatBottom');renderMobileHand();renderRivers();
  $('centerStatus').textContent=`捨て牌 ${G.discardCount}/70 · 残り ${G.wall.length}`;
  renderReactions();renderActionBar();renderBlood();renderScores();renderPeek();renderLog();
  if(NET.mode==='host')netBroadcast();
