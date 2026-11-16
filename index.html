@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0e1515">
+  <title>鷲巣式透明麻雀 | 透牌勝負・試作版</title>
+  <style>
+:root{font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Yu Gothic',Meiryo,sans-serif;color:#e9e4d9;background:#0c1415;font-size:14px;--gold:#cfb788;--felt:#1c4c43;--cream:#edeae1;--red:#c44952;--line:rgba(210,225,219,.12);--mute:#9baaa6;--tilew:clamp(23px,3.32vw,42px);--tileh:calc(var(--tilew)*1.44)}
+*{box-sizing:border-box}html{min-height:100%;scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 55% -30%,#345045 0%,transparent 58%),linear-gradient(145deg,#091111,#141d1c 68%,#0b1216);overflow-x:hidden}button,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.37}button:focus-visible,select:focus-visible{outline:2px solid #e7c782;outline-offset:3px}.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.13' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.23}.app{width:min(1640px,100%);margin:auto;padding:0 18px 12px}.topbar{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:12px}.identity,.topbar-right,.brand-text{display:flex;align-items:center}.identity{gap:13px}.brand-emblem{display:grid;place-items:center;width:42px;height:42px;border-radius:11px;color:#d9c390;border:1px solid #7e6b4e;background:linear-gradient(145deg,#2e3530,#17211f);box-shadow:0 0 20px #96734212;font:700 27px/1 serif}.brand-text{flex-direction:column;align-items:flex-start;gap:3px}.brand-text strong{font-size:23px;letter-spacing:.22em;color:#f2eddf;font-weight:700;font-family:serif}.brand-text small{font-size:9px;letter-spacing:.18em;color:#b3b5a7;white-space:nowrap}.topbar-right{gap:10px}.round-tag{padding:9px 12px;font-size:12px;color:var(--gold);border:1px solid #97815b60;border-radius:6px;background:#a08a5620}.top-btn{padding:9px 13px;border-radius:7px;background:#182725;border:1px solid var(--line);color:#c8d2c9}.top-btn:hover{background:#253b35}.game-grid{display:grid;grid-template-columns:minmax(0,1fr) 308px;gap:18px;margin-top:14px}.game-left{min-width:0}.status-strip{display:flex;justify-content:space-between;align-items:center;height:35px;gap:12px;padding:0 8px}.phase-label{font-size:12px;color:#c8cab9;letter-spacing:.05em}.dora-label{display:flex;align-items:center;gap:7px;font-size:11px;color:#d7caaf;white-space:nowrap}.mini-empty{opacity:.6}.arena-wrap{border:1px solid #bba47c30;border-radius:17px;padding:8px;background:linear-gradient(160deg,#334037,#111c1b 40%,#2a2d29);box-shadow:inset 0 0 0 1px #101a18,0 18px 65px #0008}.arena{width:100%;height:clamp(440px,59vw,670px);max-height:70vh;min-height:440px;position:relative;overflow:hidden;border-radius:11px;background:radial-gradient(ellipse at 45% 51%,#30594b 0%,#19382e 51%,#111e1d 86%);isolation:isolate;--tw:var(--tilew)}.table-wood{position:absolute;inset:9% 10% 17%;border-radius:32px;background:linear-gradient(138deg,#745943,#282521 20%,#574532 60%,#181a18 95%);border:7px solid #342e25;box-shadow:0 14px 32px #040807c9,0 0 0 1px #bba78056,inset 0 0 0 3px #b29b7756, inset 0 0 8px 7px #0b1111;transform:perspective(1000px) rotateX(5deg);transform-origin:center}.table-felt{position:absolute;inset:17px;border:2px solid #56756845;border-radius:16px;background:radial-gradient(ellipse at 48% 39%,#306153 0%,#1b4a40 46%,#13362f 100%);box-shadow:inset 0 0 100px #071b18a6,inset 0 0 0 3px #0e2d255e}.table-felt:after{content:'';position:absolute;inset:0;border-radius:inherit;background-image:repeating-linear-gradient(83deg,#fff1 0px,transparent 1px,transparent 4px);opacity:.035}.table-engraving{position:absolute;bottom:7px;left:0;right:0;text-align:center;color:#b19b75;font-size:10px;letter-spacing:1.6em;opacity:.65}.table-corner{position:absolute;width:25px;height:25px;border:1px solid #ae8e5545;border-radius:50%;background:radial-gradient(circle at 30% 22%,#b19568,#4e3d29 65%);box-shadow:0 1px 2px #0009}.c1{top:7px;left:7px}.c2{top:7px;right:7px}.c3{bottom:7px;left:7px}.c4{bottom:7px;right:7px}.table-vignette{position:absolute;inset:0;pointer-events:none;background:linear-gradient(#05110c28,transparent 22%,transparent 80%,#05110c30)}.decor-rail{position:absolute;height:1px;left:34%;right:34%;background:linear-gradient(90deg,transparent,#c4b18b88,transparent);pointer-events:none}.decor-rail-top{top:18%}.decor-rail-bottom{bottom:25%}.seat{position:absolute;z-index:4;min-width:0;pointer-events:none}.seat-top{top:1.2%;left:15%;width:70%}.seat-bottom{bottom:1.2%;left:2%;width:96%}.seat-left{top:43%;left:-15%;width:48%;transform:rotate(90deg)}.seat-right{top:43%;right:-15%;width:48%;transform:rotate(-90deg)}.seat-head{display:flex;justify-content:center;gap:7px;align-items:center;margin-bottom:5px;text-shadow:0 2px 5px #000}.seat-left .seat-head,.seat-right .seat-head{margin-bottom:4px}.seat-name{font-size:12px;color:#d6d5c8;letter-spacing:.03em;white-space:nowrap}.seat-name.rep{color:#f0c3a9}.seat-indicator{font-size:9px;color:#cfbb93;border:1px solid #a18b673b;padding:2px 5px;border-radius:3px;white-space:nowrap}.active-turn .seat-indicator{color:#132820;background:#e7cd8d;box-shadow:0 0 18px #d5b56a55}.seat-hand{display:flex;justify-content:center;gap:1px;min-height:calc(var(--tileh) + 4px);align-items:flex-end}.seat-left .seat-hand,.seat-right .seat-hand{--tw:clamp(17px,2vw,27px)}.seat-bottom .seat-hand{pointer-events:auto}.seat-opponent .tile{--tile-width:clamp(17px,2.65vw,34px);--tile-height:calc(var(--tile-width)*1.39)}.seat-bottom .tile{--tile-width:clamp(24px,3.75vw,48px);--tile-height:calc(var(--tile-width)*1.43)}.seat-left .tile,.seat-right .tile{--tile-width:clamp(16px,2.2vw,29px);--tile-height:calc(var(--tile-width)*1.42)}.seat-bottom .seat-name{font-size:13px}.seat-bottom .seat-head{margin-bottom:7px}.seat-meld{display:flex;justify-content:center;gap:3px;margin-top:4px;min-height:0}.meld-pile{display:flex;gap:1px;padding:2px;background:#0d1916b8;border-radius:4px;border:1px solid #b99d7a40}.seat-meld .tile{--tile-width:19px;--tile-height:27px}.seat-left .seat-meld .tile,.seat-right .seat-meld .tile{--tile-width:16px;--tile-height:23px}.seat-bottom .seat-meld{position:absolute;right:4px;bottom:100%;justify-content:end}
+.tile{--tile-width:var(--tilew);--tile-height:calc(var(--tile-width)*1.43);width:var(--tile-width);height:var(--tile-height);position:relative;flex:none;display:flex;align-items:center;justify-content:center;color:#26362e;border-radius:4px 4px 5px 5px;border:1px solid #e1e3d7;background:linear-gradient(115deg,#fbf8ef 0%,#e8eadf 35%,#fffdf7 82%,#d1d2c7 100%);box-shadow:inset 2px 2px 3px #fff9,inset -2px -2px 3px #68664c26,1px 2px 0 #adaba0,0 3px 4px #0009;user-select:none;-webkit-user-select:none;vertical-align:middle;transition:transform .17s ease,filter .17s ease,box-shadow .17s ease;overflow:hidden}.tile:before{content:'';pointer-events:none;position:absolute;top:2px;left:3px;right:3px;height:2px;border-radius:2px;background:#fff7;z-index:2}.tile.clear{border-color:#d8f0eead;background:linear-gradient(122deg,#f3ffff90 0%,#9ad1cc42 17%,#2b8b8a22 42%,#d9ffff70 62%,#95bdbb39 84%,#e5fffc88 100%);box-shadow:inset 2px 2px 3px #f5fffab3,inset -3px -3px 3px #5aabbd40,0 1px 0 #d0eae0c2,1px 3px 4px #021916b8;backdrop-filter:blur(.6px) saturate(1.45)}.tile.clear:after{content:'';position:absolute;inset:1px;pointer-events:none;border:1px solid #f2ffff5c;border-radius:3px;box-shadow:inset 0 0 0 1px #94d7d824}.tile.hidden{background:linear-gradient(128deg,#222d2d,#101e21 48%,#384541);border-color:#758782;box-shadow:inset 1px 1px 1px #ecf5ed58,1px 2px 1px #060c0b,0 3px 4px #0009}.tile.hidden:after{content:'鷲';font-family:serif;color:#a0a98e44;border:1px solid #91a18b3e;position:absolute;inset:4px;display:grid;place-items:center;font-size:calc(var(--tile-width)*.57)}.tile .face{position:relative;z-index:1;width:90%;height:90%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.tile .wan-number{font-family:'Yu Mincho','Hiragino Mincho ProN',serif;font-weight:900;line-height:1.03;font-size:calc(var(--tile-width)*.51);color:#171e1b}.tile .wan-unit{font-family:serif;font-size:calc(var(--tile-width)*.44);font-weight:900;line-height:1;color:#aa2835}.tile .honor{font-family:'Yu Mincho','Hiragino Mincho ProN',serif;font-size:calc(var(--tile-width)*.64);font-weight:900;color:#152b25;line-height:1}.tile .honor.red{color:#b72a36}.tile .honor.green{color:#236b4d}.tile .honor.white{border:2px solid #387c82;border-radius:2px;height:70%;width:65%;font-size:0}.tile .pips{width:88%;height:88%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);place-items:center;gap:1px}.tile .pip{display:block;width:85%;aspect-ratio:1;border-radius:50%;border:2px solid var(--pipedge,#163c36);background:radial-gradient(circle,var(--pipcore,#d2efe9) 0 18%,var(--pipmiddle,#27816f) 20% 58%,var(--pipedge,#173d41) 60%);box-shadow:inset 0 0 0 1px #c7efcaa6}.tile .pip.red{--pipedge:#811f31;--pipmiddle:#ca4251;--pipcore:#f2b7a5}.tile .pip.blue{--pipedge:#185063;--pipmiddle:#477fa0;--pipcore:#e1e6e9}.tile .pip.big{width:120%;border-width:3px}.tile .bamboos{height:94%;width:91%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);align-items:center;justify-items:center}.tile .bam{width:55%;height:88%;border-radius:48% 48% 35% 35%;background:repeating-linear-gradient(0deg,#176a52 0 32%,#64c096 34% 40%,#176a52 42% 62%,#1c5039 65% 100%);border:1px solid #215e46;transform:skew(-7deg) rotate(8deg);box-shadow:1px 0 #dcf8e3ba}.tile .bam.red{background:repeating-linear-gradient(0deg,#a8313a 0 32%,#f1a6a1 34% 40%,#a8313a 42% 62%,#752733 65% 100%);border-color:#96343c}.tile .bam-one{font-size:calc(var(--tile-width)*.74);color:#216c4a;text-shadow:1px 1px #b4daa8;line-height:1}.tile.clear .pip{filter:saturate(1.5)}.tile.selectable{cursor:pointer;-webkit-tap-highlight-color:transparent}.tile.selectable:hover{transform:translateY(-8px);z-index:10;filter:brightness(1.12)}.tile.selected{transform:translateY(-15px)!important;box-shadow:0 0 0 2px #f7ca77,0 6px 14px #000a,0 0 16px #d2b57d8a;z-index:15}.tile.riichi-lock{opacity:.55}.tile.just-drawn{margin-left:6px;animation:tile-enter .36s cubic-bezier(.3,1.7,.5,1) both}@keyframes tile-enter{from{transform:translateY(-24px) rotate(5deg);opacity:.2}to{transform:translateY(0);opacity:1}}.tile.mini{--tile-width:22px;--tile-height:31px;border-radius:3px;pointer-events:none}.tile.mini .pip{border-width:1px}.tile.mini .wan-unit{font-size:calc(var(--tile-width)*.39)}.tile.mini .honor{font-size:calc(var(--tile-width)*.58)}.tile.mini .bamboos{gap:0}.tile.mini .bam{border-width:0}.tile.small{--tile-width:19px;--tile-height:27px}.tile.small .pip{border-width:0}.tile.small .bam{border-width:0}
+.river{position:absolute;z-index:3;display:grid;grid-template-columns:repeat(6,1fr);gap:2px;justify-content:center;align-content:start;pointer-events:none}.river .tile{--tile-width:clamp(14px,2.12vw,25px);--tile-height:calc(var(--tile-width)*1.33)}.river-top{top:23%;left:35%;width:30%}.river-bottom{bottom:21%;left:35%;width:30%}.river-left{top:44%;left:17%;width:29%;transform:rotate(90deg)}.river-right{top:44%;right:17%;width:29%;transform:rotate(-90deg)}.center-plate{position:absolute;z-index:5;top:43%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:7px;pointer-events:none}.center-rim{width:clamp(86px,10vw,126px);height:clamp(86px,10vw,126px);border-radius:50%;background:radial-gradient(circle at 38% 31%,#b8a07a,#715b40 26%,#29271f 31%,#141e1b 62%,#a38b68 69%,#4d4533 76%);box-shadow:0 5px 19px #061311b8,inset 0 0 0 2px #e3c99566;display:grid;place-items:center}.center-hole{height:71%;width:71%;border-radius:50%;display:flex;align-items:center;flex-direction:column;justify-content:center;background:radial-gradient(circle at 45% 30%,#1a302a,#061310 75%);box-shadow:inset 0 3px 16px #000,inset 0 0 0 2px #b5a38540;color:#baa782;text-shadow:0 0 15px #c9aa6c32}.bag-glyph{font-size:30px;font-family:serif;line-height:1.1}.center-hole span{font-size:10px;letter-spacing:.4em}.draw-button{pointer-events:auto;padding:9px 18px;border-radius:3px;border:1px solid #dbc084;color:#152e28;font-weight:800;background:linear-gradient(120deg,#f2dba0,#bfa671);box-shadow:0 4px 14px #0008,0 0 18px #d6b56d22}.draw-button:not(:disabled){animation:draw-glow 1.7s ease-in-out infinite}@keyframes draw-glow{50%{box-shadow:0 3px 15px #e9cc6b6d,0 0 17px #f7dc8955}}.center-status{max-width:180px;text-align:center;font-size:10px;letter-spacing:.07em;color:#c1caba;text-shadow:0 1px 4px #000}.effect-layer{position:absolute;inset:0;z-index:30;pointer-events:none}.effect-tile{position:fixed!important;z-index:1000!important;pointer-events:none!important;transition:none!important}
+.action-bar{margin-top:11px;min-height:73px;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:linear-gradient(90deg,#1b2927,#152321);display:flex;align-items:center;justify-content:space-between;gap:10px}.selected-copy{font-size:12px;color:#b2c0b9}.selected-copy strong{color:#f4d08c}.action-buttons{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.action-btn{border:1px solid #6f887b82;border-radius:6px;padding:10px 16px;background:linear-gradient(130deg,#29483b,#1d312e);color:#f3f3e9;font-weight:700;white-space:nowrap}.action-btn:hover{border-color:#edce91;background:#39574d}.action-btn.primary{background:linear-gradient(120deg,#f1d399,#bc9656);border-color:#e4c188;color:#182722}.action-btn.danger{background:linear-gradient(120deg,#8c3b42,#612a32);border-color:#b15b63;color:#fff}.action-btn.subtle{color:#b9c9c2;background:#15231f}.react-panel{border:1px solid #d4af6d70;margin-top:10px;border-radius:10px;padding:12px 14px;background:linear-gradient(120deg,#363322,#1a2825);display:flex;justify-content:space-between;align-items:center;gap:12px}.react-panel[hidden]{display:none}.react-copy{font-size:13px;color:#f0d9a1}.react-buttons{display:flex;gap:8px;flex-wrap:wrap}.under-note{font-size:11px;line-height:1.5;color:#8ca099;margin:9px 6px}
+.info-panel{padding:13px;align-self:stretch;border-radius:12px;background:linear-gradient(170deg,#182523,#101c1d);border:1px solid #859b8840;display:flex;flex-direction:column;gap:11px;min-width:0}.panel-heading{display:flex;align-items:baseline;justify-content:space-between;padding:2px 4px 0}.panel-heading h2{font:600 18px serif;margin:2px 0;color:#e7e3d5;letter-spacing:.1em}.small-stamp{font-size:9px;color:#ad9979;letter-spacing:.12em}.blood-section{display:flex;flex-direction:column;gap:8px}.blood-card{border-radius:8px;padding:12px 12px 11px;background:linear-gradient(140deg,#332126,#1d2221 60%,#131c1c);border:1px solid #783b4570;overflow:hidden;position:relative}.blood-card.secondary{background:linear-gradient(140deg,#242c2c,#1d2525 55%,#121b1b);border-color:#4f666460}.blood-card:before{content:'◆';position:absolute;right:9px;top:5px;color:#aa424532;font-size:53px;transform:rotate(-12deg)}.blood-label{font-size:10px;letter-spacing:.12em;color:#dbb5ae}.blood-card.secondary .blood-label{color:#bccec5}.blood-amount{margin-top:4px;font-variant-numeric:tabular-nums;font-size:29px;line-height:1.2;font-family:Georgia,serif;color:#fff2ed;font-weight:700}.blood-card.secondary .blood-amount{color:#e2ede9}.blood-amount small{font-size:12px;margin-left:4px;color:#c8aba7;font-weight:400}.blood-track{height:7px;background:#100b0e;border-radius:20px;overflow:hidden;margin-top:10px;box-shadow:inset 0 0 3px #000}.blood-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#8f263c,#d86b67);transition:width .5s}.blood-fill.asset{background:linear-gradient(90deg,#8d7552,#d9c693)}.blood-caption{color:#b9b2ac;font-size:10px;margin-top:7px}.info-card{border-top:1px solid #9fafa52e;padding:11px 4px 0}.info-card h3{margin:0 0 9px;color:#d6d6c8;font-weight:700;font-size:12px;letter-spacing:.08em}.info-card h3 small{font-weight:400;color:#8fa39d;font-size:10px}.score-line{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;padding:7px 9px;border-radius:6px}.score-line:nth-child(odd){background:#f0fff606}.score-line .score-value{font-family:Georgia,serif;color:#f2e7cb;font-size:16px;font-variant-numeric:tabular-nums}.score-line.myself .score-name{color:#eccd91}.score-line.rep-enemy .score-name{color:#e5ada4}.score-line.team{border-left:2px solid #907853}.score-line.enemy{border-left:2px solid #783d47}.peek-heading{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px;align-items:center}.tiny-tag{font-size:9px;color:#8baaa2}.peek-line{margin-bottom:7px;padding-bottom:7px;border-bottom:1px solid #a4b2a51c}.peek-line:last-child{border:0;margin:0;padding:0}.peek-name{font-size:10px;color:#b5c7bd;margin:0 0 4px}.peek-tiles{display:flex;gap:1px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:3px;scrollbar-width:thin}.peek-tiles .tile{--tile-width:20px;--tile-height:29px}.peek-tiles .tile .wan-number{font-size:11px}.peek-tiles .tile .wan-unit{font-size:8px}.peek-tiles .tile .honor{font-size:13px}.log-card{flex:1;min-height:100px}.log-list{display:flex;flex-direction:column;gap:6px;max-height:160px;overflow-y:auto;scrollbar-width:thin}.log-entry{color:#8ea9a1;font-size:11px;line-height:1.4;border-left:2px solid #809d8335;padding-left:8px}.log-entry strong{color:#ddc6a0;font-weight:600}.disclaimer{border-top:1px solid var(--line);font-size:9px;line-height:1.7;color:#8a9c96;padding:12px 4px 0}.foot{padding:16px 4px 8px;display:flex;justify-content:space-between;letter-spacing:.12em;font-size:9px;color:#728780}
+.modal-root{position:fixed;inset:0;z-index:200;display:flex;justify-content:center;align-items:center;overflow-y:auto;background:radial-gradient(ellipse at 49% 20%,#182c2ccf,#070c0eea 60%),#0008;padding:24px 16px;backdrop-filter:blur(7px)}.modal-root[hidden]{display:none}.modal{width:min(720px,100%);max-height:min(96vh,860px);overflow-y:auto;background:linear-gradient(145deg,#24332d,#151e1e 55%,#222526);box-shadow:0 25px 90px #000b,0 0 0 1px #b7a27e50;position:relative;border-radius:13px;padding:27px 32px 24px}.modal:before{content:'';position:absolute;inset:6px;border:1px solid #c1a97c21;border-radius:8px;pointer-events:none}.setup-title-row{display:flex;justify-content:space-between;align-items:center}.label-caps{font-size:10px;letter-spacing:.23em;color:#c0ad8a}.test-pill{font-size:9px;letter-spacing:.12em;color:#d5c7a7;border:1px solid #a9926175;border-radius:3px;padding:5px 8px}.setup-intro{display:flex;gap:24px;align-items:center;margin:16px 0 22px}.setup-crests{position:relative;width:118px;height:118px;flex:none;border-radius:50%;border:1px solid #af94675e;background:radial-gradient(circle at 40% 30%,#456359,#20352e 60%,#1a2724);display:flex;justify-content:center;align-items:center;font-family:serif;font-size:57px;color:#ddcba0;text-shadow:0 3px 10px #0008;box-shadow:inset 0 0 0 6px #162620,inset 0 0 0 7px #9c875758,0 0 28px #b8a16b15}.setup-crests span{color:#a7d3c5;font-size:23px;margin-top:36px;margin-left:-8px}.setup-intro h1{font-family:serif;font-size:clamp(27px,4vw,37px);letter-spacing:.12em;margin:0 0 8px;color:#f5ecd9}.setup-intro h1 em{font-style:normal;color:#ddb980}.setup-intro p{color:#b3c8bb;font-size:13px;line-height:1.7;margin:0}.setup-content{display:flex;flex-direction:column;gap:10px}.setup-block{display:flex;gap:10px;align-items:flex-start;min-width:0}.setup-num{color:#b49c74;font:12px Georgia,serif;min-width:23px;padding-top:1px}.setup-block-body{flex:1;min-width:0}.setup-block label{display:block;color:#dedbcc;font-weight:700;letter-spacing:.04em;font-size:12px;margin-bottom:6px}.setup-block label small{color:#91a8a0;font-size:10px;font-weight:400}.setup-block select{background:#0f1e1c;border:1px solid #82968b70;color:#e6e9df;min-height:42px;border-radius:5px;width:100%;padding:8px 10px;font-size:12px;appearance:auto}.setup-block select option{background:#15241f}.setup-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}.locked-entry{min-height:42px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;background:#111e1b87;border:1px solid #62766b32;border-radius:5px;padding:5px 10px;font-size:12px;color:#d8e2d8}.locked-entry span{font-size:10px;color:#7f948c}.start-button{display:flex;align-items:center;justify-content:center;gap:16px;width:100%;min-height:53px;border:1px solid #edcf99;border-radius:5px;background:linear-gradient(105deg,#d7bc87,#f3dba8 50%,#bfa16d);color:#172820;font-weight:800;font-size:16px;letter-spacing:.15em;margin-top:21px;box-shadow:0 9px 20px #0006}.start-button:hover{filter:brightness(1.08)}.start-button b{font-size:24px;font-weight:500}.setup-fineprint{margin:13px 0 0;color:#81958d;font-size:10px;line-height:1.6}.result-modal{width:min(530px,100%);padding:31px 35px;text-align:center}.result-overline{color:#bb9b6c;letter-spacing:.22em;font-size:11px}.result-title{font:600 clamp(28px,5vw,40px) serif;letter-spacing:.13em;margin:12px 0 7px;color:#f6e4c0}.result-desc{color:#c8d4c5;font-size:13px;line-height:1.8}.result-highlight{display:flex;flex-direction:column;align-items:center;gap:5px;margin:16px auto;padding:16px;border:1px solid #ccaf785e;border-radius:6px;background:#101e1bb5}.result-highlight strong{font:700 27px Georgia,serif;color:#f5d6a4}.result-yaku{font-size:11px;color:#b6c8b9;line-height:1.7}.result-recovery{margin:20px 0;padding:14px;border:1px solid #9a4c567a;background:#3f242958;border-radius:8px;text-align:left}.result-recovery h3{margin:0 0 7px;font-size:15px;color:#f0c3bf}.result-recovery p{font-size:12px;line-height:1.65;color:#d4bfbb}.result-buttons{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:19px}.result-buttons .action-btn{min-width:155px}.modal-header{display:flex;align-items:center;justify-content:space-between}.modal-header h2{font:600 24px serif;color:#e9d8b1}.icon-close{border:1px solid #8da19954;color:#d7e0d5;background:#101b1a;width:32px;height:32px;border-radius:5px;font-size:22px}.rules-modal{width:min(600px,100%)}.rules-body{font-size:13px;line-height:1.8;color:#c2d0c7}.rules-body p{padding-bottom:10px;border-bottom:1px solid var(--line)}.rules-body strong{color:#e7cf9c}.minor-btn{border:1px solid #ad9672;border-radius:5px;background:#344b3e;color:#e7dfd0;padding:10px 15px}.toast{position:fixed;z-index:250;left:50%;bottom:24px;transform:translate(-50%,10px);padding:10px 17px;border-radius:7px;border:1px solid #c6a9775c;background:#27362ed9;color:#f4e6c7;box-shadow:0 6px 20px #0008;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;font-size:12px;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.danger-vignette{position:fixed;inset:0;pointer-events:none;z-index:20;box-shadow:inset 0 0 190px 40px #a313252e;animation:critical 2.2s ease-in-out infinite}.critical-pill{color:#f6adb0!important;border-color:#d9676c!important}.danger-vignette:after{content:'';position:absolute;inset:0;box-shadow:inset 0 0 80px #e42a3c1c}@keyframes critical{50%{opacity:.4}}
+@media(max-width:1190px){.game-grid{grid-template-columns:minmax(0,1fr) 270px;gap:10px}.info-panel{padding:10px}.seat-opponent .tile{--tile-width:clamp(16px,2.6vw,28px)}.arena{height:clamp(400px,58vw,590px);min-height:400px}}
+@media(max-width:850px){.app{padding:0 8px}.topbar{height:65px}.brand-text strong{font-size:18px}.brand-text small{font-size:8px}.brand-emblem{width:33px;height:33px;font-size:23px}.round-tag{font-size:10px;padding:6px}.top-btn{font-size:11px;padding:7px}.game-grid{grid-template-columns:1fr}.info-panel{display:grid;grid-template-columns:1fr 1fr;gap:10px}.panel-heading,.disclaimer{grid-column:1/-1}.blood-section{grid-column:1}.peek-card{grid-column:1}.log-card{grid-column:2;grid-row:2/4}.info-card{padding:10px}.log-list{max-height:220px}.arena{height:clamp(410px,72vw,630px);max-height:none}.seat-opponent .tile{--tile-width:clamp(17px,3vw,34px)}.seat-bottom .tile{--tile-width:clamp(23px,5.2vw,42px)}}
+@media(max-width:530px){.new-btn{display:none}.brand-text small{font-size:7px}.round-tag{font-size:9px;max-width:108px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.status-strip{height:29px}.phase-label{font-size:10px;max-width:57%;line-height:1.35}.dora-label{font-size:9px}.arena-wrap{padding:3px;border-radius:9px}.arena{height:445px;min-height:445px;border-radius:7px}.table-wood{inset:13% 5% 18%;border-width:5px;border-radius:19px}.table-felt{inset:9px}.seat-top{top:4%;left:1%;width:98%}.seat-left{left:-27%;top:42%;width:80%}.seat-right{right:-27%;top:42%;width:80%}.seat-bottom{bottom:2%;left:0;width:100%}.seat-top .tile{--tile-width:clamp(14px,4vw,22px)}.seat-left .tile,.seat-right .tile{--tile-width:clamp(13px,3.2vw,19px)}.seat-bottom .tile{--tile-width:clamp(20px,6.15vw,29px)}.tile .pip{border-width:1px}.seat-name{font-size:10px}.seat-indicator{font-size:8px}.seat-hand{gap:0}.river-top{top:25%;left:34%;width:32%}.river-bottom{bottom:25%;left:34%;width:32%}.river-left{left:11%;top:45%;width:34%}.river-right{right:11%;top:45%;width:34%}.river .tile{--tile-width:clamp(12px,3vw,16px)}.center-plate{top:44%}.center-rim{width:74px;height:74px}.bag-glyph{font-size:23px}.center-hole span{font-size:8px}.draw-button{padding:7px 10px;font-size:11px}.center-status{font-size:9px;max-width:130px}.action-bar{padding:9px 7px;min-height:70px;flex-wrap:wrap;align-items:stretch}.selected-copy{font-size:11px;width:100%}.action-buttons{justify-content:flex-start}.action-btn{padding:8px 11px;font-size:12px}.under-note{font-size:10px}.info-panel{display:flex}.log-list{max-height:130px}.modal{padding:20px 18px 15px;max-height:calc(100dvh - 24px)}.setup-crests{width:77px;height:77px;font-size:36px}.setup-crests span{font-size:16px;margin-top:24px}.setup-intro{gap:13px;margin:10px 0 16px}.setup-intro h1{font-size:23px}.setup-intro p{font-size:11px}.setup-block label{font-size:11px}.setup-block label small{font-size:9px}.setup-block select{font-size:11px;padding:6px 4px;min-height:38px}.setup-row{gap:6px}.setup-block{gap:3px}.setup-num{min-width:16px;font-size:10px}.locked-entry{font-size:11px}.locked-entry span{font-size:9px}.start-button{min-height:46px;margin-top:12px;font-size:14px}.setup-fineprint{font-size:9px;margin-top:7px}}
+@media(max-height:550px) and (min-width:600px){.app{padding:0 10px}.topbar{height:50px}.brand-text strong{font-size:17px}.brand-text small{font-size:8px}.brand-emblem{width:32px;height:32px;font-size:21px}.game-grid{grid-template-columns:minmax(0,1fr) 240px;margin-top:5px}.arena{height:365px;min-height:365px;max-height:none}.status-strip{height:25px}.seat-bottom .tile{--tile-width:clamp(24px,3.3vw,35px)}.seat-opponent .tile{--tile-width:clamp(15px,2.2vw,23px)}.seat-left .tile,.seat-right .tile{--tile-width:clamp(12px,1.9vw,21px)}.action-bar{min-height:58px;margin-top:5px;padding:6px 10px}.action-btn{padding:7px 12px}.under-note,.foot{font-size:9px}.info-panel{display:flex}.blood-card{padding:7px 9px}.blood-amount{font-size:22px}.blood-track{margin-top:5px}.log-card{display:none}.peek-line{margin-bottom:4px;padding-bottom:3px}.peek-tiles .tile{--tile-width:16px;--tile-height:23px}.peek-card{padding:5px}.disclaimer{display:none}.modal{max-height:calc(100dvh - 16px);padding:13px 19px}.setup-intro{margin:5px 0 8px}.setup-crests{width:58px;height:58px;font-size:31px}.setup-crests span{font-size:12px;margin-top:19px}.setup-intro h1{font-size:25px;margin-bottom:2px}.setup-intro p{font-size:10px;line-height:1.3}.setup-content{gap:5px}.setup-block label{margin-bottom:2px;font-size:11px}.setup-block select,.locked-entry{min-height:29px;padding:4px;font-size:10px}.start-button{min-height:39px;margin-top:8px}.setup-fineprint{margin-top:5px;font-size:9px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+.move-btn{min-width:37px;padding-left:8px!important;padding-right:8px!important;font-size:17px!important;line-height:1}
+
+
+/* v0.3: Back sides of all transparent opponent tiles show a horizontal mirror.
+   Face-up discard rivers/melds are not viewed through the backs. */
+.seat-opponent .seat-hand .tile.clear .face {transform:scaleX(-1);}
+/* The back of a transparent tile mirrors ONLY left/right, even at the top seat.
+   Never rotate its face 180 degrees: that was a rendering bug in v0.2. */
+.seat-top .seat-hand .tile.clear .face {transform:scaleX(-1);}
+/* The opaque rear tile has no visible front to invert. */
+.seat-top .seat-meld .tile .face,.river-top .tile .face {transform:rotate(180deg);}
+/* Visible-tile reference: opaque, pale, high-contrast face, NOT see-through onto the dark UI. */
+.peek-tiles .tile.peek-opaque {
+ background:linear-gradient(125deg,#f9f7ec 0%,#dfefe9 46%,#fcfcf3 80%,#dce8e1 100%);
+ border:1px solid #77b5ae;box-shadow:inset 1px 1px 2px #fff,0 2px 2px #0009;
+ backdrop-filter:none;color:#1b352b;
+}
+.peek-tiles .tile.peek-opaque::after {
+ content:'';position:absolute;inset:1px;border:1px solid #6faea5;border-radius:2px;
+ box-shadow:inset 0 2px #73bcb4;
+}
+.peek-legend {font-size:10px;color:#b7c6bf;line-height:1.55;margin:3px 0 10px;}
+.seat-bottom .tile.selectable{touch-action:none;cursor:grab;}
+.seat-bottom .tile.selectable:active{cursor:grabbing;}
+.seat-bottom .tile.dragging{opacity:.58;filter:brightness(1.23);}
+.seat-bottom .tile.drop-before{box-shadow:-4px 0 0 #f5cf8a,0 3px 4px #0009;}
+.seat-bottom .tile.drop-after{box-shadow:4px 0 0 #f5cf8a,0 3px 4px #0009;}
+.arrange-hint{color:#a8beb2;font-size:11px;}
+@media(max-width:530px){.peek-legend{font-size:9px}.arrange-hint{display:block;margin-top:2px;}}
+
+/* v0.3: highly legible pip engravings, rendered as vector art. */
+.tile .pip-art{width:96%;height:98%;flex:none;display:block;overflow:visible;filter:drop-shadow(0 0 .35px #0d292c)}
+.tile.clear .pip-art{filter:drop-shadow(0 0 1px #d5ffff) contrast(1.16) saturate(1.2)}
+.tile.clear .face{color:#072c29}
+.peek-tiles .tile{--tile-width:26px;--tile-height:37px;}
+.peek-tiles .tile.peek-opaque .pip-art{filter:contrast(1.16) saturate(1.12)}
+.peek-tiles .tile .face{transform:none!important}
+.peek-tiles{gap:2px;scrollbar-color:#75968c #122b26;}
+.peek-tiles .tile.peek-opaque{border-color:#5faca9;background:linear-gradient(125deg,#fffef9 0%,#f0f6ed 58%,#e9f2ed 100%)}
+/* Slightly enlarge the miniature suit symbols without altering genuine hand order. */
+.peek-tiles .tile .wan-number{font-size:calc(var(--tile-width)*.50)}
+.peek-tiles .tile .wan-unit{font-size:calc(var(--tile-width)*.40)}
+.peek-tiles .tile .honor{font-size:calc(var(--tile-width)*.60)}
+@media(max-width:530px){.peek-tiles .tile{--tile-width:27px;--tile-height:38px}}
+@media(max-height:550px) and (min-width:600px){.peek-tiles .tile{--tile-width:24px;--tile-height:34px}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div id="app" class="app">
+  <header class="topbar">
+    <div class="identity"><span class="brand-emblem">鷲</span><span class="brand-text"><strong>透牌勝負</strong><small>WASHIZU STYLE · BROWSER PROTOTYPE</small></span></div>
+    <div class="topbar-right"><span id="roundTag" class="round-tag">CPU対戦 · 試作版</span><button type="button" class="top-btn" data-action="rules" title="操作とルール">遊び方</button><button type="button" class="top-btn new-btn" data-action="new" title="最初の設定に戻る">設定に戻る</button></div>
+  </header>
+  <main class="game-grid">
+    <section class="game-left" aria-label="麻雀卓">
+      <div class="status-strip"><span id="phaseLabel" class="phase-label">透明牌が拓く、読み合いの勝負。</span><span id="doraLabel" class="dora-label">ドラ表示 <span class="mini-empty">—</span></span></div>
+      <div class="arena-wrap">
+        <div id="tableArena" class="arena">
+          <div class="table-wood" aria-hidden="true"><div class="table-felt"></div><div class="table-engraving">透 牌</div><span class="table-corner c1"></span><span class="table-corner c2"></span><span class="table-corner c3"></span><span class="table-corner c4"></span></div>
+          <div class="table-vignette" aria-hidden="true"></div>
+          <div class="decor-rail decor-rail-top" aria-hidden="true"></div>
+          <div class="decor-rail decor-rail-bottom" aria-hidden="true"></div>
+          <div id="seatTop" class="seat seat-top"></div>
+          <div id="seatLeft" class="seat seat-left"></div>
+          <div id="seatRight" class="seat seat-right"></div>
+          <div id="riverTop" class="river river-top" aria-label="対面の捨て牌"></div>
+          <div id="riverLeft" class="river river-left" aria-label="左家の捨て牌"></div>
+          <div id="riverRight" class="river river-right" aria-label="右家の捨て牌"></div>
+          <div id="riverBottom" class="river river-bottom" aria-label="自分の捨て牌"></div>
+          <div id="centerPlate" class="center-plate">
+            <div class="center-rim"><div class="center-hole"><div class="bag-glyph">鷲</div><span>牌 袋</span></div></div>
+            <button type="button" id="drawButton" class="draw-button" data-action="draw" disabled>袋からツモ</button>
+            <div id="centerStatus" class="center-status">対局準備中</div>
+          </div>
+          <div id="seatBottom" class="seat seat-bottom"></div>
+          <div id="effectLayer" class="effect-layer" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div id="reactPanel" class="react-panel" hidden></div>
+      <div id="actionBar" class="action-bar">
+        <div class="selected-copy" id="selectedHint">手牌を選ぶと、ここに操作が表示される</div>
+        <div id="actionButtons" class="action-buttons"></div>
+      </div>
+      <div class="under-note">自動理牌なし。牌をドラッグ、または選択して ← → で手動理牌。打牌はボタンで確定。</div>
+    </section>
+    <aside id="infoPanel" class="info-panel" aria-label="公開情報と対局情報">
+      <div class="panel-heading"><span class="small-stamp">MATCH RECORD</span><h2>対局の記録</h2></div>
+      <div id="bloodSection" class="blood-section"></div>
+      <section class="info-card" aria-label="持ち点"><h3>点棒 <small>各局のスコア</small></h3><div id="scoreboard"></div></section>
+      <section class="info-card peek-card" aria-label="相手の見える牌"><div class="peek-heading"><h3>透けて見える手牌</h3><span class="tiny-tag">手牌の並び順を保持</span></div><div class="peek-legend">薄青の縁＝実際は透明牌（この欄では不透明表示） ／ 鷲＝不透明牌</div><div id="peekInfo"></div></section>
+      <section class="info-card log-card" aria-label="進行ログ"><h3>対局ログ</h3><div id="logBox" class="log-list" role="log" aria-live="polite"></div></section>
+      <div class="disclaimer">仮想の血液・仮想資産によるゲームです。現実の賭けや出血は伴いません。<br>非公式のオリジナル試作画面です。</div>
+    </aside>
+  </main>
+  <footer class="foot">WASHIZU STYLE MAHJONG · PROTOTYPE 0.3 <span>ローカルCPU対戦 / オフライン対応 · 制作：鈾</span></footer>
+</div>
+<div id="modalRoot" class="modal-root">
+  <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
+    <div class="setup-title-row"><span class="label-caps">A GAME OF VISIBLE SECRETS</span><span class="test-pill">PROTOTYPE v0.3</span></div>
+    <div class="setup-intro"><div class="setup-crests">透<span>牌</span></div><div><h1 id="setupTitle">鷲巣式 <em>透明麻雀</em></h1><p>見える三枚、見えない一枚。<br>互いの代表が運命を背負う、四人の心理戦。</p></div></div>
+    <div class="setup-content">
+      <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">賭けるもの <small>いずれもゲーム内の架空数値</small></label><select id="stakeMode"><option value="both" selected>両チームの代表が仮想血液を賭ける</option><option value="original">原作寄り：挑戦者は仮想血液 / 相手は仮想資産</option></select></div></div>
+      <div class="setup-row">
+        <div class="setup-block"><span class="setup-num">02</span><div class="setup-block-body"><label for="bloodRate">1,000点あたり</label><select id="bloodRate"><option value="10">10 mL</option><option value="50">50 mL</option><option value="100" selected>100 mL</option><option value="200">200 mL</option><option value="500">500 mL</option></select></div></div>
+        <div class="setup-block"><span class="setup-num">03</span><div class="setup-block-body"><label for="bloodInit">仮想血液の初期量</label><select id="bloodInit"><option value="1000">1,000 mL</option><option value="2000" selected>2,000 mL</option><option value="3000">3,000 mL</option><option value="5000">5,000 mL</option></select></div></div>
+      </div>
+      <div class="setup-row">
+        <div class="setup-block"><span class="setup-num">04</span><div class="setup-block-body"><label for="bloodRecovery">血液を戻すか <small>部屋主が決定</small></label><select id="bloodRecovery"><option value="yes" selected>可能：獲得時に代表が選択</option><option value="no">不可：失った血液は戻せない</option></select></div></div>
+        <div class="setup-block"><span class="setup-num">05</span><div class="setup-block-body"><label for="halfCount">対局の長さ</label><select id="halfCount"><option value="1" selected>半荘1回（お試し）</option><option value="2">半荘2回</option><option value="6">半荘6回（原作型）</option></select></div></div>
+      </div>
+      <div class="setup-row">
+        <div class="setup-block"><span class="setup-num">06</span><div class="setup-block-body"><label for="cpuSpeed">CPU思考時間</label><select id="cpuSpeed"><option value="900" selected>標準（演出あり）</option><option value="420">速い</option><option value="110">高速テスト</option></select></div></div>
+        <div class="setup-block locked-block"><span class="setup-num">07</span><div class="setup-block-body"><label>参加方法</label><div class="locked-entry">あなた + CPU 3人 <span>今後オンライン対応予定</span></div></div></div>
+      </div>
+    </div>
+    <button type="button" id="startBtn" data-action="start" class="start-button"><span>対局を始める</span><b>→</b></button>
+    <p class="setup-fineprint">原作の主要な特殊要素を取り入れた試作版です。細かな役・符計算やすべての鳴き・精算条件は開発中です。実際のお金や血液は扱いません。</p>
+  </div>
+</div>
+<div id="resultRoot" class="modal-root result-root" hidden>
+  <div id="resultModal" class="modal result-modal" role="dialog" aria-modal="true" aria-labelledby="resultTitle"></div>
+</div>
+<div id="rulesRoot" class="modal-root rules-root" hidden>
+  <div class="modal rules-modal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+    <div class="modal-header"><h2 id="rulesTitle">操作とルール</h2><button type="button" class="icon-close" data-action="close-rules" aria-label="閉じる">×</button></div>
+    <div class="rules-body">
+      <p><strong>透明牌</strong>：同じ種類4枚のうち、3枚は透明、残り1枚は不透明。相手の透明牌の表は見えるが、不透明牌の種類は見えません。</p>
+      <p><strong>手動理牌</strong>：配牌・ツモ・打牌の際、手牌を自動で並べ替えません。手牌をドラッグするか、牌をタップして左右矢印で好きな位置へ動かしてください。CPUの番でも並べ替え可能です。2回タップしても打牌されず、打牌は専用ボタンで確定します。立直後はツモ切りのみです。</p>
+      <p><strong>牌の向き</strong>：相手の透明牌を裏側から見たとき、牌面は上下を逆にせず左右だけ鏡映しで表示します。対面の捨て牌・副露は通常の席向きの表示です。筒子は見やすいベクター絵柄に変更しています。右側の「透けて見える手牌」欄では読みやすさ優先で透明牌を不透明に描いています。</p>
+      <p><strong>基本操作</strong>：自分の番で牌を選択し「打牌」。袋からのツモ、ロン・チー・ポン・カン・リーチは可能な場面でボタンが出ます。</p>
+      <p><strong>勝負</strong>：自分と対面のCPUが同じ陣営。相手陣営は左右のCPUで、血液精算の対象になるのは自分と右の代表のみです。</p>
+      <p><strong>原作寄りルール</strong>：牌山を積まず袋から引く、全員の捨て牌合計70枚で流局、代表間の直接支払い・半荘終了時の精算に仮想血液・資産の特別支払いを付けます。</p>
+      <p><strong>現バージョンの限界</strong>：主要な役の判定と基本的な点計算、チー・ポン・カン・リーチの基礎機能を試作しています。すべての役、暗槓制限、フリテンの例外、複数ロン、流局時処理などは完全再現ではありません。競技・精算の厳密性はまだ保証しません。</p>
+      <p><strong>血液の回復</strong>：設定を「可能」にしたときだけ、代表が精算時の回復を選べます。「不可」を選ぶと血液は戻りません。</p>
+    </div>
+    <button type="button" class="minor-btn" data-action="close-rules">卓に戻る</button>
+  </div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+/* Washizu Mahjong: offline rules engine. No network services or external dependencies. */
+(function(root){
+'use strict';
+const TYPES=[];
+for(const suit of ['m','p','s']) for(let n=1;n<=9;n++)TYPES.push(n+suit);
+for(let n=1;n<=7;n++) TYPES.push(n+'z');
+const HONORS=['東','南','西','北','白','發','中'];
+const NAMES={m:'萬子',p:'筒子',s:'索子',z:'字牌'};
+const NUMBER_KANJI=['','一','二','三','四','五','六','七','八','九'];
+const idx=t=>TYPES.indexOf(t);
+const suit=t=>t.slice(-1);
+const num=t=>Number(t.slice(0,-1));
+const isHonor=t=>suit(t)==='z';
+const isTerminal=t=>isHonor(t)||num(t)===1||num(t)===9;
+const isSimple=t=>!isTerminal(t);
+const isDragon=t=>suit(t)==='z'&&num(t)>=5;
+const tileName=t=>isHonor(t)?HONORS[num(t)-1]:num(t)+NAMES[suit(t)];
+function randomShuffle(array,rand=Math.random){for(let i=array.length-1;i>0;i--){const j=Math.floor(rand()*(i+1));[array[i],array[j]]=[array[j],array[i]];}return array;}
+function makeTiles(rand=Math.random){let id=0;const ts=[];for(const type of TYPES){for(let copy=0;copy<4;copy++){ts.push({id:id++,type,clear:copy!==0});}}return randomShuffle(ts,rand);}
+function counts(tiles){const c=new Array(34).fill(0);for(const t of tiles)c[idx(typeof t==='string'?t:t.type)]++;return c;}
+function isSevenPairs(tiles){if(tiles.length!==14)return false;const c=counts(tiles);return c.filter(x=>x===2).length===7;}
+const KOKUSHI=['1m','9m','1p','9p','1s','9s','1z','2z','3z','4z','5z','6z','7z'];
+function isKokushi(tiles){if(tiles.length!==14)return false;const c=counts(tiles);return KOKUSHI.every(t=>c[idx(t)]>=1)&&KOKUSHI.some(t=>c[idx(t)]>=2)&&c.reduce((a,b)=>a+b,0)===14;}
+function getDecompositions(tiles, openMelds=0){
+ const needed=4-openMelds;if(needed<0||tiles.length!==needed*3+2)return [];
+ const c=counts(tiles), out=[];
+ function walk(sets){
+  const first=c.findIndex(n=>n>0);
+  if(first===-1){if(sets.length===needed)out.push(sets.map(x=>({...x})));return;}
+  if(sets.length>=needed)return;
+  if(c[first]>=3){c[first]-=3;sets.push({kind:'pon',tiles:[TYPES[first],TYPES[first],TYPES[first]],open:false});walk(sets);sets.pop();c[first]+=3;}
+  if(first<27 && first%9<=6 && c[first+1]>0 && c[first+2]>0){c[first]--;c[first+1]--;c[first+2]--;sets.push({kind:'chi',tiles:[TYPES[first],TYPES[first+1],TYPES[first+2]],open:false});walk(sets);sets.pop();c[first]++;c[first+1]++;c[first+2]++;}
+ }
+ for(let pair=0;pair<34;pair++){if(c[pair]<2)continue;c[pair]-=2;const start=out.length;walk([]);for(let k=start;k<out.length;k++)out[k].pair=TYPES[pair];c[pair]+=2;}
+ return out;
+}
+function isWinningShape(tiles,melds=[]){return (melds.length===0&&(isSevenPairs(tiles)||isKokushi(tiles)))||getDecompositions(tiles,melds.length).length>0;}
+function getWaits(tiles,melds=[]){const waits=[];const c=counts(tiles);for(let i=0;i<34;i++){if(c[i]>=4)continue;if(isWinningShape([...tiles,TYPES[i]],melds))waits.push(TYPES[i]);}return waits;}
+function nextDora(ind){const s=suit(ind),n=num(ind);if(s==='z'){
+ if(n<=4)return (n===4?1:n+1)+'z';return (n===7?5:n+1)+'z';}
+ return (n===9?1:n+1)+s;
+}
+function seatWind(seat,dealer){return ((seat-dealer+4)%4+1)+'z';}
+function pointsFor(base,dealerWinner,tsumo,fromDealer=false){const multi=dealerWinner? (tsumo?2:6) : (tsumo?(fromDealer?2:1):4);return Math.ceil(base*multi/100)*100;}
+function baseScore(han,fu,yakuman=false){
+ if(yakuman)return 8000;
+ if(han>=13)return 8000;
+ if(han>=11)return 6000;
+ if(han>=8)return 4000;
+ if(han>=6)return 3000;
+ if(han>=5)return 2000;
+ const raw=fu*Math.pow(2,han+2);return Math.min(2000,raw);
+}
+function totalSuit(tiles){const suits=new Set(tiles.filter(t=>!isHonor(t)).map(suit));return {suits, honors:tiles.some(isHonor)};}
+function candidateEval(concealed,melds,opts,pattern){
+ const all=[...concealed,...melds.flatMap(m=>m.tiles)];
+ const closed=!melds.some(m=>m.open);
+ let han=0,fu=20, yakuman=false, yaku=[];
+ function add(name,h){if(h>0){han+=h;yaku.push({name,han:h});}}
+ if(pattern==='kokushi'){return {han:13,fu:0,yaku:[{name:'国士無双',han:13}],yakuman:true,pointsBase:8000};}
+ if(opts.riichi&&closed)add('立直',1);
+ if(opts.tsumo&&closed)add('門前清自摸和',1);
+ if(all.every(isSimple))add('断么九',1);
+ if(pattern==='chiitoi'){add('七対子',2);fu=25;}
+ let sets=[],pair=null;
+ if(pattern&&typeof pattern==='object'){sets=[...pattern,...melds];pair=pattern.pair;}
+ if(sets.length){
+  let yakuTrip=0;
+  for(const m of sets){if(m.kind==='chi')continue;const t=m.tiles[0];if(isDragon(t))yakuTrip++;if(t===opts.seatWind)yakuTrip++;if(t===opts.roundWind)yakuTrip++;}
+  if(yakuTrip)add('役牌',yakuTrip);
+  if(sets.every(m=>m.kind!=='chi'))add('対々和',2);
+  const seqs=sets.filter(m=>m.kind==='chi');
+  const concealedSeq=seqs.filter(m=>!m.open);
+  if(closed){
+    const c={};for(const m of concealedSeq){const k=m.tiles[0];c[k]=(c[k]||0)+1;}
+    if(Object.values(c).some(n=>n>=2))add('一盃口',1);
+  }
+  let sanshoku=false;
+  for(let n=1;n<=7;n++){
+    if(['m','p','s'].every(s=>seqs.some(m=>m.tiles[0]===n+s)))sanshoku=true;
+  }
+  if(sanshoku)add('三色同順',closed?2:1);
+  let ittsu=false;
+  for(const s of ['m','p','s'])if([1,4,7].every(n=>seqs.some(m=>m.tiles[0]===n+s)))ittsu=true;
+  if(ittsu)add('一気通貫',closed?2:1);
+  if(sets.every(m=>m.tiles.some(isTerminal))&&isTerminal(pair))add('混全帯么九',closed?2:1);
+  const valuePair=isDragon(pair)||pair===opts.seatWind||pair===opts.roundWind;
+  if(closed&&seqs.length===4&&!valuePair&&opts.winningTile){
+    const wt=opts.winningTile;
+    let ryanmen=false;
+    for(const m of seqs){if(!m.tiles.includes(wt))continue;const n=num(m.tiles[0]);const winN=num(wt);if(suit(wt)===suit(m.tiles[0])&&((winN===n&&n>1)||(winN===n+2&&n+2<9)))ryanmen=true;}
+    if(ryanmen)add('平和',1);
+  }
+  if(pair===opts.roundWind)fu+=2;
+  if(pair===opts.seatWind)fu+=2;
+  if(isDragon(pair))fu+=2;
+  for(const m of sets){if(m.kind==='chi')continue;const isKan=m.kind==='kan';const term=isTerminal(m.tiles[0]);const open=m.open;
+   fu+=(isKan?(open?8:16):(open?2:4))*(term?2:1);
+  }
+  if(opts.winningTile&&pair===opts.winningTile)fu+=2;
+  if(!opts.tsumo&&closed)fu+=10;
+  if(opts.tsumo&&!yaku.some(x=>x.name==='平和'))fu+=2;
+  if(!closed&&!opts.tsumo)fu=Math.max(30,fu);
+  if(opts.tsumo&&yaku.some(x=>x.name==='平和'))fu=20;
+  fu=Math.ceil(fu/10)*10;
+ }
+ const {suits,honors}=totalSuit(all);
+ if(suits.size===1){if(honors)add('混一色',closed?3:2);else add('清一色',closed?6:5);}
+ // Dora is not a yaku and cannot justify a win by itself.
+ const yakuHan=han;
+ let dora=0;
+ for(const d of opts.dora||[]){dora+=all.filter(t=>t===nextDora(d)).length;}
+ if(yakuHan>0&&dora){han+=dora;yaku.push({name:'ドラ',han:dora});}
+ if(yakuHan===0)return null;
+ return {han,fu,yaku,yakuman,pointsBase:baseScore(han,fu,yakuman)};
+}
+function evaluateHand(concealed, melds, opts){
+ const types=concealed.map(t=>typeof t==='string'?t:t.type);
+ let best=null;
+ const candidates=[];
+ if(melds.length===0&&isKokushi(types))candidates.push('kokushi');
+ if(melds.length===0&&isSevenPairs(types))candidates.push('chiitoi');
+ for(const pattern of getDecompositions(types,melds.length))candidates.push(pattern);
+ for(const pattern of candidates){
+  const e=candidateEval(types,melds,opts,pattern);if(!e)continue;
+  if(!best||e.pointsBase>best.pointsBase||(e.pointsBase===best.pointsBase&&e.han>best.han))best=e;
+ }
+ return best;
+}
+function shantenHeuristic(tiles,melds=[]){
+ // Higher is better: concealed blocks, pairs, and adjacent sequences.
+ const c=counts(tiles), score=[];
+ for(let i=0;i<34;i++){
+  let s=0;
+  const t=TYPES[i],v=c[i];if(!v)continue;
+  if(v>=2)s+=4.6;if(v>=3)s+=6.0;
+  if(i<27){const n=i%9;
+   if(n>0&&c[i-1])s+=2.1;if(n<8&&c[i+1])s+=2.1;
+   if(n>1&&c[i-2])s+=0.65;if(n<7&&c[i+2])s+=0.65;
+   if(n===0||n===8)s-=0.4;
+  }else{s+=v===1?-1.2:0.2;}
+  score[i]=s;
+ }
+ let total=0, pairs=0,triplets=0;
+ for(let i=0;i<34;i++){
+  if(c[i])total+=score[i];if(c[i]>=2)pairs++;if(c[i]>=3)triplets++;
+ }
+ total+=triplets*5+pairs*1.1;
+ // Slightly reward flush concentration and fewer isolated suits.
+ const suits=new Set(tiles.map(x=>suit(typeof x==='string'?x:x.type)));total+=(4-suits.size)*0.6;
+ return total;
+}
+function chooseDiscard(hand,melds=[],dora=[],opponentVisible=[]){
+ if(hand.length===0)return -1;
+ let best=-Infinity,bestIndex=hand.length-1;
+ for(let i=0;i<hand.length;i++){
+  const remain=hand.filter((_,j)=>j!==i);const t=hand[i].type;
+  let value=shantenHeuristic(remain,melds);
+  const doraType=dora.map(nextDora);if(doraType.includes(t))value-=7;
+  // A visible opponent's frequent suit slightly discourages discarding the same honor/terminal.
+  const publicCount=opponentVisible.filter(x=>x===t).length;
+  if(isHonor(t)&&publicCount===0)value-=0.2;
+  value+=Math.random()*0.2;
+  if(value>best){best=value;bestIndex=i;}
+ }
+ return bestIndex;
+}
+const api={TYPES,HONORS,NUMBER_KANJI,NAMES,num,suit,idx,tileName,isHonor,isTerminal,isSimple,isDragon,randomShuffle,makeTiles,counts,isSevenPairs,isKokushi,getDecompositions,isWinningShape,getWaits,nextDora,seatWind,baseScore,pointsFor,evaluateHand,chooseDiscard};
+if(typeof module!=='undefined'&&module.exports)module.exports=api;
+root.WashizuLogic=api;
+})(typeof window!=='undefined'?window:globalThis);
+
+</script>
+<script>
+/* 透牌勝負 - offline four-player prototype. All assets bundled; no real stakes. */
+(function(){
+'use strict';
+const L=window.WashizuLogic;
+const $=id=>document.getElementById(id);
+const NUM=L.NUMBER_KANJI;
+const SEATS=[{name:'あなた',team:'挑戦者',label:'代表 · あなた'},{name:'右家 CPU',team:'対戦相手',label:'代表 · CPU'},{name:'対面 CPU',team:'挑戦者',label:'補佐 · CPU'},{name:'左家 CPU',team:'対戦相手',label:'補佐 · CPU'}];
+const ROOT=$('modalRoot'),SETUP=$('setupModal'),RESULTROOT=$('resultRoot'),RULESROOT=$('rulesRoot');
+let G=null,aiTimer=null,clock=0,toastTimer=null;
+const format=n=>Math.round(n).toLocaleString('ja-JP');
+const esc=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const pick=(ary)=>ary[Math.floor(Math.random()*ary.length)];
+function showToast(s){const el=$('toast');el.textContent=s;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2600);}
+function log(message){if(!G)return;G.logs.unshift(message);G.logs=G.logs.slice(0,30);}
+function settingsFromForm(){return {mode:$('stakeMode').value,bloodRate:Number($('bloodRate').value),bloodInit:Number($('bloodInit').value),recover:$('bloodRecovery').value==='yes',halves:Number($('halfCount').value),speed:Number($('cpuSpeed').value)};}
+function stopTimers(){clock++;clearTimeout(aiTimer);aiTimer=null;}
+function newPlayer(seat){return {seat,name:SEATS[seat].name,score:25000,hand:[],melds:[],discards:[],riichi:false,ippatsu:false,riichiTurn:-1,tempFuriten:false,justDrawn:null};}
+function makeGame(settings){return {settings,halfNo:1,handIndex:0,honba:0,riichiPot:0,dealer:0,turn:0,phase:'setup',wall:[],dora:[],discardCount:0,players:Array.from({length:4},(_,i)=>newPlayer(i)),blood:{0:settings.bloodInit,1:settings.bloodInit},asset:{1:500000},assetWon:0,bloodRecovered:0,foregone:0,recoveryPending:0,logs:[],selectedId:null,riichiReady:false,call:null,result:null,sessionEnded:false,lastDiscard:null,lastResult:null,moveCount:0,turnNo:0};}
+function startGame(){stopTimers();G=makeGame(settingsFromForm());ROOT.hidden=true;SETUP.hidden=true;RESULTROOT.hidden=true;RULESROOT.hidden=true;startHand();log('対局開始。各種牌のうち3枚が透明牌です。');render();}
+function startHand(){
+ stopTimers();G.dealer=G.handIndex%4;G.players.forEach((p,i)=>{const fresh=newPlayer(i);Object.assign(p,fresh,{score:p.score});});
+ G.wall=L.makeTiles();G.dora=[G.wall.pop().type];G.discardCount=0;G.lastDiscard=null;G.moveCount=0;G.turn=G.dealer;G.phase='discard';G.selectedId=null;G.riichiReady=false;G.call=null;G.result=null;
+ // Each seat receives thirteen tiles in rounds of two; dealer receives one extra tile.
+ for(let round=0;round<6;round++){for(let j=0;j<4;j++){const seat=(G.dealer+j)%4;G.players[seat].hand.push(G.wall.pop(),G.wall.pop());}}
+ for(let j=0;j<4;j++)G.players[(G.dealer+j)%4].hand.push(G.wall.pop());
+ G.players[G.dealer].hand.push(G.wall.pop());
+ // Keep the actual dealing order; never rearrange a player's hand automatically.
+ log(`${roundLabel()} 開局。ドラ表示は ${L.tileName(G.dora[0])}。`);
+ if(G.turn!==0)scheduleAI();
+ render();
+}
+function roundLabel(){return `${G.handIndex<4?'東':'南'}${G.handIndex%4+1}局${G.honba?' '+G.honba+'本場':''} / ${G.halfNo}半荘目`;}
+function currentWind(){return G.handIndex<4?'1z':'2z';}
+function canOperate(){return G&&G.phase!=='result'&&!G.sessionEnded;}
+function winnerEval(seat,extra=null,tsumo=false){
+ const p=G.players[seat],types=p.hand.map(x=>x.type);if(extra)types.push(extra.type);
+ const opts={riichi:p.riichi,tsumo,winningTile:extra?.type||p.justDrawn?.type||null,dora:G.dora,roundWind:currentWind(),seatWind:L.seatWind(seat,G.dealer)};
+ return L.evaluateHand(types,p.melds,opts);
+}
+function isFuriten(seat){const p=G.players[seat];if(p.tempFuriten)return true;const waits=L.getWaits(p.hand.map(t=>t.type),p.melds);return p.discards.some(t=>waits.includes(t.type));}
+function canRon(seat,tile,discarder){if(seat===discarder||isFuriten(seat))return false;return Boolean(winnerEval(seat,tile,false));}
+function isClosed(p){return p.melds.every(m=>!m.open);}
+function riichiWaitsForDiscard(seat,tileId){const p=G.players[seat];if(p.riichi||!isClosed(p)||p.score<1000)return [];
+ const hand=p.hand.filter(t=>t.id!==tileId).map(t=>t.type);return L.getWaits(hand,p.melds);
+}
+function canDeclareRiichi(seat,tileId){const p=G.players[seat];if(!p||p.hand.length===0)return false;return riichiWaitsForDiscard(seat,tileId).length>0;}
+function drawTile(seat,kan=false){
+ if(G.wall.length===0){exhaustiveDraw();return false;}
+ const tile=G.wall.pop(),p=G.players[seat];p.hand.push(tile);p.justDrawn=tile;p.tempFuriten=false;G.phase='discard';
+ log(`${p.name}が${kan?'嶺上牌':'牌袋'}からツモ。`);render();return true;
+}
+function userDraw(){if(!canOperate()||G.turn!==0||G.phase!=='draw')return;if(drawTile(0))render();}
+function canArrangeMyHand(){return Boolean(G&&!G.sessionEnded&&G.phase!=='result'&&!G.players[0].riichi);}
+function canSelectMyTile(id){if(!G||G.sessionEnded||G.phase==='result')return false;
+ const p=G.players[0];if(!p.hand.some(t=>t.id===id))return false;
+ return !p.riichi||(G.turn===0&&G.phase==='discard'&&p.justDrawn?.id===id);
+}
+function selectTile(id){if(!canSelectMyTile(id))return;
+ // A second tap deselects the tile; discarding ALWAYS requires the 打牌 button.
+ // Selection and manual arrangement work even while the CPU is thinking.
+ G.selectedId=G.selectedId===id?null:id;G.riichiReady=false;render();
+}
+function userDiscard(){if(!G||G.phase!=='discard'||G.turn!==0)return;const id=G.selectedId;const p=G.players[0],i=p.hand.findIndex(t=>t.id===id);
+ if(i<0){showToast('先に捨てる牌を選ぶのじゃ。');return;}discard(0,i,G.riichiReady);
+}
+function moveMySelected(direction){
+ if(!canArrangeMyHand()||G.selectedId==null)return;
+ const hand=G.players[0].hand,index=hand.findIndex(t=>t.id===G.selectedId);
+ if(index<0||index+direction<0||index+direction>=hand.length)return;
+ [hand[index],hand[index+direction]]=[hand[index+direction],hand[index]];render();
+}
+function insertMyTile(sourceId,targetId,after=false){
+ if(!canArrangeMyHand())return false;
+ const hand=G.players[0].hand;
+ const from=hand.findIndex(t=>t.id===sourceId),target=hand.findIndex(t=>t.id===targetId);
+ if(from<0||target<0||from===target)return false;
+ // The destination refers to a particular neighboring tile, not a sorted value.
+ let insertAt=target+(after?1:0);
+ const [moving]=hand.splice(from,1);
+ if(from<insertAt)insertAt--;
+ hand.splice(insertAt,0,moving);
+ G.selectedId=sourceId;
+ G.riichiReady=false;
+ render();return true;
+}
+function userRiichi(){if(!G||G.turn!==0||G.phase!=='discard')return;if(G.selectedId==null){showToast('先に捨てる牌を選んでおくれ。');return;}
+ if(!canDeclareRiichi(0,G.selectedId)){showToast('選んだ牌を捨てても聴牌にならないため、立直できぬ。');return;}
+ G.riichiReady=true;render();showToast('立直宣言準備。金色の「立直して打牌」を押すのじゃ。');}
+function animateDiscard(seat,tile){
+ let source=null;if(seat===0)source=document.querySelector(`.seat-bottom [data-tile-id="${tile.id}"]`);
+ else source=document.querySelector(`#${seat===1?'seatRight':seat===2?'seatTop':'seatLeft'} [data-tile-id="${tile.id}"]`);
+ if(!source||!source.animate)return;
+ const rect=source.getBoundingClientRect();const ghost=source.cloneNode(true);ghost.classList.remove('selected','selectable','just-drawn');ghost.classList.add('effect-tile');
+ ghost.removeAttribute('data-action');ghost.style.left=rect.left+'px';ghost.style.top=rect.top+'px';ghost.style.width=rect.width+'px';ghost.style.height=rect.height+'px';document.body.appendChild(ghost);
+ const target=$('centerPlate').getBoundingClientRect();const dx=target.left+target.width/2-(rect.left+rect.width/2);const dy=target.top+target.height/2-(rect.top+rect.height/2)+(seat===0?75:0);
+ const animation=ghost.animate([{transform:'translate(0,0) translateZ(0) rotate(0deg)',opacity:1,offset:0},{transform:`translate(${dx*.58}px,${dy*.58-30}px) rotate(${seat%2?10:-8}deg) scale(1.05)`,opacity:1,offset:.55},{transform:`translate(${dx}px,${dy}px) rotate(${seat%2?17:-11}deg) scale(.7)`,opacity:.1,offset:1}],{duration:G.settings.speed===110?210:460,easing:'cubic-bezier(.22,.9,.3,1)'});
+ animation.onfinish=()=>ghost.remove();
+}
+function discard(seat,index,declareRiichi=false){
+ if(!G||G.turn!==seat||G.phase!=='discard')return;
+ const p=G.players[seat];if(index<0||index>=p.hand.length)return;
+ if(p.riichi&&p.justDrawn&&p.hand[index].id!==p.justDrawn.id){return;}
+ if(declareRiichi&&!canDeclareRiichi(seat,p.hand[index].id))return;
+ const tile=p.hand[index];animateDiscard(seat,tile);
+ if(declareRiichi){p.riichi=true;p.riichiTurn=G.moveCount;p.score-=1000;G.riichiPot+=1000;log(`${p.name}「立直！」 1000点棒を供託。`);}
+ p.hand.splice(index,1);p.discards.push(tile);p.justDrawn=null;G.selectedId=null;G.riichiReady=false;G.lastDiscard={seat,tile};G.discardCount++;G.moveCount++;
+ log(`${p.name}：${L.tileName(tile.type)} を打牌。`);
+ G.phase='waiting';render();
+ const token=clock;
+ setTimeout(()=>{if(!G||token!==clock||G.phase!=='waiting')return;processDiscardReactions(seat,tile);},G.settings.speed===110?35:160);
+}
+function reactionCandidates(discarder,tile){const ron=[];for(let j=1;j<=3;j++){const seat=(discarder+j)%4;if(canRon(seat,tile,discarder))ron.push(seat);}return ron;}
+function processDiscardReactions(discarder,tile){
+ if(!G||G.phase!=='waiting')return;
+ const ron=reactionCandidates(discarder,tile);
+ if(ron.length){const nearest=ron[0];
+  if(nearest===0){offerReaction({kind:'ron',discarder,tile,options:[{kind:'ron',label:'ロン'}],afterPass:()=>{const c=ron.find(x=>x!==0);if(c!==undefined)scoreWinningHand(c,discarder,tile,false);else afterRonPhase(discarder,tile);}});return;}
+  scoreWinningHand(nearest,discarder,tile,false);return;
+ }
+ afterRonPhase(discarder,tile);
+}
+function afterRonPhase(discarder,tile){
+ if(G.discardCount>=70||G.wall.length===0){exhaustiveDraw();return;}
+ // Calls have priority over ordinary drawing. This is a simplified priority implementation.
+ const userCalls=discarder!==0?getMeldCalls(0,discarder,tile):[];
+ if(userCalls.length){offerReaction({kind:'meld',discarder,tile,options:userCalls,afterPass:()=>finishCalls(discarder,tile)});return;}
+ finishCalls(discarder,tile);
+}
+function getMeldCalls(seat,discarder,tile){
+ const p=G.players[seat];if(seat===discarder||p.riichi)return [];
+ const match=p.hand.filter(t=>t.type===tile.type);const options=[];
+ if(match.length>=2)options.push({kind:'pon',label:'ポン',types:[tile.type,tile.type]});
+ if(match.length>=3)options.push({kind:'kan',label:'カン',types:[tile.type,tile.type,tile.type]});
+ if(seat===(discarder+1)%4&&!L.isHonor(tile.type)){
+ const s=L.suit(tile.type),n=L.num(tile.type);
+ for(const start of [n-2,n-1,n]){if(start<1||start>7)continue;
+ const wanted=[start,start+1,start+2].filter(k=>k!==n).map(k=>k+s);
+ if(wanted.every(type=>p.hand.some(t=>t.type===type)))options.push({kind:'chi',label:`チー ${start}-${start+2}`,types:wanted});
+ }
+ }
+ return options;
+}
+function finishCalls(discarder,tile){
+ for(let j=1;j<=3;j++){
+  const seat=(discarder+j)%4;if(seat===0)continue;
+  const calls=getMeldCalls(seat,discarder,tile);
+  const pon=calls.find(c=>c.kind==='pon'),kan=calls.find(c=>c.kind==='kan');
+  if(kan&&Math.random()<.15){applyCall(seat,kan,discarder,tile);return;}
+  if(pon){const term=L.isHonor(tile.type),mine=L.isDragon(tile.type)||tile.type===L.seatWind(seat,G.dealer)||tile.type===currentWind();if(Math.random()<(mine?.48:term?.09:.035)){applyCall(seat,pon,discarder,tile);return;}}
+  // CPU is intentionally conservative with chi to avoid open hands with no yaku.
+ }
+ nextTurn(discarder);
+}
+function offerReaction(call){G.call=call;G.phase='react';render();}
+function passReaction(){if(!G||G.phase!=='react'||!G.call)return;
+ if(G.call.kind==='ron')G.players[0].tempFuriten=true;
+ const cb=G.call.afterPass;G.call=null;G.phase='waiting';render();cb();
+}
+function useReaction(index){if(!G||G.phase!=='react'||!G.call)return;const call=G.call,option=call.options[index];if(!option)return;
+ G.call=null;G.phase='waiting';if(option.kind==='ron'){scoreWinningHand(0,call.discarder,call.tile,false);return;}
+ applyCall(0,option,call.discarder,call.tile);
+}
+function applyCall(seat,option,discarder,tile){
+ const p=G.players[seat];const actual=[];
+ for(const type of option.types){const i=p.hand.findIndex(t=>t.type===type);if(i<0){showToast('必要な牌が見つからない。');return;}actual.push(p.hand.splice(i,1)[0]);}
+ // Remove the tile from its previous discard river because it is called.
+ const river=G.players[discarder].discards;const last=river[river.length-1];if(last?.id===tile.id)river.pop();
+ const allObjs=[...actual,tile];p.melds.push({kind:option.kind,tiles:allObjs.map(x=>x.type),tileObjs:allObjs,open:true,from:discarder});
+ G.turn=seat;G.phase='discard';p.justDrawn=null;G.selectedId=null;G.riichiReady=false;
+ log(`${p.name}が${option.kind==='chi'?'チー':option.kind==='pon'?'ポン':'大明槓'}。`);
+ if(option.kind==='kan'){addDora();if(!drawTile(seat,true))return;}
+ render();if(seat!==0)scheduleAI();
+}
+function addDora(){if(G.wall.length){const ind=G.wall.pop();G.dora.push(ind.type);log(`カンドラ：${L.tileName(ind.type)}。`);}}
+function getAnkanTypes(seat){const p=G.players[seat];if(p.riichi)return [];const c=L.counts(p.hand.map(t=>t.type));return L.TYPES.filter((t,i)=>c[i]===4);}
+function userAnkan(){if(!G||G.phase!=='discard'||G.turn!==0)return;const types=getAnkanTypes(0);if(!types.length)return;doAnkan(0,types[0]);}
+function doAnkan(seat,type){const p=G.players[seat];if(!getAnkanTypes(seat).includes(type))return;const got=[];for(let j=0;j<4;j++){const i=p.hand.findIndex(t=>t.type===type);got.push(...p.hand.splice(i,1));}
+ p.melds.push({kind:'kan',tiles:got.map(x=>x.type),tileObjs:got,open:false,from:seat});log(`${p.name}が暗槓：${L.tileName(type)}。`);addDora();if(drawTile(seat,true)&&seat!==0)scheduleAI();render();}
+function nextTurn(discarder){G.turn=(discarder+1)%4;G.phase='draw';G.call=null;G.selectedId=null;G.riichiReady=false;render();if(G.turn!==0)scheduleAI();}
+function scheduleAI(){if(!G||G.turn===0||!['draw','discard'].includes(G.phase))return;clearTimeout(aiTimer);const token=clock;aiTimer=setTimeout(()=>{if(!G||clock!==token)return;if(!RULESROOT.hidden){scheduleAI();return;}cpuStep();},G.settings.speed);}
+function cpuStep(){if(!G||G.turn===0)return;const seat=G.turn,p=G.players[seat];
+ if(G.phase==='draw'){
+  if(!drawTile(seat))return;
+  if(p.justDrawn&&winnerEval(seat,null,true)){scoreWinningHand(seat,null,p.justDrawn,true);return;}
+  if(getAnkanTypes(seat).length&&Math.random()<.16){doAnkan(seat,getAnkanTypes(seat)[0]);return;}
+  scheduleAI();return;
+ }
+ if(G.phase==='discard'){
+  let index=p.riichi?(p.justDrawn?p.hand.findIndex(x=>x.id===p.justDrawn.id):p.hand.length-1):L.chooseDiscard(p.hand,p.melds,G.dora);
+  if(index<0)index=p.hand.length-1;
+  const declare=!p.riichi&&isClosed(p)&&p.score>=1000&&canDeclareRiichi(seat,p.hand[index].id)&&Math.random()<.8;
+  discard(seat,index,declare);
+ }
+}
+function transfer(from,to,amount,reason){amount=Math.round(amount);if(amount<=0)return;G.players[from].score-=amount;G.players[to].score+=amount;stakeTransfer(from,to,amount,reason);}
+function stakeTransfer(from,to,points,reason){if(!((from===0&&to===1)||(from===1&&to===0)))return;
+ const ml=Math.max(0,points*G.settings.bloodRate/1000);
+ if(from===0){G.blood[0]=Math.max(0,G.blood[0]-ml);if(G.settings.mode==='both'&&G.settings.recover)G.blood[1]=Math.min(G.settings.bloodInit,G.blood[1]+ml);if(G.settings.mode==='original')G.asset[1]+=points;log(`代表間の特別精算：挑戦者の仮想血液 −${format(ml)} mL (${reason})。`);}
+ else {if(G.settings.mode==='both')G.blood[1]=Math.max(0,G.blood[1]-ml);else G.asset[1]=Math.max(0,G.asset[1]-points);
+  G.assetWon+=points;if(G.settings.recover){G.recoveryPending+=ml;log(`代表間の特別精算：${format(ml)} mL 分の回復選択権を獲得。`);}else{G.foregone+=ml;log(`代表間の特別精算：回復OFFのため血液は戻らない。`);}
+ }
+}
+function scoreWinningHand(seat,discarder,tile,tsumo){
+ stopTimers();const evaluation=winnerEval(seat,tsumo?null:tile,tsumo);
+ if(!evaluation){showToast('今の形には有効な役がないため和了できぬ。');return;}
+ const winner=G.players[seat],dealerWin=seat===G.dealer;let total=0;
+ if(tsumo){for(let from=0;from<4;from++){if(from===seat)continue;const amount=L.pointsFor(evaluation.pointsBase,dealerWin,true,from===G.dealer)+G.honba*100;transfer(from,seat,amount,'ツモ和了');total+=amount;}}
+ else{const amount=L.pointsFor(evaluation.pointsBase,dealerWin,false)+G.honba*300;transfer(discarder,seat,amount,'ロン和了');total=amount;}
+ const sticks=G.riichiPot;winner.score+=sticks;G.riichiPot=0;total+=sticks;
+ log(`${winner.name}が${tsumo?'ツモ':'ロン'}！ ${evaluation.han}翻 / ${evaluation.fu}符 / ${format(total)}点獲得。`);
+ const labels=evaluation.yaku.map(y=>`${y.name}${y.han}翻`).join(' · ');
+ const title=seat===0?'和了！':seat===2?'味方の和了':'対戦相手の和了';
+ const desc=`${winner.name}の${tsumo?'ツモ':'ロン'}。${evaluation.han}翻 ${evaluation.fu}符。${labels||'役あり'}。`;
+ finishHand({title,desc,total,yaku:labels},dealerWin);
+}
+function exhaustiveDraw(){stopTimers();const tenpai=G.players.map(p=>L.getWaits(p.hand.map(x=>x.type),p.melds).length>0);let n=tenpai.filter(Boolean).length;
+ if(n>=1&&n<=3){const receive=3000/n,pay=3000/(4-n);
+  // Round to integer points. Uses exact 3000 split for conventional 1/2/3 player situations.
+  for(let from=0;from<4;from++)if(!tenpai[from])for(let to=0;to<4;to++)if(tenpai[to])transfer(from,to,3000/((4-n)*n),'流局聴牌料');
+ }
+ log(`流局：捨て牌${G.discardCount}枚。聴牌 ${n}人。`);
+ finishHand({title:'流局',desc:`捨て牌合計 ${G.discardCount} 枚で流局。聴牌：${tenpai.map((b,i)=>b?SEATS[i].name:null).filter(Boolean).join('、')||'なし'}。`,total:0,yaku:'ノーテン罰符は基本処理のみ対応'},tenpai[G.dealer]);
+}
+function settleHalf(){const ranking=[...G.players].sort((a,b)=>b.score-a.score||a.seat-b.seat);const uma=[30000,10000,-10000,-30000],adjusted={};
+ ranking.forEach((p,rank)=>{adjusted[p.seat]=p.score-30000+uma[rank]+(rank===0?20000:0);});
+ const delta=Math.round(adjusted[0]-adjusted[1]);if(delta>0)stakeTransfer(1,0,delta,'半荘精算');else if(delta<0)stakeTransfer(0,1,-delta,'半荘精算');
+ const settled=`代表の精算差 ${format(Math.abs(delta))} 点相当（ウマ10-30、オカ20,000）。`;
+ log(`${G.halfNo}半荘目終了。${settled}`);return settled;
+}
+function finishHand(result,dealerStay){
+ G.phase='result';G.call=null;G.selectedId=null;G.riichiReady=false;
+ if(dealerStay)G.honba++;else{G.handIndex++;G.honba=0;}
+ const halfEnd=G.handIndex>=8;
+ if(halfEnd)result.desc+=' '+settleHalf();
+ const myDead=G.blood[0]<=0,oppDead=G.settings.mode==='both'?G.blood[1]<=0:G.asset[1]<=0;
+ G.sessionEnded=myDead||oppDead||(halfEnd&&G.halfNo>=G.settings.halves);
+ if(myDead){result.desc+=' 挑戦者の仮想血液が0となったため勝負終了。';}
+ else if(oppDead){result.desc+=' 対戦相手の仮想持ち分が0となったため勝負終了。';}
+ else if(halfEnd&&G.halfNo>=G.settings.halves){result.desc+=' 設定した半荘数を完走。';}
+ G.result={...result,halfEnd,sessionEnded:G.sessionEnded};
+ render();RESULTROOT.hidden=false;renderResult();
+}
+function renderResult(){if(!G?.result)return;const r=G.result;
+ const hasRecovery=G.settings.recover&&G.recoveryPending>0;
+ const recoveryHtml=hasRecovery?`<section class="result-recovery"><h3>仮想血液を戻せる</h3><p>今回の精算で ${format(G.recoveryPending)} mL 分の回復権を得た。<br>戻すかどうかは代表自身が選べる。初期量を超えては戻せない。</p><div class="result-buttons"><button class="action-btn primary" data-action="recover">血液を戻す</button><button class="action-btn subtle" data-action="forgo">今回は戻さない</button></div></section>`:'';
+ const nextLabel=r.sessionEnded?'設定に戻る':r.halfEnd?'次の半荘へ':'次の局へ';
+ $('resultModal').innerHTML=`<div class="result-overline">${r.halfEnd?'HALF-TIME SETTLEMENT':r.title==='流局'?'EXHAUSTIVE DRAW':'HAND SETTLEMENT'}</div><h2 class="result-title" id="resultTitle">${esc(r.title)}</h2><p class="result-desc">${esc(r.desc)}</p>${r.total?`<div class="result-highlight"><span>和了点（供託を含む）</span><strong>+${format(r.total)} pt</strong><div class="result-yaku">${esc(r.yaku)}</div></div>`:''}${recoveryHtml}<div class="result-buttons"><button class="action-btn primary" data-action="next" ${hasRecovery?'disabled title="回復の選択後に進めます"':''}>${nextLabel} →</button></div>`;
+}
+function chooseRecovery(recover){if(!G||G.phase!=='result'||!G.settings.recover||G.recoveryPending<=0)return;
+ const pending=G.recoveryPending;G.recoveryPending=0;
+ if(recover){const usable=Math.max(0,Math.min(pending,G.settings.bloodInit-G.blood[0]));G.blood[0]+=usable;G.bloodRecovered+=usable;G.foregone+=pending-usable;log(`仮想血液を ${format(usable)} mL 回復。`);showToast(`${format(usable)} mL 回復した。`);}
+ else{G.foregone+=pending;log(`仮想血液 ${format(pending)} mL分の回復権を放棄。`);showToast('回復せず、勝負を続ける。');}
+ render();renderResult();
+}
+function nextAfterResult(){if(!G||G.phase!=='result')return;if(G.settings.recover&&G.recoveryPending>0)return;
+ if(G.result?.sessionEnded){resetToSetup();return;}
+ RESULTROOT.hidden=true;
+ if(G.result?.halfEnd){G.halfNo++;G.handIndex=0;G.honba=0;G.riichiPot=0;G.players.forEach(p=>p.score=25000);log(`${G.halfNo}半荘目へ。点棒を25,000点に戻し、仮想血液は持ち越し。`);}
+ startHand();
+}
+function resetToSetup(){stopTimers();G=null;ROOT.hidden=false;SETUP.hidden=false;RESULTROOT.hidden=true;RULESROOT.hidden=true;document.querySelector('.danger-vignette')?.remove();$('roundTag').textContent='CPU対戦 · 試作版';$('phaseLabel').textContent='透明牌が拓く、読み合いの勝負。';$('doraLabel').innerHTML='ドラ表示 <span class="mini-empty">—</span>';}
+function userTsumo(){if(!G||G.phase!=='discard'||G.turn!==0||!G.players[0].justDrawn)return;
+ if(!winnerEval(0,null,true)){showToast('この牌姿ではツモ和了できぬ。');return;}
+ scoreWinningHand(0,null,G.players[0].justDrawn,true);
+}
+/** Pinzu are drawn as SVG rather than tiny CSS grid dots; details stay visible on a phone.
+ * Each pipped disc has a dark silhouette, a vivid lacquer ring and a bright engraving.
+ * All numbers 1-9 have standard distinct arrangements, with five's red center pip.
+ */
+function pipDisc(x,y,r,tone='green',single=false){
+ const colors={green:['#043e3e','#19a788','#beffe2'],blue:['#173858','#308ad0','#b6eafd'],red:['#75202f','#ed4d5d','#ffccbc']};
+ const [dark,base,hi]=colors[tone];
+ let svg=`<circle cx="${x}" cy="${y}" r="${r}" fill="${dark}" stroke="#0a2b31" stroke-width="1.15"/>`;
+ svg+=`<circle cx="${x}" cy="${y}" r="${(r*.79).toFixed(2)}" fill="${base}" stroke="${hi}" stroke-width="1.2"/>`;
+ svg+=`<circle cx="${x}" cy="${y}" r="${(r*.51).toFixed(2)}" fill="none" stroke="${dark}" stroke-width="${single?2:1.6}"/>`;
+ svg+=`<circle cx="${x}" cy="${y}" r="${(r*.25).toFixed(2)}" fill="${hi}"/>`;
+ svg+=`<circle cx="${(x-r*.31).toFixed(2)}" cy="${(y-r*.33).toFixed(2)}" r="${(r*.115).toFixed(2)}" fill="#fff" opacity=".78"/>`;
+ return svg;
+}
+function pinzuVector(n){
+ const dot=(x,y,r,color)=>pipDisc(x,y,r,color);
+ const pat={
+  1:[[30,42,23,'green']],
+  2:[[18,19,13.5,'blue'],[42,65,13.5,'red']],
+  3:[[16,18,12.2,'blue'],[30,42,12.2,'red'],[44,66,12.2,'blue']],
+  4:[[16,19,11.4,'blue'],[44,19,11.4,'green'],[16,65,11.4,'green'],[44,65,11.4,'blue']],
+  5:[[16,19,11,'blue'],[44,19,11,'green'],[30,42,11.2,'red'],[16,65,11,'green'],[44,65,11,'blue']],
+  6:[[16,16,10.3,'green'],[44,16,10.3,'green'],[16,42,10.3,'red'],[44,42,10.3,'red'],[16,68,10.3,'blue'],[44,68,10.3,'blue']],
+  7:[[12,14,9,'red'],[30,26,9,'red'],[48,38,9,'red'],[16,57,8.7,'green'],[44,57,8.7,'green'],[16,75,8.7,'blue'],[44,75,8.7,'blue']],
+  8:[[18,11,8.4,'blue'],[42,11,8.4,'blue'],[18,31,8.4,'blue'],[42,31,8.4,'blue'],[18,53,8.4,'blue'],[42,53,8.4,'blue'],[18,73,8.4,'blue'],[42,73,8.4,'blue']],
+  9:[[12,14,8.3,'green'],[30,14,8.3,'green'],[48,14,8.3,'green'],[12,42,8.3,'red'],[30,42,8.3,'red'],[48,42,8.3,'red'],[12,70,8.3,'blue'],[30,70,8.3,'blue'],[48,70,8.3,'blue']]
+ };
+ let marks=pat[n].map(([x,y,r,c])=>dot(x,y,r,c)).join('');
+ if(n===1){
+  // Decorated concentric single-pin is unmistakable from both sides of the table.
+  marks+=`<circle cx="30" cy="42" r="16" fill="none" stroke="#eae17c" stroke-width="1.5" opacity=".86"/>`;
+ }
+ return `<svg class="pip-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 84" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${n}筒">${marks}</svg>`;
+}
+function mahjongTileFace(type){
+ const s=L.suit(type),n=L.num(type);
+ if(s==='m')return `<span class="face"><span class="wan-number">${NUM[n]}</span><span class="wan-unit">萬</span></span>`;
+ if(s==='z')return `<span class="face"><span class="honor ${n===7?'red':n===6?'green':n===5?'white':''}">${n===5?'□':L.HONORS[n-1]}</span></span>`;
+ if(s==='p') return `<span class="face">${pinzuVector(n)}</span>`;
+ const bamboo={1:[[2,2]],2:[[1,2],[3,2]],3:[[1,2],[2,1],[3,3]],4:[[1,1],[1,3],[3,1],[3,3]],5:[[1,1],[1,3],[2,2],[3,1],[3,3]],6:[[1,1],[1,3],[2,1],[2,3],[3,1],[3,3]],7:[[1,1],[1,2],[1,3],[2,1],[2,3],[3,1],[3,3]],8:[[1,1],[1,2],[1,3],[2,1],[2,3],[3,1],[3,2],[3,3]],9:[[1,1],[1,2],[1,3],[2,1],[2,2],[2,3],[3,1],[3,2],[3,3]]}[n];
+ if(n===1)return '<span class="face"><span class="bam-one">❁</span></span>';
+ return `<span class="face"><span class="bamboos">${bamboo.map(([r,c],i)=>`<i class="bam ${i%4===0?'red':''}" style="grid-row:${r};grid-column:${c}"></i>`).join('')}</span></span>`;
+}
+function tileHtml(tile,{hide=false,mini=false,small=false,selectable=false,selected=false,locked=false,drawn=false,opaquePreview=false}={}){
+ if(!tile)return '';
+ const isHidden=hide&&!tile.clear;
+ let className=['tile',isHidden?'hidden':tile.clear?'clear':'opaque',mini?'mini':'',small?'small':'',selectable?'selectable':'',selected?'selected':'',locked?'riichi-lock':'',drawn?'just-drawn':'',opaquePreview&&tile.clear?'peek-opaque':''].filter(Boolean).join(' ');
+ const label=isHidden?'不透明牌':L.tileName(tile.type)+(tile.clear?(opaquePreview?'（透明牌・見やすさ優先で不透明表示）':'（透明）'):'（不透明）');
+ if(selectable){return `<button type="button" class="${className}" aria-label="${esc(label)}を選択" title="${esc(label)}" data-action="select" data-id="${tile.id}" data-tile-id="${tile.id}">${isHidden?'':mahjongTileFace(tile.type)}</button>`;}
+ return `<div class="${className}" aria-label="${esc(label)}" title="${esc(label)}" data-tile-id="${tile.id??''}">${isHidden?'':mahjongTileFace(tile.type)}</div>`;
+}
+function renderSeat(seat,id){const p=G.players[seat],yourTurn=G.turn===seat&&['discard','draw'].includes(G.phase);const isHuman=seat===0;
+ const selectedId=G.selectedId;let tiles=p.hand.map(t=>tileHtml(t,{hide:!isHuman,selectable:isHuman&&canSelectMyTile(t.id),selected:isHuman&&t.id===selectedId,locked:isHuman&&p.riichi&&p.justDrawn?.id!==t.id,drawn:isHuman&&p.justDrawn?.id===t.id&&p.hand[p.hand.length-1]?.id===t.id})).join('');
+ const melds=p.melds.map(m=>`<div class="meld-pile" title="${m.kind==='chi'?'チー':m.kind==='pon'?'ポン':'カン'}">${m.tileObjs.map(t=>tileHtml(t,{mini:true})).join('')}</div>`).join('');
+ const el=$(id);el.classList.toggle('active-turn',yourTurn);el.classList.toggle('seat-opponent',!isHuman);
+ el.innerHTML=`<div class="seat-head"><span class="seat-name ${seat===0||seat===1?'rep':''}">${esc(SEATS[seat].name)}</span><span class="seat-indicator">${seat===G.dealer?'東 · 親':L.HONORS[(seat-G.dealer+4)%4]} / ${seat===0||seat===1?'代表':'補佐'} ${p.riichi?' · 立直':''}</span></div><div class="seat-hand">${tiles}</div>${melds?`<div class="seat-meld">${melds}</div>`:''}`;
+}
+function renderRivers(){const refs=['riverBottom','riverRight','riverTop','riverLeft'];G.players.forEach((p,i)=>{const latest=p.discards.slice(-30);$(refs[i]).innerHTML=latest.map(t=>tileHtml(t,{small:true})).join('');});}
+function renderBlood(){const blood=G.blood[0],pct=Math.min(100,Math.max(0,blood/G.settings.bloodInit*100)),other=G.blood[1],otherPct=Math.max(0,Math.min(100,other/G.settings.bloodInit*100));
+ const my=`<div class="blood-card"><div class="blood-label">挑戦者代表 · あなたの仮想血液</div><div class="blood-amount">${format(blood)} <small>mL</small></div><div class="blood-track"><div class="blood-fill" style="width:${pct}%"></div></div><div class="blood-caption">初期量 ${format(G.settings.bloodInit)} mL · 残り ${pct.toFixed(0)}%</div></div>`;
+ const opp=G.settings.mode==='both'?`<div class="blood-card secondary"><div class="blood-label">相手代表 · 仮想血液</div><div class="blood-amount">${format(other)} <small>mL</small></div><div class="blood-track"><div class="blood-fill" style="width:${otherPct}%"></div></div><div class="blood-caption">回復 ${G.settings.recover?'許可':'禁止'} · レート ${G.settings.bloodRate} mL / 1000点</div></div>`:`<div class="blood-card secondary"><div class="blood-label">相手代表 · 仮想資産ポイント</div><div class="blood-amount">${format(G.asset[1])} <small>pt</small></div><div class="blood-track"><div class="blood-fill asset" style="width:${Math.min(100,Math.max(0,G.asset[1]/500000*100))}%"></div></div><div class="blood-caption">双方とも現実の財産は使いません</div></div>`;
+ $('bloodSection').innerHTML=my+opp;
+ let vignette=document.querySelector('.danger-vignette');if(pct<=30&&pct>0&&G.phase!=='result'){if(!vignette){vignette=document.createElement('div');vignette.className='danger-vignette';vignette.setAttribute('aria-hidden','true');document.body.appendChild(vignette);}}else vignette?.remove();
+}
+function renderScores(){const names=G.players.map(p=>p.seat===0?'あなた':p.seat===1?'右家 CPU':p.seat===2?'対面 CPU':'左家 CPU');
+ $('scoreboard').innerHTML=G.players.map((p,i)=>`<div class="score-line ${i%2===0?'team':'enemy'} ${i===0?'myself':''} ${i===1?'rep-enemy':''}"><span class="score-name">${names[i]} <small>${i===0||i===1?'★':''}</small></span><strong class="score-value">${format(p.score)}</strong></div>`).join('');}
+function renderPeek(){const refs=[1,2,3];$('peekInfo').innerHTML=refs.map(seat=>{const p=G.players[seat];return `<div class="peek-line"><div class="peek-name">${esc(SEATS[seat].name)} <span style="color:#758c81">· 透牌 ${p.hand.filter(x=>x.clear).length}/${p.hand.length}</span></div><div class="peek-tiles">${p.hand.map(t=>tileHtml(t,{hide:true,mini:true,opaquePreview:true})).join('')}</div></div>`;}).join('');}
+function renderLog(){$('logBox').innerHTML=G.logs.slice(0,10).map((s,i)=>`<div class="log-entry">${esc(s)}</div>`).join('');}
+function renderActionBar(){
+ const buttons=$('actionButtons'),hint=$('selectedHint');buttons.innerHTML='';
+ if(G.phase==='result'){hint.textContent='精算結果を確認し、次局へ。';return;}
+ const p=G.players[0],myDiscard=G.turn===0&&G.phase==='discard';
+ const sel=p.hand.find(t=>t.id===G.selectedId),arrange=canArrangeMyHand();
+ const list=[];
+ if(sel){
+  hint.innerHTML=`選択中：<strong>${esc(L.tileName(sel.type))}</strong> ${sel.clear?'・透明牌':'・不透明牌'} <span class="arrange-hint">${arrange?'ドラッグ・矢印で手動理牌':'立直後はツモ切りのみ'}</span>`;
+  if(arrange){
+   list.push('<button type="button" class="action-btn subtle move-btn" data-action="move-left" title="選択牌を左へ一つ移動">←</button>');
+   list.push('<button type="button" class="action-btn subtle move-btn" data-action="move-right" title="選択牌を右へ一つ移動">→</button>');
+  }
+  if(myDiscard){
+   if(canDeclareRiichi(0,sel.id)&&!G.riichiReady)list.push('<button type="button" class="action-btn" data-action="riichi">立直</button>');
+   list.push(`<button type="button" class="action-btn primary" data-action="discard">${G.riichiReady?'立直して打牌':'選択牌を打牌'} →</button>`);
+  }
+  if(arrange)list.push('<button type="button" class="action-btn subtle" data-action="deselect">選択解除</button>');
+ }else if(G.phase==='react'){
+  hint.textContent='鳴くか見逃すかを選ぼう。手牌の順番は自動では変わらない。';
+ }else if(arrange){
+  const sub=G.turn===0?(G.phase==='draw'?'中央の袋からツモ。':'打牌する牌を選ぼう。'):'CPUの思考中も理牌できる。';
+  hint.textContent=`${sub} 牌をドラッグ、またはタップして ← → で手動理牌。`;
+ }else if(G.phase==='draw'){
+  hint.textContent='卓の中央から牌を引こう。';
+ }else if(G.turn!==0){
+  hint.textContent='CPUが思考中。相手の透明牌を読んでみよう。';
+ }else{
+  hint.textContent='立直後はツモ切りのみ可能。';
+ }
+ if(myDiscard){
+  if(p.justDrawn&&winnerEval(0,null,true))list.unshift('<button type="button" class="action-btn danger" data-action="tsumo">ツモ和了！</button>');
+  if(getAnkanTypes(0).length)list.unshift('<button type="button" class="action-btn" data-action="ankan">暗槓</button>');
+ }
+ buttons.innerHTML=list.join('');
+}
+function renderReactions(){const box=$('reactPanel');if(G.phase!=='react'||!G.call){box.hidden=true;box.innerHTML='';return;}
+ const call=G.call;box.hidden=false;
+ box.innerHTML=`<span class="react-copy">${call.kind==='ron'?`<strong>和了牌！</strong> ${L.tileName(call.tile.type)} でロンできる。`:`${L.tileName(call.tile.type)} が捨てられた。鳴くか？`}</span><div class="react-buttons">${call.options.map((o,i)=>`<button class="action-btn ${o.kind==='ron'?'danger':'primary'}" data-action="react" data-index="${i}">${esc(o.label)}</button>`).join('')}<button class="action-btn subtle" data-action="pass">見逃す</button></div>`;
+}
+function render(){if(!G)return;
+ $('roundTag').textContent=roundLabel();$('phaseLabel').textContent=G.phase==='result'?'精算中 · 結果を確認':G.phase==='react'?'選択の刻 · 鳴き待ち':G.turn===0?G.phase==='draw'?'あなたの番 · 袋から牌を引く':'あなたの番 · 牌を選んで打牌':`${G.players[G.turn].name} が考えている…`;
+ $('doraLabel').innerHTML=`ドラ表示 ${G.dora.map(t=>tileHtml({type:t,clear:false,id:'dora'}, {mini:true})).join('')} <span style="font-size:9px;color:#a3b5a9">→ ${G.dora.map(L.nextDora).map(L.tileName).join(' / ')}</span>`;
+ renderSeat(2,'seatTop');renderSeat(3,'seatLeft');renderSeat(1,'seatRight');renderSeat(0,'seatBottom');renderRivers();
+ $('drawButton').disabled=G.phase!=='draw'||G.turn!==0;
+ $('centerStatus').textContent=`${G.discardCount} / 70 捨て牌 · 袋の残り ${G.wall.length} 牌`;
+ renderReactions();renderActionBar();renderBlood();renderScores();renderPeek();renderLog();
+}
+// Pointer-based manual 理牌. Never sort by type and never move a tile unless the player asks.
+let drag=null,dragClickBlockUntil=0;
+function resetDragVisuals(){document.querySelectorAll('.seat-bottom .seat-hand .tile.dragging,.seat-bottom .seat-hand .tile.drop-before,.seat-bottom .seat-hand .tile.drop-after')
+ .forEach(node=>node.classList.remove('dragging','drop-before','drop-after'));}
+function findDropTile(x,y){
+ const row=document.querySelector('.seat-bottom .seat-hand');if(!row)return null;
+ const rect=row.getBoundingClientRect();
+ if(x<rect.left-12||x>rect.right+12||y<rect.top-42||y>rect.bottom+42)return null;
+ const nodes=[...row.querySelectorAll('.tile[data-action="select"]')];
+ if(!nodes.length)return null;
+ let nearest=nodes[0],distance=Infinity;
+ for(const node of nodes){const r=node.getBoundingClientRect();const d=Math.abs(x-(r.left+r.right)/2);if(d<distance){distance=d;nearest=node;}}
+ const rectTile=nearest.getBoundingClientRect();
+ return {id:Number(nearest.dataset.id),after:x>(rectTile.left+rectTile.right)/2,element:nearest};
+}
+document.addEventListener('pointerdown',e=>{
+ const el=e.target.closest('.seat-bottom .seat-hand .tile[data-action="select"]');
+ if(!el||!canArrangeMyHand()||(e.pointerType==='mouse'&&e.button!==0))return;
+ drag={id:Number(el.dataset.id),pointerId:e.pointerId,x:e.clientX,y:e.clientY,started:false,element:el,lastDrop:null};
+ try{el.setPointerCapture(e.pointerId);}catch(_){}
+});
+document.addEventListener('pointermove',e=>{
+ if(!drag||drag.pointerId!==e.pointerId||!canArrangeMyHand())return;
+ if(!drag.started&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)<8)return;
+ drag.started=true;e.preventDefault();
+ resetDragVisuals();drag.element.classList.add('dragging');
+ drag.lastDrop=findDropTile(e.clientX,e.clientY);
+ if(drag.lastDrop&&drag.lastDrop.id!==drag.id){drag.lastDrop.element.classList.add(drag.lastDrop.after?'drop-after':'drop-before');}
+});
+function finishDrag(e){
+ if(!drag||drag.pointerId!==e.pointerId)return;
+ const local=drag;drag=null;
+ resetDragVisuals();
+ try{local.element.releasePointerCapture(e.pointerId);}catch(_){}
+ if(local.started){
+  e.preventDefault();dragClickBlockUntil=Date.now()+550;
+  const target=findDropTile(e.clientX,e.clientY)||local.lastDrop;
+  if(target&&target.id!==local.id)insertMyTile(local.id,target.id,target.after);
+ }
+}
+document.addEventListener('pointerup',finishDrag);
+document.addEventListener('pointercancel',e=>{if(!drag||drag.pointerId!==e.pointerId)return;resetDragVisuals();drag=null;dragClickBlockUntil=Date.now()+550;});
+document.addEventListener('click',e=>{
+ if(Date.now()<dragClickBlockUntil&&e.target.closest('.seat-bottom .seat-hand .tile')){e.preventDefault();e.stopImmediatePropagation();}
+},true);
+// Unified event handling works with freshly-rendered tile buttons and modal controls.
+document.addEventListener('click',function(e){const el=e.target.closest('[data-action]');if(!el)return;const action=el.dataset.action;
+ switch(action){
+ case 'start':startGame();break;
+ case 'new':resetToSetup();break;
+ case 'draw':userDraw();break;
+ case 'select':selectTile(Number(el.dataset.id));break;
+ case 'discard':userDiscard();break;
+ case 'riichi':userRiichi();break;
+ case 'move-left':moveMySelected(-1);break;
+ case 'move-right':moveMySelected(1);break;
+ case 'deselect':if(G){G.selectedId=null;G.riichiReady=false;render();}break;
+ case 'tsumo':userTsumo();break;
+ case 'ankan':userAnkan();break;
+ case 'react':useReaction(Number(el.dataset.index));break;
+ case 'pass':passReaction();break;
+ case 'recover':chooseRecovery(true);break;
+ case 'forgo':chooseRecovery(false);break;
+ case 'next':nextAfterResult();break;
+ case 'rules':RULESROOT.hidden=false;break;
+ case 'close-rules':RULESROOT.hidden=true;if(G&&G.turn!==0)scheduleAI();break;
+ default:break;
+ }
+});
+// Lightweight read-only debugging hooks for local validation.
+window.WashizuPrototype={state:()=>G,logic:L,render,resetToSetup,startGame};
+})();
+
+</script>
+</body>
+</html>
