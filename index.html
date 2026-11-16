@@ -295,15 +295,15 @@ body {
 .tile .pip-art,.tile .sou-art{filter:drop-shadow(0 0 .25px #0d2725) saturate(1.02)}
 @media(max-width:530px){.seat-body{gap:4px}.seat-top .tile{--tile-width:clamp(16px,4.4vw,24px)!important}.seat-left .tile,.seat-right .tile{--tile-width:clamp(15px,3.7vw,21px)!important}.seat-bottom .tile{--tile-width:clamp(23px,6.45vw,32px)!important}.river .tile{--tile-width:clamp(14px,3.5vw,19px)!important}.meld-pile .tile{--tile-width:16px;--tile-height:23px}.seat-left .meld-pile .tile,.seat-right .meld-pile .tile{--tile-width:14px;--tile-height:21px}}
 
-/* v0.17: normal backs / clearer rivers / title + transparent count + normal pinzu */
+/* v0.18: normal backs / clearer rivers / title + transparent count + normal pinzu */
 .tile.hidden{background:linear-gradient(128deg,#385057,#21343a 48%,#486064)!important;border-color:#8da3a2!important;box-shadow:inset 1px 1px 1px #f6fff25b,1px 2px 1px #081112,0 3px 4px #0009!important}.tile.hidden:after{content:''!important;position:absolute;inset:5px!important;border-radius:3px;border:1px solid rgba(233,242,240,.32);background:radial-gradient(circle at 50% 50%,rgba(244,251,249,.22) 0 16%,transparent 18%),repeating-linear-gradient(45deg,rgba(235,245,244,.08) 0 2px,transparent 2px 6px),linear-gradient(135deg,rgba(255,255,255,.06),rgba(0,0,0,.06))!important;display:block!important}
 .river{background:none!important;border:none!important;box-shadow:none!important;padding:0!important;gap:1px!important}.river .tile{box-shadow:inset 1px 1px 2px #fff8,inset -1px -1px 2px #69674e1c,1px 2px 0 #9ea093,0 2px 3px #0007!important}.peek-legend{font-size:10px;color:#8ea8a0;margin:0 0 6px}
 .setup-crests{font-size:52px}.setup-crests span{font-size:21px;margin-top:34px}.setup-intro h1{margin-bottom:4px}
 
-/* v0.17: standard-ish souzu layouts, smaller suit art to avoid overlap */
+/* v0.18: standard-ish souzu layouts, smaller suit art to avoid overlap */
 .seat-bottom .seat-hand{gap:2px}.seat-opponent .seat-hand{gap:2px}.tile.clear .sou-art,.tile.clear .pip-art{transform:scale(.97);transform-origin:center center}.tile .honor.white::before,.tile .honor.white::after{content:none!important}
 
-/* v0.17: larger side tiles + opponent hand strip below table + tap-to-swap */
+/* v0.18: larger side tiles + opponent hand strip below table + tap-to-swap */
 .peek-card-bottom{margin-top:12px;padding:12px 14px;background:linear-gradient(170deg,#182523,#101c1d);border:1px solid #859b8840;border-radius:12px}
 .peek-card-bottom #peekInfo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .peek-card-bottom .peek-line{margin:0;padding:10px;border:1px solid #2b4541;background:linear-gradient(180deg,#102220,#122726);border-radius:9px}
@@ -318,13 +318,13 @@ body {
 .seat-left,.seat-right{width:52%}
 @media(max-width:980px){.peek-card-bottom #peekInfo{grid-template-columns:1fr}.peek-card-bottom .peek-tiles .tile{--tile-width:26px;--tile-height:37px}.seat-top .tile{--tile-width:clamp(20px,3.2vw,31px)!important}.seat-left .tile,.seat-right .tile{--tile-width:clamp(18px,3vw,28px)!important}.seat-left,.seat-right{width:49%}}
 
-/* v0.17: use user-provided tile sample sheet directly */
+/* v0.18: use user-provided tile sample sheet directly */
 .tile.sprite-card{background:transparent;border:none;box-shadow:0 2px 4px rgba(0,0,0,.45);overflow:visible}.tile.sprite-card::before{display:none}.tile.sprite-card .face{width:100%;height:100%;display:block}.tile-card-img{display:block;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none}.tile.sprite-card.clear .tile-card-img{opacity:.58;filter:saturate(1.06) brightness(1.03)}.tile.sprite-card.clear:after{content:'';position:absolute;inset:1px;border-radius:4px;border:1px solid rgba(196,243,255,.68);background:linear-gradient(120deg,rgba(255,255,255,.12),rgba(103,198,210,.08) 46%,rgba(255,255,255,.14));box-shadow:inset 0 0 0 1px rgba(116,224,229,.16),0 0 0 1px rgba(231,250,255,.12)}.tile.sprite-card.opaque{filter:drop-shadow(0 1px 0 rgba(255,255,255,.2))}.tile.hidden{background:linear-gradient(128deg,#31474d,#20343a 48%,#405860)!important;border:1px solid #879899!important;box-shadow:inset 1px 1px 1px #ecf5ed58,1px 2px 1px #060c0b,0 3px 4px #0009!important}.tile.hidden:after{content:''!important;position:absolute;inset:5px;border-radius:3px;border:1px solid rgba(233,242,240,.32);background:radial-gradient(circle at 50% 50%,rgba(244,251,249,.22) 0 16%,transparent 18%),repeating-linear-gradient(45deg,rgba(235,245,244,.08) 0 2px,transparent 2px 6px),linear-gradient(135deg,rgba(255,255,255,.06),rgba(0,0,0,.06))!important;display:block!important}.tile.hidden .face{display:none!important}
 /* larger readable side hands and opponent strip */
 .seat-top .tile{--tile-width:clamp(24px,3.2vw,40px)!important;--tile-height:calc(var(--tile-width)*1.38)}.seat-left .tile,.seat-right .tile{--tile-width:clamp(22px,3vw,36px)!important;--tile-height:calc(var(--tile-width)*1.38)}.peek-card-bottom #peekInfo{grid-template-columns:1fr}.peek-card-bottom .peek-line{padding:10px 12px}.peek-card-bottom .peek-tiles{gap:4px;flex-wrap:wrap}.peek-card-bottom .peek-tiles .tile{--tile-width:34px;--tile-height:46px}.peek-card-bottom .peek-name{font-size:13px;font-weight:700}.peek-heading h3{font-size:14px}.peek-legend{font-size:11px}
 @media(max-width:980px){.seat-top .tile{--tile-width:clamp(19px,4.6vw,28px)!important}.seat-left .tile,.seat-right .tile{--tile-width:clamp(18px,4.2vw,25px)!important}.peek-card-bottom .peek-tiles .tile{--tile-width:28px;--tile-height:39px}}
 
-/* v0.17 - vector-drawn symbols, clean glass and solid ivory backs. No face veil. */
+/* v0.18 - vector-drawn symbols, clean glass and solid ivory backs. No face veil. */
 .tile.v17-face{border:1px solid #d6d2c4!important;border-radius:5px!important;background:linear-gradient(119deg,#fcfaf3 0%,#f0f1e9 47%,#fffdf8 80%,#d9dbd0 100%)!important;box-shadow:inset 1px 1px 1px #ffffff, inset -2px -2px 2px #92918238,1px 2px 0 #a2a89a,0 3px 5px #0b272760!important;backdrop-filter:none!important;overflow:hidden!important}
 .tile.v17-face.opaque{border-top-color:#ffffff!important;border-left-color:#e6e9df!important}
 .tile.v17-face.clear{border:2px solid #47b5c4!important;border-left-color:#b2f7f0!important;border-top-color:#d1ffff!important;background:linear-gradient(116deg,rgba(240,255,254,.36) 0%,rgba(148,229,227,.26) 23%,rgba(227,255,252,.22) 59%,rgba(110,214,211,.29) 100%)!important;box-shadow:inset 2px 2px 2px #ffffffa8,inset -2px -2px 2px #288b9760,1px 2px 0 #4d9295aa,0 3px 5px #0b26266f!important;backdrop-filter:none!important}
@@ -343,6 +343,20 @@ body {
 .peek-tiles .tile.v17-face .face{transform:none!important}
 /* Give mobile users the entire 14-tile hand without cropping the edge tiles. */
 @media(max-width:530px){.seat-bottom .seat-hand{gap:1px!important}.seat-bottom .tile{--tile-width:clamp(19px,5.95vw,24px)!important;--tile-height:calc(var(--tile-width)*1.43)!important}}
+
+
+
+/* v0.18: room creator and hosted P2P lobby */
+.online-setup{border-top:1px solid #667f756b;margin-top:14px;padding-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:7px 10px}
+.online-setup label{display:block;color:#c9d8ca;font-size:11px;grid-column:span 1}.online-setup input,.online-setup select{min-width:0;width:100%;border:1px solid #6c887a;border-radius:7px;background:#e5f0e3;color:#203729;padding:9px 10px;font-size:13px}
+.online-buttons{grid-column:1/-1;display:flex;gap:10px;margin-top:5px}.online-buttons button,.room-actions button,.room-link-row button{flex:1;min-height:43px;border-radius:8px;border:1px solid #70917e;background:#243d33;color:#e8f2e9;font-weight:700}
+.online-buttons .online-primary,.room-actions .online-primary{background:linear-gradient(125deg,#c7e4a4,#a5cb86);color:#19351f;border-color:#b7de90}
+.online-error{color:#f2b3ad;min-height:0;grid-column:1/-1;font-size:12px;line-height:1.4}.solo-start{margin-top:8px;background:linear-gradient(135deg,#4d6952,#2e4e3b)!important;color:#e3edda!important}
+.room-lobby{max-width:550px;width:min(96vw,550px)}.room-lobby h2{font:700 26px/1.3 serif;color:#f1f2df;margin:16px 0 7px}.room-lobby h2 span{color:#bfe1ae;font:700 18px/1 sans-serif;letter-spacing:.08em}
+.room-lobby label{display:block;color:#c3d9cd;font-size:12px;margin:14px 0 5px}.lobby-note{font-size:12px;color:#acc8b7;margin:5px 0 16px}.room-status-dot{color:#c3deb2;font-size:12px}
+.room-link-row{display:flex;gap:6px}.room-link-row input{min-width:0;flex:1;background:#e0eee2;color:#1b3930;font-size:13px;border:1px solid #8daf98;padding:9px;border-radius:7px}.room-link-row button{flex:0 0 76px}
+.room-members{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:17px 0}.room-member{background:#172b28;border:1px solid #5f7f6d;border-radius:9px;padding:10px}.room-member strong{display:block;color:#f0f4e9;font-size:13px;min-height:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.room-member small{color:#b0c7bc;font-size:10px}.room-member.offline{opacity:.7}.room-rules-summary{font-size:11px;color:#a8bdad;line-height:1.7}.room-actions{display:flex;gap:8px;margin-top:12px}.room-caution{font-size:10px;color:#829c8d;line-height:1.55;margin:14px 0 0}
+@media(max-width:550px){.online-setup{grid-template-columns:1fr}.online-setup label,.online-setup input{grid-column:1}.online-setup label:nth-of-type(2){margin-top:4px}.room-lobby{padding:20px 15px}.room-member{padding:8px 6px}.room-lobby h2{font-size:22px}}
 
 </style>
 </head>
@@ -396,7 +410,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.17</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.18</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1><p>卓・牌・見え方を現実寄りに寄せた試作版。</p></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
@@ -414,11 +428,28 @@ body {
       </div>
       <div class="setup-row">
         <div class="setup-block"><span class="setup-num">08</span><div class="setup-block-body"><label for="sashikomiMode">差し込み補助</label><select id="sashikomiMode"><option value="on" selected>ON：CPUが味方に合わせる</option><option value="off">OFF</option></select></div></div>
-        <div class="setup-block locked-block"><span class="setup-num">09</span><div class="setup-block-body"><label>参加方法</label><div class="locked-entry">あなた + CPU 3人（2対2）</div></div></div>
+        <div class="setup-block"><span class="setup-num">09</span><div class="setup-block-body"><label>参加方法</label><div class="locked-entry">友達と最大4人・空席はCPU</div></div></div>
       </div>
     </div>
-    <button type="button" id="startBtn" data-action="start" class="start-button"><span>対局を始める</span><b>→</b></button>
+    <div class="online-setup">
+      <label for="onlineName">プレイヤー名</label><input id="onlineName" maxlength="16" placeholder="名前" value="" autocomplete="nickname" />
+      <label for="onlineCode">部屋コード（指定しない場合は自動生成）</label><input id="onlineCode" maxlength="12" placeholder="例：TSUKI2026" autocapitalize="characters" autocomplete="off" />
+      <label for="joinSeat">希望する席（参加時）</label><select id="joinSeat"><option value="0">空いている席</option><option value="2">対面・部屋主の味方（補佐）</option><option value="1">右家・対戦相手の代表</option><option value="3">左家・対戦相手の補佐</option></select>
+      <div class="online-buttons"><button type="button" class="online-primary" data-action="create-room">部屋を作る</button><button type="button" data-action="join-room">部屋に入る</button></div>
+      <div id="onlineError" class="online-error" role="status" aria-live="polite"></div>
+    </div>
+    <button type="button" id="startBtn" data-action="start" class="start-button solo-start"><span>CPUと遊ぶ</span><b>→</b></button>
     <p class="setup-fineprint">ゲーム内演出のみ。実際の出血・金銭取引はありません。</p>
+  </div>
+  <div id="roomLobby" class="modal room-lobby" hidden>
+    <div class="setup-title-row"><span class="label-caps">麻雀 / 対局部屋</span><span id="roomStatusDot" class="room-status-dot">接続中</span></div>
+    <h2>対局部屋 <span id="roomCodeLabel"></span></h2>
+    <p id="roomStatusText" class="lobby-note">接続中...</p>
+    <label for="roomLink">招待URL</label><div class="room-link-row"><input id="roomLink" readonly /><button type="button" data-action="copy-room">コピー</button></div>
+    <div id="roomMembers" class="room-members"></div>
+    <p id="roomRuleSummary" class="room-rules-summary"></p>
+    <div class="room-actions"><button type="button" id="roomStartBtn" data-action="start-room" class="online-primary">対局開始</button><button type="button" data-action="leave-room">退出</button></div>
+    <p class="room-caution">試験運用。通信は外部の接続サービスを使用します。部屋主が閉じると対局は終了します。</p>
   </div>
 </div>
 <div id="resultRoot" class="modal-root result-root" hidden>
@@ -615,8 +646,9 @@ root.WashizuLogic=api;
 })(typeof window!=='undefined'?window:globalThis);
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.5/dist/peerjs.min.js"></script>
 <script>
-/* 透牌勝負 - offline four-player prototype. All assets bundled; no real stakes. */
+/* 透牌勝負 - solo/online 2v2; no real stakes. */
 (function(){
 'use strict';
 const L=window.WashizuLogic;
@@ -625,6 +657,12 @@ const NUM=L.NUMBER_KANJI;
 const SEATS=[{name:'あなた',team:'挑戦者',label:'代表 · あなた'},{name:'右家 CPU',team:'対戦相手',label:'代表 · CPU'},{name:'対面 CPU',team:'挑戦者',label:'補佐 · CPU'},{name:'左家 CPU',team:'対戦相手',label:'補佐 · CPU'}];
 const ROOT=$('modalRoot'),SETUP=$('setupModal'),RESULTROOT=$('resultRoot'),RULESROOT=$('rulesRoot');
 let G=null,aiTimer=null,clock=0,toastTimer=null,drawFlight=null;
+const NET={mode:'solo',code:null,peer:null,connection:null,members:{},seat:0,settings:null,roomStarted:false,token:null,connections:{},timer:null};
+function localSeat(){return NET.mode==='guest'?NET.seat:0;}
+function isCpuSeat(seat){return seat!==0&&(NET.mode!=='host'||!NET.members[seat]?.online);}
+function isHumanSeat(seat){return !isCpuSeat(seat);}
+function relativeSeat(seat){return (seat-localSeat()+4)%4;}
+
 const format=n=>Math.round(n).toLocaleString('ja-JP');
 const esc=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const pick=(ary)=>ary[Math.floor(Math.random()*ary.length)];
@@ -635,7 +673,7 @@ function stopTimers(){
  clock++;clearTimeout(aiTimer);aiTimer=null;
  if(drawFlight){drawFlight.animation?.cancel();drawFlight.ghost?.remove();drawFlight=null;}
 }
-function newPlayer(seat){return {seat,name:SEATS[seat].name,score:25000,hand:[],melds:[],discards:[],riichi:false,ippatsu:false,riichiTurn:-1,tempFuriten:false,justDrawn:null};}
+function newPlayer(seat){return {seat,name:NET.mode==='host'?(NET.members[seat]?.name||`CPU ${seat+1}`):SEATS[seat].name,score:25000,hand:[],melds:[],discards:[],riichi:false,ippatsu:false,riichiTurn:-1,tempFuriten:false,justDrawn:null};}
 function partnerSeat(seat){return (seat+2)%4;}
 function chooseSashikomiDiscardIndex(seat){
  const p=G.players[seat],mate=G.players[partnerSeat(seat)];
@@ -648,7 +686,7 @@ function chooseSashikomiDiscardIndex(seat){
  return prefer?prefer.i:-1;
 }
 function makeGame(settings){return {settings,halfNo:1,handIndex:0,honba:0,riichiPot:0,dealer:0,turn:0,phase:'setup',wall:[],dora:[],discardCount:0,players:Array.from({length:4},(_,i)=>newPlayer(i)),blood:{0:settings.bloodInit,1:settings.bloodInit},asset:{1:500000},assetWon:0,bloodRecovered:0,foregone:0,recoveryPending:0,logs:[],selectedId:null,riichiReady:false,drawTileId:null,call:null,result:null,sessionEnded:false,lastDiscard:null,lastResult:null,moveCount:0,turnNo:0};}
-function startGame(){stopTimers();G=makeGame(settingsFromForm());ROOT.hidden=true;SETUP.hidden=true;RESULTROOT.hidden=true;RULESROOT.hidden=true;startHand();render();}
+function startGame(){if(NET.mode==='guest')return;stopTimers();G=makeGame(NET.mode==='host'?NET.settings:settingsFromForm());ROOT.hidden=true;SETUP.hidden=true;RESULTROOT.hidden=true;RULESROOT.hidden=true;startHand();render();}
 function startHand(){
  stopTimers();G.dealer=G.handIndex%4;G.players.forEach((p,i)=>{const fresh=newPlayer(i);Object.assign(p,fresh,{score:p.score});});
  G.wall=L.makeTiles(Math.random,G.settings.clearCount);G.dora=[G.wall.pop().type];G.discardCount=0;G.lastDiscard=null;G.moveCount=0;G.turn=G.dealer;G.phase='discard';G.selectedId=null;G.drawTileId=null;G.riichiReady=false;G.call=null;G.result=null;
@@ -658,7 +696,7 @@ function startHand(){
  G.players[G.dealer].hand.push(G.wall.pop());
  // Keep the actual dealing order; never rearrange a player's hand automatically.
  log(`${roundLabel()} 開局。ドラ表示は ${L.tileName(G.dora[0])}。`);
- if(G.turn!==0)scheduleAI();
+ if(isCpuSeat(G.turn))scheduleAI();
  render();
 }
 function roundLabel(){return `${G.handIndex<4?'東':'南'}${G.handIndex%4+1}局${G.honba?' '+G.honba+'本場':''} / ${G.halfNo}半荘目`;}
@@ -714,49 +752,50 @@ function drawTile(seat,kan=false,after=null){
  animateDraw(seat,tile,()=>{
   if(G!==game||clock!==token||G.turn!==seat||G.phase!=='drawing')return;
   G.phase='discard';G.drawTileId=null;render();
-  if(after)after();else if(seat!==0)scheduleAI();
+  if(after)after();else if(isCpuSeat(seat))scheduleAI();
  });
  return true;
 }
-function canArrangeMyHand(){return Boolean(G&&!G.sessionEnded&&!['result','drawing'].includes(G.phase)&&!G.players[0].riichi);}
+function canArrangeMyHand(){return Boolean(G&&!G.sessionEnded&&!['result','drawing'].includes(G.phase)&&!G.players[localSeat()].riichi);}
 function canSelectMyTile(id){if(!G||G.sessionEnded||['result','drawing'].includes(G.phase))return false;
- const p=G.players[0];if(!p.hand.some(t=>t.id===id))return false;
- return !p.riichi||(G.turn===0&&G.phase==='discard'&&p.justDrawn?.id===id);
+ const seat=localSeat(),p=G.players[seat];if(!p.hand.some(t=>t.id===id))return false;
+ return !p.riichi||(G.turn===seat&&G.phase==='discard'&&p.justDrawn?.id===id);
 }
 function selectTile(id){if(!canSelectMyTile(id))return;
- const p=G.players[0];
- if(canArrangeMyHand() && G.selectedId!=null && G.selectedId!==id){
+ const p=G.players[localSeat()];
+ if(canArrangeMyHand()&&G.selectedId!=null&&G.selectedId!==id){
   const a=p.hand.findIndex(t=>t.id===G.selectedId),b=p.hand.findIndex(t=>t.id===id);
-  if(a>=0&&b>=0){[p.hand[a],p.hand[b]]=[p.hand[b],p.hand[a]];G.selectedId=id;G.riichiReady=false;render();return;}
+  if(a>=0&&b>=0){const idA=p.hand[a].id,idB=p.hand[b].id;[p.hand[a],p.hand[b]]=[p.hand[b],p.hand[a]];G.selectedId=id;G.riichiReady=false;
+   if(NET.mode==='guest')netSendAction('swap',{a:idA,b:idB});render();return;}
  }
  G.selectedId=G.selectedId===id?null:id;G.riichiReady=false;render();
 }
-function userDiscard(){if(!G||G.phase!=='discard'||G.turn!==0)return;const id=G.selectedId;const p=G.players[0],i=p.hand.findIndex(t=>t.id===id);
- if(i<0){showToast('先に捨てる牌を選ぶのじゃ。');return;}discard(0,i,G.riichiReady);
+function userDiscard(){const seat=localSeat();if(!G||G.phase!=='discard'||G.turn!==seat)return;const id=G.selectedId,p=G.players[seat],i=p.hand.findIndex(t=>t.id===id);
+ if(i<0){showToast('先に牌を選んでおくれ。');return;}
+ if(NET.mode==='guest'){netSendAction('discard',{id,riichi:Boolean(G.riichiReady)});G.selectedId=null;G.riichiReady=false;render();return;}
+ discard(seat,i,G.riichiReady);
 }
-function moveMySelected(direction){
- if(!canArrangeMyHand()||G.selectedId==null)return;
- const hand=G.players[0].hand,index=hand.findIndex(t=>t.id===G.selectedId);
+function moveMySelected(direction){if(!canArrangeMyHand()||G.selectedId==null)return;
+ const hand=G.players[localSeat()].hand,index=hand.findIndex(t=>t.id===G.selectedId);
  if(index<0||index+direction<0||index+direction>=hand.length)return;
- [hand[index],hand[index+direction]]=[hand[index+direction],hand[index]];render();
+ const a=hand[index].id,b=hand[index+direction].id;
+ [hand[index],hand[index+direction]]=[hand[index+direction],hand[index]];
+ if(NET.mode==='guest')netSendAction('swap',{a,b});render();
 }
-function insertMyTile(sourceId,targetId,after=false){
- if(!canArrangeMyHand())return false;
- const hand=G.players[0].hand;
+function insertMyTile(sourceId,targetId,after=false){if(!canArrangeMyHand())return false;
+ const hand=G.players[localSeat()].hand;
  const from=hand.findIndex(t=>t.id===sourceId),target=hand.findIndex(t=>t.id===targetId);
  if(from<0||target<0||from===target)return false;
- // The destination refers to a particular neighboring tile, not a sorted value.
- let insertAt=target+(after?1:0);
- const [moving]=hand.splice(from,1);
- if(from<insertAt)insertAt--;
- hand.splice(insertAt,0,moving);
- G.selectedId=sourceId;
- G.riichiReady=false;
+ let at=target+(after?1:0),[moving]=hand.splice(from,1);if(from<at)at--;hand.splice(at,0,moving);
+ G.selectedId=sourceId;G.riichiReady=false;
+ if(NET.mode==='guest')netSendAction('reorder',{sourceId,targetId,after});
  render();return true;
 }
-function userRiichi(){if(!G||G.turn!==0||G.phase!=='discard')return;if(G.selectedId==null){showToast('先に捨てる牌を選んでおくれ。');return;}
- if(!canDeclareRiichi(0,G.selectedId)){showToast('選んだ牌を捨てても聴牌にならないため、立直できぬ。');return;}
- G.riichiReady=true;render();showToast('立直宣言準備。金色の「立直して打牌」を押すのじゃ。');}
+function userRiichi(){const seat=localSeat();if(!G||G.turn!==seat||G.phase!=='discard')return;
+ if(G.selectedId==null){showToast('先に牌を選んでおくれ。');return;}
+ if(!canDeclareRiichi(seat,G.selectedId)){showToast('聴牌にならないため立直できぬ。');return;}
+ G.riichiReady=true;render();showToast('立直を準備した。打牌で確定。');
+}
 function handTileNode(seat,tileId){
  const root=seat===0?'.seat-bottom':`#${seat===1?'seatRight':seat===2?'seatTop':'seatLeft'}`;
  return document.querySelector(`${root} [data-tile-id="${tileId}"]`);
@@ -804,17 +843,30 @@ function processDiscardReactions(discarder,tile){
  if(!G||G.phase!=='waiting')return;
  const ron=reactionCandidates(discarder,tile);
  if(ron.length){const nearest=ron[0];
-  if(nearest===0){offerReaction({kind:'ron',discarder,tile,options:[{kind:'ron',label:'ロン'}],afterPass:()=>{const c=ron.find(x=>x!==0);if(c!==undefined)scoreWinningHand(c,discarder,tile,false);else afterRonPhase(discarder,tile);}});return;}
-  scoreWinningHand(nearest,discarder,tile,false);return;
+  resolveRonCandidates(ron,discarder,tile);return;
  }
  afterRonPhase(discarder,tile);
+}
+function resolveRonCandidates(list,discarder,tile){
+ if(!list.length){afterRonPhase(discarder,tile);return;}
+ const seat=list[0];
+ if(isHumanSeat(seat)){
+  offerReaction({kind:'ron',seat,discarder,tile,options:[{kind:'ron',label:'ロン'}],afterPass:()=>{G.players[seat].tempFuriten=true;resolveRonCandidates(list.slice(1),discarder,tile);}});
+  return;
+ }
+ scoreWinningHand(seat,discarder,tile,false);
 }
 function afterRonPhase(discarder,tile){
  if(G.discardCount>=70||G.wall.length===0){exhaustiveDraw();return;}
  // Calls have priority over ordinary drawing. This is a simplified priority implementation.
- const userCalls=discarder!==0?getMeldCalls(0,discarder,tile):[];
- if(userCalls.length){offerReaction({kind:'meld',discarder,tile,options:userCalls,afterPass:()=>finishCalls(discarder,tile)});return;}
- finishCalls(discarder,tile);
+ const humanSeats=[1,2,3].map(j=>(discarder+j)%4).filter(seat=>isHumanSeat(seat));
+ function checkNext(idx){
+  if(idx>=humanSeats.length){finishCalls(discarder,tile);return;}
+  const seat=humanSeats[idx],calls=getMeldCalls(seat,discarder,tile);
+  if(calls.length){offerReaction({kind:'meld',seat,discarder,tile,options:calls,afterPass:()=>checkNext(idx+1)});return;}
+  checkNext(idx+1);
+ }
+ checkNext(0);
 }
 function getMeldCalls(seat,discarder,tile){
  const p=G.players[seat];if(seat===discarder||p.riichi)return [];
@@ -832,7 +884,7 @@ function getMeldCalls(seat,discarder,tile){
 }
 function finishCalls(discarder,tile){
  for(let j=1;j<=3;j++){
-  const seat=(discarder+j)%4;if(seat===0)continue;
+  const seat=(discarder+j)%4;if(!isCpuSeat(seat))continue;
   const calls=getMeldCalls(seat,discarder,tile);
   const pon=calls.find(c=>c.kind==='pon'),kan=calls.find(c=>c.kind==='kan');
   if(kan&&Math.random()<.15){applyCall(seat,kan,discarder,tile);return;}
@@ -841,14 +893,16 @@ function finishCalls(discarder,tile){
  }
  nextTurn(discarder);
 }
-function offerReaction(call){G.call=call;G.phase='react';render();}
-function passReaction(){if(!G||G.phase!=='react'||!G.call)return;
- if(G.call.kind==='ron')G.players[0].tempFuriten=true;
+function offerReaction(call){G.call=call;G.phase='react';render();if(NET.mode==='host'&&call.seat!==0&&!NET.members[call.seat]?.online){passOrAutoReact(call.seat);}}
+function passReaction(){if(!G||G.phase!=='react'||!G.call||G.call.seat!==localSeat())return;
+ if(NET.mode==='guest'){netSendAction('pass',{});return;}
  const cb=G.call.afterPass;G.call=null;G.phase='waiting';render();cb();
 }
-function useReaction(index){if(!G||G.phase!=='react'||!G.call)return;const call=G.call,option=call.options[index];if(!option)return;
- G.call=null;G.phase='waiting';if(option.kind==='ron'){scoreWinningHand(0,call.discarder,call.tile,false);return;}
- applyCall(0,option,call.discarder,call.tile);
+function useReaction(index){if(!G||G.phase!=='react'||!G.call||G.call.seat!==localSeat())return;
+ if(NET.mode==='guest'){netSendAction('reaction',{index});return;}
+ const call=G.call,option=call.options[index];if(!option)return;
+ G.call=null;G.phase='waiting';if(option.kind==='ron'){scoreWinningHand(call.seat,call.discarder,call.tile,false);return;}
+ applyCall(call.seat,option,call.discarder,call.tile);
 }
 function applyCall(seat,option,discarder,tile){
  const p=G.players[seat];const actual=[];
@@ -858,21 +912,29 @@ function applyCall(seat,option,discarder,tile){
  const allObjs=[...actual,tile];p.melds.push({kind:option.kind,tiles:allObjs.map(x=>x.type),tileObjs:allObjs,open:true,from:discarder});
  G.turn=seat;G.phase='discard';p.justDrawn=null;G.selectedId=null;G.riichiReady=false;
  log(`${p.name}が${option.kind==='chi'?'チー':option.kind==='pon'?'ポン':'大明槓'}。`);
- if(option.kind==='kan'){addDora();drawTile(seat,true,seat===0?null:()=>afterCpuDraw(seat));return;}
- render();if(seat!==0)scheduleAI();
+ if(option.kind==='kan'){addDora();drawTile(seat,true,isCpuSeat(seat)?()=>afterCpuDraw(seat):null);return;}
+ render();if(isCpuSeat(seat))scheduleAI();
 }
 function addDora(){if(G.wall.length){const ind=G.wall.pop();G.dora.push(ind.type);log(`カンドラ：${L.tileName(ind.type)}。`);}}
 function getAnkanTypes(seat){const p=G.players[seat];if(p.riichi)return [];const c=L.counts(p.hand.map(t=>t.type));return L.TYPES.filter((t,i)=>c[i]===4);}
-function userAnkan(){if(!G||G.phase!=='discard'||G.turn!==0)return;const types=getAnkanTypes(0);if(!types.length)return;doAnkan(0,types[0]);}
+function userAnkan(){const seat=localSeat();if(!G||G.phase!=='discard'||G.turn!==seat)return;
+ const types=getAnkanTypes(seat);if(!types.length)return;
+ if(NET.mode==='guest'){netSendAction('ankan',{type:types[0]});return;}
+ doAnkan(seat,types[0]);
+}
 function doAnkan(seat,type){const p=G.players[seat];if(!getAnkanTypes(seat).includes(type))return;const got=[];for(let j=0;j<4;j++){const i=p.hand.findIndex(t=>t.type===type);got.push(...p.hand.splice(i,1));}
- p.melds.push({kind:'kan',tiles:got.map(x=>x.type),tileObjs:got,open:false,from:seat});log(`${p.name} 暗槓：${L.tileName(type)}`);addDora();drawTile(seat,true,seat===0?null:()=>afterCpuDraw(seat));}
+ p.melds.push({kind:'kan',tiles:got.map(x=>x.type),tileObjs:got,open:false,from:seat});log(`${p.name} 暗槓：${L.tileName(type)}`);addDora();drawTile(seat,true,isCpuSeat(seat)?()=>afterCpuDraw(seat):null);}
 function nextTurn(discarder){
  G.turn=(discarder+1)%4;G.phase='draw';G.call=null;G.selectedId=null;G.riichiReady=false;render();
- if(G.turn!==0){scheduleAI();return;}
- const game=G,token=clock;
- setTimeout(()=>{if(G!==game||clock!==token||G.turn!==0||G.phase!=='draw')return;drawTile(0);},150);
+ if(isCpuSeat(G.turn)){scheduleAI();return;}
+ const game=G,token=clock,seat=G.turn;
+ setTimeout(()=>{if(G!==game||clock!==token||G.turn!==seat||G.phase!=='draw')return;drawTile(seat);},150);
 }
-function scheduleAI(){if(!G||G.turn===0||!['draw','discard'].includes(G.phase))return;clearTimeout(aiTimer);const token=clock;aiTimer=setTimeout(()=>{if(!G||clock!==token)return;if(!RULESROOT.hidden){scheduleAI();return;}cpuStep();},G.settings.speed);}
+function scheduleAI(){if(!G||!isCpuSeat(G.turn)||!['draw','discard'].includes(G.phase))return;
+ clearTimeout(aiTimer);const token=clock;
+ aiTimer=setTimeout(()=>{if(!G||clock!==token||!isCpuSeat(G.turn))return;
+  if(!RULESROOT.hidden){scheduleAI();return;}cpuStep();},G.settings.speed);
+}
 function afterCpuDraw(seat){
  if(!G||G.turn!==seat||G.phase!=='discard')return;
  const p=G.players[seat];
@@ -880,7 +942,7 @@ function afterCpuDraw(seat){
  if(getAnkanTypes(seat).length&&Math.random()<.16){doAnkan(seat,getAnkanTypes(seat)[0]);return;}
  scheduleAI();
 }
-function cpuStep(){if(!G||G.turn===0)return;const seat=G.turn,p=G.players[seat];
+function cpuStep(){if(!G||!isCpuSeat(G.turn))return;const seat=G.turn,p=G.players[seat];
  if(G.phase==='draw'){drawTile(seat,false,()=>afterCpuDraw(seat));return;}
  if(G.phase==='discard'){
   let index;
@@ -913,7 +975,7 @@ function scoreWinningHand(seat,discarder,tile,tsumo){
  const labels=evaluation.yaku.map(y=>`${y.name}${y.han}翻`).join(' · ');
  const title=seat===0?'和了！':seat===2?'味方の和了':'対戦相手の和了';
  const desc=`${winner.name}の${tsumo?'ツモ':'ロン'}。${evaluation.han}翻 ${evaluation.fu}符。${labels||'役あり'}。`;
- finishHand({title,desc,total,yaku:labels},dealerWin);
+ finishHand({title,desc,total,yaku:labels,winnerSeat:seat},dealerWin);
 }
 function exhaustiveDraw(){stopTimers();const tenpai=G.players.map(p=>L.getWaits(p.hand.map(x=>x.type),p.melds).length>0);let n=tenpai.filter(Boolean).length;
  if(n>=1&&n<=3){const receive=3000/n,pay=3000/(4-n);
@@ -943,10 +1005,11 @@ function finishHand(result,dealerStay){
  render();RESULTROOT.hidden=false;renderResult();
 }
 function renderResult(){if(!G?.result)return;const r=G.result;
+ const title=r.winnerSeat===undefined?r.title:r.winnerSeat===localSeat()?'和了！':(r.winnerSeat%2===localSeat()%2?'味方の和了':'対戦相手の和了');
  const hasRecovery=G.settings.recover&&G.recoveryPending>0;
  const recoveryHtml=hasRecovery?`<section class="result-recovery"><h3>血液の回復</h3><p>${format(G.recoveryPending)} mL</p><div class="result-buttons"><button class="action-btn primary" data-action="recover">血液を戻す</button><button class="action-btn subtle" data-action="forgo">今回は戻さない</button></div></section>`:'';
- const nextLabel=r.sessionEnded?'設定に戻る':r.halfEnd?'次の半荘へ':'次の局へ';
- $('resultModal').innerHTML=`<div class="result-overline">${r.halfEnd?'HALF-TIME SETTLEMENT':r.title==='流局'?'EXHAUSTIVE DRAW':'HAND SETTLEMENT'}</div><h2 class="result-title" id="resultTitle">${esc(r.title)}</h2><p class="result-desc">${esc(r.desc)}</p>${r.total?`<div class="result-highlight"><span>和了点（供託を含む）</span><strong>+${format(r.total)} pt</strong><div class="result-yaku">${esc(r.yaku)}</div></div>`:''}${recoveryHtml}<div class="result-buttons"><button class="action-btn primary" data-action="next" ${hasRecovery?'disabled title="回復の選択後に進めます"':''}>${nextLabel} →</button></div>`;
+ const nextLabel=NET.mode==='guest'?'部屋主の操作を待機中':r.sessionEnded?'設定に戻る':r.halfEnd?'次の半荘へ':'次の局へ';
+ $('resultModal').innerHTML=`<div class="result-overline">${r.halfEnd?'HALF-TIME SETTLEMENT':r.title==='流局'?'EXHAUSTIVE DRAW':'HAND SETTLEMENT'}</div><h2 class="result-title" id="resultTitle">${esc(title)}</h2><p class="result-desc">${esc(r.desc)}</p>${r.total?`<div class="result-highlight"><span>和了点（供託を含む）</span><strong>+${format(r.total)} pt</strong><div class="result-yaku">${esc(r.yaku)}</div></div>`:''}${NET.mode==='guest'?'':recoveryHtml}<div class="result-buttons"><button class="action-btn primary" data-action="next" ${(hasRecovery||NET.mode==='guest')?'disabled':''}>${nextLabel} →</button></div>`;
 }
 function chooseRecovery(recover){if(!G||G.phase!=='result'||!G.settings.recover||G.recoveryPending<=0)return;
  const pending=G.recoveryPending;G.recoveryPending=0;
@@ -955,15 +1018,16 @@ function chooseRecovery(recover){if(!G||G.phase!=='result'||!G.settings.recover|
  render();renderResult();
 }
 function nextAfterResult(){if(!G||G.phase!=='result')return;if(G.settings.recover&&G.recoveryPending>0)return;
- if(G.result?.sessionEnded){resetToSetup();return;}
+ if(G.result?.sessionEnded){if(NET.mode==='host'){stopTimers();G=null;NET.roomStarted=false;ROOT.hidden=false;SETUP.hidden=true;$('roomLobby').hidden=false;netRenderLobby();netBroadcast();return;}resetToSetup();return;}
  RESULTROOT.hidden=true;
  if(G.result?.halfEnd){G.halfNo++;G.handIndex=0;G.honba=0;G.riichiPot=0;G.players.forEach(p=>p.score=25000);log(`${G.halfNo}半荘目へ。点棒を25,000点に戻し、血液は持ち越し。`);}
  startHand();
 }
-function resetToSetup(){stopTimers();G=null;ROOT.hidden=false;SETUP.hidden=false;RESULTROOT.hidden=true;RULESROOT.hidden=true;document.querySelector('.danger-vignette')?.remove();$('roundTag').textContent='CPU対戦';$('phaseLabel').textContent='対局準備';$('doraLabel').innerHTML='ドラ表示 <span class="mini-empty">—</span>';$('centerDora').innerHTML='ドラ <span class="mini-empty">—</span>';}
-function userTsumo(){if(!G||G.phase!=='discard'||G.turn!==0||!G.players[0].justDrawn)return;
- if(!winnerEval(0,null,true)){showToast('この牌姿ではツモ和了できぬ。');return;}
- scoreWinningHand(0,null,G.players[0].justDrawn,true);
+function resetToSetup(){netLeaveRoom();stopTimers();G=null;ROOT.hidden=false;SETUP.hidden=false;RESULTROOT.hidden=true;RULESROOT.hidden=true;document.querySelector('.danger-vignette')?.remove();$('roundTag').textContent='CPU対戦';$('phaseLabel').textContent='対局準備';$('doraLabel').innerHTML='ドラ表示 <span class="mini-empty">—</span>';$('centerDora').innerHTML='ドラ <span class="mini-empty">—</span>';}
+function userTsumo(){const seat=localSeat();if(!G||G.phase!=='discard'||G.turn!==seat||!G.players[seat].justDrawn)return;
+ if(!winnerEval(seat,null,true)){showToast('この牌姿ではツモ和了できぬ。');return;}
+ if(NET.mode==='guest'){netSendAction('tsumo',{});return;}
+ scoreWinningHand(seat,null,G.players[seat].justDrawn,true);
 }
 /** Pinzu are drawn as SVG rather than tiny CSS grid dots; details stay visible on a phone.
  * Each pipped disc has a dark silhouette, a vivid lacquer ring and a bright engraving.
@@ -1074,11 +1138,16 @@ function v17Bird(){
  return `<g>${fan}<path d="M36 46 C23 42 21 55 24 68 C27 79 37 80 44 72 C51 62 45 51 36 46Z" fill="#295a66" stroke="#203f4e" stroke-width="1.5"/><path d="M30 51 C20 52 20 68 29 73 C36 76 38 67 36 59 Z" fill="#c6c6a0" stroke="#294a54" stroke-width="1.1"/><path d="M28 60 C19 63 16 57 15 52 C18 55 22 54 27 52" fill="#af5d60"/><path d="M38 49 C42 42 43 34 41 31 C36 27 33 31 34 36 C35 41 34 45 34 49" fill="#326f6c" stroke="#1b4d51" stroke-width="1.2"/><circle cx="38.5" cy="33" r="1.2" fill="#172c35"/><path d="M42 33 L49 36 L42 39Z" fill="#d4ab5c" stroke="#7b5934" stroke-width=".8"/><path d="M32 74 L30 89 M40 74 L43 88 M30 89 L24 90 M30 89 L34 91 M43 88 L38 91 M43 88 L48 89" stroke="#a7474e" stroke-width="1.65" stroke-linecap="round" fill="none"/></g>`;
 }
 function v17EightBamboo(y){
- return `<g transform="translate(36 ${y})"><path d="M-22 -9 L-14 9 L0 -7 L14 9 L22 -9" stroke="#203b38" stroke-width="7" stroke-linejoin="round" fill="none"/><path d="M-22 -9 L-14 9 L0 -7 L14 9 L22 -9" stroke="#277451" stroke-width="3.6" stroke-linejoin="round" fill="none"/><path d="M-21 -10 L-13 8 L1 -8 L15 8 L23 -10" stroke="#94c6a1" stroke-width="1" fill="none"/><path d="M-19 -9 L-13 5 M-8 0 L0 -6 M7 1 L14 7 M18 0 L22 -7" stroke="#d2e3c8" stroke-width="2"/></g>`;
+ // Traditional 8-sou: two mirrored groups of four motifs.
+ // Each group has two upright bamboo bars and two crossing diagonal strokes.
+ const flip=y>50?-1:1;
+ const bars=v17Bamboo(18,0,.91,'green')+v17Bamboo(54,0,.91,'green');
+ const connector=flip>0?'M21 -7 L36 8 L51 -7':'M21 7 L36 -8 L51 7';
+ return `<g transform="translate(0 ${y})">${bars}<path d="${connector}" fill="none" stroke="#193f38" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><path d="${connector}" fill="none" stroke="#348265" stroke-width="4.3" stroke-linejoin="round" stroke-linecap="round"/><path d="${connector}" fill="none" stroke="#a4d5b6" stroke-width="1.25" stroke-linejoin="round"/></g>`;
 }
 function v17Sou(n){
  if(n===1)return v17Bird();
- if(n===8)return v17EightBamboo(28)+v17EightBamboo(73);
+ if(n===8)return v17EightBamboo(29)+v17EightBamboo(73);
  const p={
   2:[[36,27,1.05],[36,73,1.05]],
   3:[[36,22,1.05],[20,73,1.05],[52,73,1.05]],
@@ -1115,27 +1184,29 @@ function renderMeld(m){
    .replace('class="tile ','class="tile '+(i===idx?'called ':'') )).join('');
  return `<div class="meld-pile ${m.open?'open':''}" title="${title}">${tiles}</div>`;
 }
-function renderSeat(seat,id){const p=G.players[seat],yourTurn=G.turn===seat&&['discard','draw'].includes(G.phase);const isHuman=seat===0;
- const selectedId=G.selectedId;let tiles=p.hand.map(t=>tileHtml(t,{hide:!isHuman,selectable:isHuman&&canSelectMyTile(t.id),selected:isHuman&&t.id===selectedId,locked:isHuman&&p.riichi&&p.justDrawn?.id!==t.id,drawn:isHuman&&G.phase!=='drawing'&&p.justDrawn?.id===t.id&&p.hand[p.hand.length-1]?.id===t.id,arriving:G.phase==='drawing'&&G.drawTileId===t.id&&seat===G.turn})).join('');
+function renderSeat(seat,id){const p=G.players[seat],yourTurn=G.turn===seat&&['discard','draw'].includes(G.phase),isMe=seat===localSeat();
+ const selectedId=G.selectedId,tiles=p.hand.map(t=>tileHtml(t,{hide:!isMe,selectable:isMe&&canSelectMyTile(t.id),selected:isMe&&t.id===selectedId,locked:isMe&&p.riichi&&p.justDrawn?.id!==t.id,drawn:isMe&&G.phase!=='drawing'&&p.justDrawn?.id===t.id&&p.hand[p.hand.length-1]?.id===t.id,arriving:G.phase==='drawing'&&G.drawTileId===t.id&&seat===G.turn})).join('');
  const melds=p.melds.map(renderMeld).join('');
- const el=$(id);el.classList.toggle('active-turn',yourTurn);el.classList.toggle('seat-opponent',!isHuman);
- el.innerHTML=`<div class="seat-head"><span class="seat-name ${seat===0||seat===1?'rep':''}">${esc(SEATS[seat].name)}</span><span class="seat-indicator">${seat===G.dealer?'東 · 親':L.HONORS[(seat-G.dealer+4)%4]} / ${seat===0||seat===1?'代表':'補佐'} ${p.riichi?' · 立直':''}</span></div><div class="seat-body"><div class="seat-hand">${tiles}</div>${melds?`<div class="seat-meld">${melds}</div>`:''}</div>`;
+ const el=$(id);el.classList.toggle('active-turn',yourTurn);el.classList.toggle('seat-opponent',!isMe);
+ const role=seat===0||seat===1?'代表':'補佐';
+ el.innerHTML=`<div class="seat-head"><span class="seat-name ${role==='代表'?'rep':''}">${esc(p.name)}</span><span class="seat-indicator">${seat===G.dealer?'東 · 親':L.HONORS[(seat-G.dealer+4)%4]} / ${role} ${p.riichi?' · 立直':''}</span></div><div class="seat-body"><div class="seat-hand">${tiles}</div>${melds?`<div class="seat-meld">${melds}</div>`:''}</div>`;
 }
-function renderRivers(){const refs=['riverBottom','riverRight','riverTop','riverLeft'];G.players.forEach((p,i)=>{const latest=p.discards.slice(-30);$(refs[i]).innerHTML=latest.map(t=>tileHtml(t,{small:true})).join('');});}
+function renderRivers(){const refs=['riverBottom','riverRight','riverTop','riverLeft'];G.players.forEach((p,seat)=>{const rel=relativeSeat(seat);$(refs[rel]).innerHTML=p.discards.slice(-30).map(t=>tileHtml(t,{small:true})).join('');});}
 function renderBlood(){const blood=G.blood[0],pct=Math.min(100,Math.max(0,blood/G.settings.bloodInit*100)),other=G.blood[1],otherPct=Math.max(0,Math.min(100,other/G.settings.bloodInit*100));
  const my=`<div class="blood-card"><div class="blood-label">挑戦者 · 血液</div><div class="blood-amount">${format(blood)} <small>mL</small></div><div class="blood-track"><div class="blood-fill" style="width:${pct}%"></div></div><div class="blood-caption">初期 ${format(G.settings.bloodInit)} mL</div></div>`;
  const opp=G.settings.mode==='both'?`<div class="blood-card secondary"><div class="blood-label">対戦相手 · 血液</div><div class="blood-amount">${format(other)} <small>mL</small></div><div class="blood-track"><div class="blood-fill" style="width:${otherPct}%"></div></div><div class="blood-caption">回復 ${G.settings.recover?'許可':'禁止'} · レート ${G.settings.bloodRate} mL / 1000点</div></div>`:`<div class="blood-card secondary"><div class="blood-label">対戦相手 · 資産</div><div class="blood-amount">${format(G.asset[1])} <small>pt</small></div><div class="blood-track"><div class="blood-fill asset" style="width:${Math.min(100,Math.max(0,G.asset[1]/500000*100))}%"></div></div><div class="blood-caption"></div></div>`;
  $('bloodSection').innerHTML=my+opp;
  let vignette=document.querySelector('.danger-vignette');if(pct<=30&&pct>0&&G.phase!=='result'){if(!vignette){vignette=document.createElement('div');vignette.className='danger-vignette';vignette.setAttribute('aria-hidden','true');document.body.appendChild(vignette);}}else vignette?.remove();
 }
-function renderScores(){const names=G.players.map(p=>p.seat===0?'あなた':p.seat===1?'右家 CPU':p.seat===2?'対面 CPU':'左家 CPU');
- $('scoreboard').innerHTML=G.players.map((p,i)=>`<div class="score-line ${i%2===0?'team':'enemy'} ${i===0?'myself':''} ${i===1?'rep-enemy':''}"><span class="score-name">${names[i]} <small>${i===0||i===1?'★':''}</small></span><strong class="score-value">${format(p.score)}</strong></div>`).join('');}
-function renderPeek(){const refs=[1,2,3];$('peekInfo').innerHTML=refs.map(seat=>{const p=G.players[seat];return `<div class="peek-line"><div class="peek-name">${esc(SEATS[seat].name)} <span style="color:#758c81">· 透牌 ${p.hand.filter(x=>x.clear).length}/${p.hand.length}</span></div><div class="peek-tiles">${p.hand.map(t=>tileHtml(t,{hide:true,mini:false,opaquePreview:true})).join('')}</div></div>`;}).join('');}
+function renderScores(){const names=G.players.map(p=>p.name+(p.seat===localSeat()?'（あなた）':''));
+ $('scoreboard').innerHTML=G.players.map((p,i)=>`<div class="score-line ${i%2===0?'team':'enemy'} ${i===localSeat()?'myself':''} ${i===1?'rep-enemy':''}"><span class="score-name">${esc(names[i])} <small>${i===0||i===1?'★':''}</small></span><strong class="score-value">${format(p.score)}</strong></div>`).join('');
+}
+function renderPeek(){const refs=[1,2,3].map(j=>(localSeat()+j)%4);$('peekInfo').innerHTML=refs.map(seat=>{const p=G.players[seat];return `<div class="peek-line"><div class="peek-name">${esc(p.name)} <span style="color:#758c81">· 透牌 ${p.hand.filter(x=>x.clear).length}/${p.hand.length}</span></div><div class="peek-tiles">${p.hand.map(t=>tileHtml(t,{hide:true,mini:false,opaquePreview:true})).join('')}</div></div>`;}).join('');}
 function renderLog(){$('logBox').innerHTML=G.logs.slice(0,10).map((s,i)=>`<div class="log-entry">${esc(s)}</div>`).join('');}
 function renderActionBar(){
  const buttons=$('actionButtons'),hint=$('selectedHint');buttons.innerHTML='';
  const bar=$('actionBar');bar.classList.add('is-empty');
- const p=G.players[0],myDiscard=G.turn===0&&G.phase==='discard';
+ const seat=localSeat(),p=G.players[seat],myDiscard=G.turn===seat&&G.phase==='discard';
  const sel=p.hand.find(t=>t.id===G.selectedId),arrange=canArrangeMyHand();
  const list=[];
  hint.textContent='';
@@ -1147,30 +1218,31 @@ function renderActionBar(){
    list.push('<button type="button" class="action-btn subtle move-btn" data-action="move-right">→</button>');
   }
   if(myDiscard){
-   if(canDeclareRiichi(0,sel.id)&&!G.riichiReady)list.push('<button type="button" class="action-btn" data-action="riichi">立直</button>');
+   if(canDeclareRiichi(seat,sel.id)&&!G.riichiReady)list.push('<button type="button" class="action-btn" data-action="riichi">立直</button>');
    list.push(`<button type="button" class="action-btn primary" data-action="discard">${G.riichiReady?'立直・打牌':'打牌'}</button>`);
   }
   if(arrange)list.push('<button type="button" class="action-btn subtle" data-action="deselect">解除</button>');
  }
  if(myDiscard){
-  if(p.justDrawn&&winnerEval(0,null,true))list.unshift('<button type="button" class="action-btn danger" data-action="tsumo">ツモ</button>');
-  if(getAnkanTypes(0).length)list.unshift('<button type="button" class="action-btn" data-action="ankan">暗槓</button>');
+  if(p.justDrawn&&winnerEval(seat,null,true))list.unshift('<button type="button" class="action-btn danger" data-action="tsumo">ツモ</button>');
+  if(getAnkanTypes(seat).length)list.unshift('<button type="button" class="action-btn" data-action="ankan">暗槓</button>');
  }
  buttons.innerHTML=list.join('');
  bar.classList.toggle('is-empty',!list.length&&!hint.textContent);
 }
-function renderReactions(){const box=$('reactPanel');if(G.phase!=='react'||!G.call){box.hidden=true;box.innerHTML='';return;}
+function renderReactions(){const box=$('reactPanel');if(G.phase!=='react'||!G.call||G.call.seat!==localSeat()){box.hidden=true;box.innerHTML='';return;}
  const call=G.call;box.hidden=false;
  box.innerHTML=`<span class="react-copy">${call.kind==='ron'?'ロン':L.tileName(call.tile.type)}</span><div class="react-buttons">${call.options.map((o,i)=>`<button class="action-btn ${o.kind==='ron'?'danger':'primary'}" data-action="react" data-index="${i}">${esc(o.label)}</button>`).join('')}<button class="action-btn subtle" data-action="pass">見逃す</button></div>`;
 }
 function render(){if(!G)return;
- $('roundTag').textContent=roundLabel();$('phaseLabel').textContent=G.phase==='result'?'精算':G.phase==='react'?'鳴き選択':G.phase==='drawing'?'ツモ':G.turn===0?(G.phase==='draw'?'ツモ':'あなたの番'):'CPUの番';
+ $('roundTag').textContent=roundLabel();$('phaseLabel').textContent=G.phase==='result'?'精算':G.phase==='react'?'鳴き選択':G.phase==='drawing'?'ツモ':G.turn===localSeat()?(G.phase==='draw'?'ツモ':'あなたの番'):'相手の番';
  const doraHtml=`ドラ ${G.dora.map(t=>tileHtml({type:t,clear:false,id:'dora'}, {mini:true})).join('')}`;
  $('doraLabel').innerHTML=`${doraHtml} <span style="font-size:9px;color:#a3b5a9">→ ${G.dora.map(L.nextDora).map(L.tileName).join(' / ')}</span>`;
  $('centerDora').innerHTML=doraHtml;
- renderSeat(2,'seatTop');renderSeat(3,'seatLeft');renderSeat(1,'seatRight');renderSeat(0,'seatBottom');renderRivers();
+ renderSeat((localSeat()+2)%4,'seatTop');renderSeat((localSeat()+3)%4,'seatLeft');renderSeat((localSeat()+1)%4,'seatRight');renderSeat(localSeat(),'seatBottom');renderRivers();
  $('centerStatus').textContent=`捨て牌 ${G.discardCount}/70 · 残り ${G.wall.length}`;
  renderReactions();renderActionBar();renderBlood();renderScores();renderPeek();renderLog();
+ if(NET.mode==='host')netBroadcast();
 }
 // Pointer-based manual 理牌. Never sort by type and never move a tile unless the player asks.
 let drag=null,dragClickBlockUntil=0;
@@ -1217,10 +1289,192 @@ document.addEventListener('pointercancel',e=>{if(!drag||drag.pointerId!==e.point
 document.addEventListener('click',e=>{
  if(Date.now()<dragClickBlockUntil&&e.target.closest('.seat-bottom .seat-hand .tile')){e.preventDefault();e.stopImmediatePropagation();}
 },true);
+// Room state is authoritative in the host browser. Client snapshots are redacted per seat.
+function roomCodeValid(code){return /^[A-Z0-9]{6,12}$/.test(code);}
+function generateRoomCode(){const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',bytes=new Uint8Array(8);crypto.getRandomValues(bytes);return [...bytes].map(v=>alphabet[v%alphabet.length]).join('');}
+function roomLink(){const base=(location.protocol==='file:'||location.origin==='null')?'https://yoshisuke1111-svg.github.io/washizu-mahjong/':`${location.origin}${location.pathname}`;return `${base}?room=${encodeURIComponent(NET.code)}`;}
+function setRoomError(s){$('onlineError').textContent=s||'';}
+function setLobbyStatus(s){$('roomStatusText').textContent=s;}
+function netName(){return ($('onlineName').value||'プレイヤー').trim().slice(0,16);}
+function netLobbyOpen(){ROOT.hidden=false;SETUP.hidden=true;$('roomLobby').hidden=false;RESULTROOT.hidden=true;netRenderLobby();}
+function netCleanStateFor(seat){
+ const publicPlayers=G.players.map((p,i)=>({
+  ...p,
+  hand:p.hand.map(t=>(i===seat||t.clear)?{...t}:{id:t.id,type:'1z',clear:false}),
+  justDrawn:i===seat?p.justDrawn:null,
+  tempFuriten:i===seat?p.tempFuriten:false
+ }));
+ // The wall is confidential; send count only. An opponent's opaque tile type never leaves host.
+ return {...G,wall:Array(G.wall.length).fill(null),players:publicPlayers,
+  selectedId:null,riichiReady:false,drawTileId:G.turn===seat?G.drawTileId:null,
+  call:G.call?.seat===seat?{kind:G.call.kind,seat,discarder:G.call.discarder,tile:G.call.tile,options:G.call.options}:null};
+}
+function netSafeSend(conn,data){try{if(conn?.open)conn.send(data);}catch(e){console.warn('Room send failed:',e);}}
+function netMembersPublic(){return Object.values(NET.members).map(({seat,name,online})=>({seat,name,online:Boolean(online)}));}
+function netBroadcast(){
+ if(NET.mode!=='host')return;
+ const members=netMembersPublic();
+ for(let seat=1;seat<=3;seat++){
+  const c=NET.connections[seat];if(!c?.open)continue;
+  netSafeSend(c,{kind:'room',members,started:NET.roomStarted,settings:NET.settings});
+  if(G)netSafeSend(c,{kind:'snapshot',state:netCleanStateFor(seat)});
+ }
+ netRenderLobby();
+}
+function netRenderLobby(){
+ if(NET.mode==='solo')return;
+ $('roomCodeLabel').textContent=NET.code||'';
+ $('roomLink').value=roomLink();
+ $('roomStartBtn').hidden=NET.mode==='guest';
+ $('roomStartBtn').disabled=NET.mode==='host'&&NET.roomStarted;
+ const m=NET.members;
+ $('roomMembers').innerHTML=[0,1,2,3].map(seat=>{
+  const info=m[seat];const label=seat===0||seat===1?'代表':'補佐';
+  return `<div class="room-member ${!info?.online?'offline':''}"><small>${seat+1}番席 · ${label} · ${seat%2===0?'挑戦者':'対戦相手'}</small><strong>${info?esc(info.name):'空席 / CPU'}</strong><small>${info?(info.online?'参加中':'切断 / CPUが代行'):'参加待ち'}</small></div>`;
+ }).join('');
+ const x=NET.settings||settingsFromForm();
+ $('roomRuleSummary').textContent=`透明牌 ${x.clearCount}/4・血液 ${x.bloodRate}mL / 1000点・回復 ${x.recover?'あり':'なし'}・${x.halves}半荘`;
+ $('roomStatusDot').textContent=NET.mode==='host'?'部屋主':`参加者・${NET.seat+1}番席`;
+ if(NET.mode==='host')setLobbyStatus(NET.roomStarted?'対局中。空席はCPUが代行します。':'招待URLを共有して、揃ったら対局開始。空席はCPUになります。');
+}
+function netLeaveRoom(){
+ if(NET.timer){clearTimeout(NET.timer);NET.timer=null;}
+ try{NET.connection?.close();}catch(_){ }
+ try{NET.peer?.destroy();}catch(_){ }
+ NET.mode='solo';NET.code=null;NET.peer=null;NET.connection=null;NET.connections={};NET.members={};NET.settings=null;NET.roomStarted=false;NET.seat=0;
+ $('roomLobby').hidden=true;setRoomError('');
+}
+function netPeerError(error){
+ console.warn('Room connection:',error);
+ const msg=error?.type==='unavailable-id'?'その部屋コードは使用中です。別のコードで試してくれ。':'通信に接続できません。ネットワークを確認してくれ。';
+ if(NET.mode==='host'&&!NET.roomStarted){netLeaveRoom();ROOT.hidden=false;SETUP.hidden=false;}
+ else if(NET.mode==='guest')setLobbyStatus(msg);
+ setRoomError(msg);
+}
+function netCreateRoom(){
+ if(NET.mode!=='solo')return;
+ if(typeof Peer==='undefined'){setRoomError('通信ライブラリが読み込めません。接続して再読み込みしてくれ。');return;}
+ const custom=$('onlineCode').value.trim().toUpperCase();if(custom&&!roomCodeValid(custom)){setRoomError('部屋コードは英数字6〜12文字で指定してくれ。');return;}
+ NET.mode='host';NET.seat=0;NET.code=custom||generateRoomCode();NET.settings=settingsFromForm();NET.members={0:{seat:0,name:netName(),online:true}};NET.roomStarted=false;
+ $('onlineCode').value=NET.code;setRoomError('');
+ NET.peer=new Peer('washizu-'+NET.code.toLowerCase(),{debug:0});
+ NET.peer.on('open',()=>{if(NET.mode!=='host')return;if(NET.timer){clearTimeout(NET.timer);NET.timer=null;}netLobbyOpen();netRenderLobby();});
+ NET.peer.on('connection',conn=>netHostAccept(conn));
+ NET.peer.on('error',netPeerError);
+ NET.peer.on('disconnected',()=>setLobbyStatus('シグナリング接続が切断されました。再接続を確認中。'));
+ NET.timer=setTimeout(()=>{if(NET.mode==='host'&&!NET.peer?.open)netPeerError({type:'timeout'});},16000);
+}
+function netJoinRoom(){
+ if(NET.mode!=='solo')return;
+ if(typeof Peer==='undefined'){setRoomError('通信ライブラリが読み込めません。接続して再読み込みしてくれ。');return;}
+ const code=$('onlineCode').value.trim().toUpperCase();
+ if(!roomCodeValid(code)){setRoomError('部屋コードは英数字6〜12文字じゃ。');return;}
+ NET.mode='guest';NET.code=code;NET.seat=-1;NET.members={};NET.settings=null;NET.roomStarted=false;
+ try{NET.token=sessionStorage.getItem('washizu-token-'+code)||generateRoomCode()+generateRoomCode();sessionStorage.setItem('washizu-token-'+code,NET.token);}catch(_){NET.token=generateRoomCode()+generateRoomCode();}
+ setRoomError('');NET.peer=new Peer(undefined,{debug:0});
+ NET.peer.on('open',()=>{
+  if(NET.mode!=='guest')return;
+  const conn=NET.peer.connect('washizu-'+code.toLowerCase(),{reliable:true,serialization:'json'});
+  NET.connection=conn;
+  conn.on('open',()=>{netLobbyOpen();setLobbyStatus('部屋主と接続しました。参加処理中。');netSafeSend(conn,{kind:'hello',name:netName(),token:NET.token,seatPreference:Number($('joinSeat').value),protocol:18});});
+  conn.on('data',msg=>netGuestMessage(msg));
+  conn.on('close',()=>{ROOT.hidden=false;SETUP.hidden=true;$('roomLobby').hidden=false;RESULTROOT.hidden=true;setLobbyStatus('部屋主との接続が切れました。退出してから入り直してくれ。');});
+  conn.on('error',netPeerError);
+ });
+ NET.peer.on('error',netPeerError);
+ NET.timer=setTimeout(()=>{if(NET.mode==='guest'&&NET.seat===-1){const msg='入室できませんでした。部屋コードと部屋主の接続を確認してくれ。';setRoomError(msg);setLobbyStatus(msg);}},17000);
+}
+function netHostAccept(conn){
+ if(NET.mode!=='host'){conn.close();return;}
+ let authorizedSeat=-1;
+ conn.on('data',msg=>{
+  if(!msg||typeof msg!=='object')return;
+  if(authorizedSeat<0){
+   if(msg.kind!=='hello'||msg.protocol!==18)return;
+   const token=String(msg.token||''),name=String(msg.name||'参加者').slice(0,16).trim()||'参加者';
+   if(token.length<10||token.length>80){netSafeSend(conn,{kind:'reject',reason:'参加情報が不正です。'});conn.close();return;}
+   let seat=[1,2,3].find(i=>NET.members[i]?.token===token);
+   if(seat===undefined&&!NET.roomStarted){const pref=Number(msg.seatPreference);if([1,2,3].includes(pref)&&!NET.members[pref])seat=pref;}
+   if(seat===undefined&&!NET.roomStarted)seat=[1,2,3].find(i=>!NET.members[i]);
+   if(seat===undefined){netSafeSend(conn,{kind:'reject',reason:NET.roomStarted?'対局開始後は新規参加できません。':'部屋が満員です。'});conn.close();return;}
+   authorizedSeat=seat;
+   try{NET.connections[seat]?.close();}catch(_){ }
+   NET.connections[seat]=conn;NET.members[seat]={seat,name,online:true,token};
+   if(G)G.players[seat].name=name;
+   netSafeSend(conn,{kind:'welcome',seat,code:NET.code});netBroadcast();
+   return;
+  }
+  if(msg.kind==='action'){netHostAction(authorizedSeat,msg.action,msg.data||{});}
+ });
+ conn.on('close',()=>{
+  if(authorizedSeat<0||NET.connections[authorizedSeat]!==conn)return;
+  delete NET.connections[authorizedSeat];
+  if(NET.members[authorizedSeat])NET.members[authorizedSeat].online=false;
+  if(G&&G.phase==='react'&&G.call?.seat===authorizedSeat)passOrAutoReact(authorizedSeat);
+  else if(G&&G.turn===authorizedSeat&&['draw','discard'].includes(G.phase))scheduleAI();
+  netBroadcast();
+ });
+ conn.on('error',e=>console.warn('Guest connection:',e));
+}
+function passOrAutoReact(seat){if(!G||G.call?.seat!==seat)return;
+ const cb=G.call.afterPass;G.call=null;G.phase='waiting';render();cb?.();
+}
+function netHostAction(seat,action,data){
+ if(NET.mode!=='host'||!NET.members[seat]?.online||!G)return;
+ const p=G.players[seat];
+ if(action==='swap'||action==='reorder'){
+  if(G.sessionEnded||['result','drawing'].includes(G.phase)||p.riichi)return;
+  const from=p.hand.findIndex(t=>t.id===(action==='swap'?data.a:data.sourceId));
+  const to=p.hand.findIndex(t=>t.id===(action==='swap'?data.b:data.targetId));
+  if(from<0||to<0||from===to)return;
+  if(action==='swap'){[p.hand[from],p.hand[to]]=[p.hand[to],p.hand[from]];}
+  else{let at=to+(data.after?1:0),[tile]=p.hand.splice(from,1);if(from<at)at--;p.hand.splice(at,0,tile);}
+  netBroadcast();return;
+ }
+ if(action==='discard'&&G.turn===seat&&G.phase==='discard'){
+  const i=p.hand.findIndex(t=>t.id===data.id);if(i<0)return;
+  discard(seat,i,Boolean(data.riichi));return;
+ }
+ if(action==='tsumo'&&G.turn===seat&&G.phase==='discard'&&p.justDrawn&&winnerEval(seat,null,true)){scoreWinningHand(seat,null,p.justDrawn,true);return;}
+ if(action==='ankan'&&G.turn===seat&&G.phase==='discard'&&getAnkanTypes(seat).includes(data.type)){doAnkan(seat,data.type);return;}
+ if(action==='pass'&&G.phase==='react'&&G.call?.seat===seat){passOrAutoReact(seat);return;}
+ if(action==='reaction'&&G.phase==='react'&&G.call?.seat===seat){
+  const call=G.call,idx=Number(data.index),option=call.options[idx];if(!option)return;
+  G.call=null;G.phase='waiting';if(option.kind==='ron')scoreWinningHand(seat,call.discarder,call.tile,false);
+  else applyCall(seat,option,call.discarder,call.tile);
+ }
+}
+function netGuestMessage(msg){
+ if(NET.mode!=='guest'||!msg||typeof msg!=='object')return;
+ if(msg.kind==='reject'){setLobbyStatus(msg.reason||'入室できませんでした。');return;}
+ if(msg.kind==='welcome'){NET.seat=Number(msg.seat);NET.code=msg.code;if(NET.timer){clearTimeout(NET.timer);NET.timer=null;}netLobbyOpen();return;}
+ if(msg.kind==='room'){NET.members=Object.fromEntries((msg.members||[]).map(m=>[m.seat,m]));NET.roomStarted=Boolean(msg.started);NET.settings=msg.settings||NET.settings;netRenderLobby();if(!NET.roomStarted){G=null;RESULTROOT.hidden=true;netLobbyOpen();}return;}
+ if(msg.kind==='snapshot'){
+  if(NET.seat<1||NET.seat>3)return;
+  const selection=G?.selectedId,ready=G?.riichiReady;
+  G=msg.state;
+  G.selectedId=G.players[NET.seat].hand.some(t=>t.id===selection)?selection:null;
+  G.riichiReady=Boolean(ready&&G.selectedId!==null&&G.turn===NET.seat);
+  ROOT.hidden=true;SETUP.hidden=true;$('roomLobby').hidden=true;
+  render();RESULTROOT.hidden=G.phase!=='result';if(G.phase==='result')renderResult();
+ }
+}
+function netSendAction(action,data){if(NET.mode==='guest')netSafeSend(NET.connection,{kind:'action',action,data});}
+function netStartRoom(){if(NET.mode!=='host'||!NET.peer?.open||NET.roomStarted)return;
+ NET.roomStarted=true;$('roomLobby').hidden=true;ROOT.hidden=true;startGame();netBroadcast();}
+function netCopyRoom(){const s=roomLink();if(navigator.clipboard?.writeText){navigator.clipboard.writeText(s).then(()=>showToast('招待URLをコピーした。')).catch(()=>{const el=$('roomLink');el.select();showToast('URLを選択したのでコピーしてくれ。');});}else{$('roomLink').select();showToast('URLを選択したのでコピーしてくれ。');}}
+window.addEventListener('beforeunload',()=>{try{NET.peer?.destroy();}catch(_){}});
+(function prefillRoomCode(){const code=new URLSearchParams(location.search).get('room');if(code){$('onlineCode').value=code.toUpperCase();$('onlineError').textContent='招待された部屋です。名前を入力して「部屋に入る」を押してくれ。';}})();
+
 // Unified event handling works with freshly-rendered tile buttons and modal controls.
 document.addEventListener('click',function(e){const el=e.target.closest('[data-action]');if(!el)return;const action=el.dataset.action;
  switch(action){
  case 'start':startGame();break;
+ case 'create-room':netCreateRoom();break;
+ case 'join-room':netJoinRoom();break;
+ case 'start-room':netStartRoom();break;
+ case 'copy-room':netCopyRoom();break;
+ case 'leave-room':resetToSetup();break;
  case 'new':resetToSetup();break;
  case 'select':selectTile(Number(el.dataset.id));break;
  case 'discard':userDiscard();break;
@@ -1236,12 +1490,12 @@ document.addEventListener('click',function(e){const el=e.target.closest('[data-a
  case 'forgo':chooseRecovery(false);break;
  case 'next':nextAfterResult();break;
  case 'rules':RULESROOT.hidden=false;break;
- case 'close-rules':RULESROOT.hidden=true;if(G&&G.turn!==0)scheduleAI();break;
+ case 'close-rules':RULESROOT.hidden=true;if(G&&isCpuSeat(G.turn))scheduleAI();break;
  default:break;
  }
 });
 // Lightweight read-only debugging hooks for local validation.
-window.WashizuPrototype={state:()=>G,logic:L,render,resetToSetup,startGame};
+window.WashizuPrototype={state:()=>G,logic:L,render,resetToSetup,startGame,net:()=>NET,hostAction:netHostAction,netCleanStateFor,netGuestMessage};
 })();
 
 </script>
