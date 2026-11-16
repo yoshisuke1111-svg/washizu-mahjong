@@ -64,6 +64,66 @@
 .peek-tiles .tile .honor{font-size:calc(var(--tile-width)*.60)}
 @media(max-width:530px){.peek-tiles .tile{--tile-width:27px;--tile-height:38px}}
 @media(max-height:550px) and (min-width:600px){.peek-tiles .tile{--tile-width:24px;--tile-height:34px}}
+/* v0.5: translucent tiles must never sit against a near-black stage.
+   Shadows on the tiles and table frame stay; the color directly behind each
+   visible transparent hand is a soft, light yellow-green across the arena. */
+body {
+  background: radial-gradient(ellipse at 45% -15%, #486d54 0%, transparent 55%),
+              linear-gradient(145deg, #263e31 0%, #1c3128 66%, #152a24 100%);
+}
+.arena-wrap {
+  border: 1px solid #bbd294;
+  padding: 7px;
+  background: linear-gradient(155deg, #d5e8a2 0%, #b3d181 47%, #8eae70 100%);
+  box-shadow: inset 0 0 0 1px #f5ffe580, 0 18px 43px #0a201e88;
+}
+/* Light stage is visible THROUGH opposing tiles even beyond the felt's edge. */
+.arena {
+  height: clamp(490px, 62vw, 730px);
+  min-height: 490px;
+  max-height: 78vh;
+  background: radial-gradient(ellipse at 50% 44%, #dff3a6 0%, #b7da80 55%, #9cc571 84%, #8eb568 100%);
+}
+.table-wood {
+  inset: 6% 7% 12%;
+  background: linear-gradient(138deg, #8e704d 0%, #604731 22%, #826343 65%, #473d2d 100%);
+  border-color: #4c3e2e;
+  box-shadow: 0 15px 31px #304b354d, 0 0 0 1px #c7b58f8c,
+              inset 0 0 0 3px #d7b78851, inset 0 0 9px 5px #282f2159;
+}
+.table-felt {
+  inset: 11px;
+  background: radial-gradient(ellipse at 50% 38%, #d5ec8e 0%, #bae079 40%, #a1d064 76%, #87b753 100%);
+  border-color: #8db66f;
+  box-shadow: inset 0 0 54px #547e284a, inset 0 0 0 3px #eeffd44a;
+}
+.table-felt::after { opacity: .08; }
+.table-vignette {
+  background: linear-gradient(#efffc729, transparent 22%, transparent 80%, #415f2614);
+}
+/* Glass remains transparent (not solid white), but has a pale neutral cast
+   and a fine tile-edge shadow, not a dark block across the printed face. */
+.tile.clear {
+  background: linear-gradient(123deg,
+      #f1fffaab 0%, #c5ece199 24%, #e9fff4a4 53%, #b1e5d592 84%, #f6fffbb8 100%);
+  border-color: #effff7df;
+  box-shadow: inset 2px 2px 3px #fafffff2, inset -2px -2px 3px #6baea35c,
+              0 1px 0 #defff4d1, 1px 3px 3px #36583a63;
+  backdrop-filter: blur(.4px) saturate(1.08);
+}
+.tile.clear .face { filter: contrast(1.19); }
+.tile.clear .pip-art { filter: drop-shadow(0 0 .5px #174b41) contrast(1.24) saturate(1.15); }
+/* Keep the current compact screen layout, while making the board breathe. */
+@media (max-width: 530px) {
+  .arena-wrap { padding: 4px; }
+  .arena { height: 470px; min-height: 470px; max-height: none; }
+  .table-wood { inset: 10% 3% 15%; border-radius: 20px; border-width: 5px; }
+  .table-felt { inset: 7px; }
+}
+@media (max-height: 550px) and (min-width: 600px) {
+  .arena { height: 385px; min-height: 385px; max-height: none; }
+}
+
 </style>
 </head>
 <body>
@@ -114,11 +174,11 @@
       <div class="disclaimer">仮想の血液・仮想資産によるゲームです。現実の賭けや出血は伴いません。<br>非公式のオリジナル試作画面です。</div>
     </aside>
   </main>
-  <footer class="foot">WASHIZU STYLE MAHJONG · PROTOTYPE 0.3 <span>ローカルCPU対戦 / オフライン対応 · 制作：鈾</span></footer>
+  <footer class="foot">WASHIZU STYLE MAHJONG · PROTOTYPE 0.5 <span>ローカルCPU対戦 / オフライン対応 · 制作：鈾</span></footer>
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">A GAME OF VISIBLE SECRETS</span><span class="test-pill">PROTOTYPE v0.3</span></div>
+    <div class="setup-title-row"><span class="label-caps">A GAME OF VISIBLE SECRETS</span><span class="test-pill">PROTOTYPE v0.5</span></div>
     <div class="setup-intro"><div class="setup-crests">透<span>牌</span></div><div><h1 id="setupTitle">鷲巣式 <em>透明麻雀</em></h1><p>見える三枚、見えない一枚。<br>互いの代表が運命を背負う、四人の心理戦。</p></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">賭けるもの <small>いずれもゲーム内の架空数値</small></label><select id="stakeMode"><option value="both" selected>両チームの代表が仮想血液を賭ける</option><option value="original">原作寄り：挑戦者は仮想血液 / 相手は仮想資産</option></select></div></div>
