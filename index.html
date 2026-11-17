@@ -751,7 +751,7 @@ body {
   .river .tile.v17-face .face>img.v17-art{filter:contrast(1.08) saturate(1.08)!important}
 }
 
-/* v0.28: truly larger discarded tiles. Top and bottom rivers use more felt width;
+/* v0.29: truly larger discarded tiles. Top and bottom rivers use more felt width;
    side rivers have their own compact scale to clear the players' hands. */
 @media(max-width:600px){
  .arena{height:clamp(550px,143vw,615px)!important;min-height:clamp(550px,143vw,615px)!important;
@@ -790,12 +790,12 @@ body {
 @media(min-width:981px){
  .river .tile.v17-face .face{inset:.75px!important}
 }
-/* v0.28 desktop rivers: preserve enough separation from bottom name. */
+/* v0.29 desktop rivers: preserve enough separation from bottom name. */
 @media(min-width:981px){
  .arena{--river-tw:clamp(23px,1.85vw,25px);--river-th:calc(var(--river-tw)*1.36)}
  .river-bottom{top:58.2%!important}
 }
-/* v0.28: shared, mandatory post-hand yaku and dora reveal, phone-friendly. */
+/* v0.29: shared, mandatory post-hand yaku and dora reveal, phone-friendly. */
 .result-root{z-index:245!important}
 .result-root .result-modal{width:min(680px,100%)!important;max-height:calc(100dvh - 24px)!important;overflow-y:auto!important;padding:21px 22px!important;text-align:center}
 .result-agari{display:flex;flex-direction:column;gap:9px;text-align:left;margin:13px 0;padding:14px;background:linear-gradient(155deg,#203e32,#172a25);border:1px solid #83a88a77;border-radius:11px}
@@ -845,6 +845,35 @@ body {
  .result-agari-heading{font-size:12px}
  .result-agari-heading strong{font-size:15px}
 }
+/* v0.29 — table-level call & win decisions, between river and hand.
+   No secondary reaction strip below the player's large mobile hand. */
+.arena .table-decision{
+ position:absolute!important;z-index:28!important;left:50%!important;bottom:auto!important;
+ transform:translateX(-50%)!important;display:flex!important;flex-flow:row wrap!important;
+ align-items:center!important;justify-content:center!important;
+ gap:6px!important;margin:0!important;padding:6px 10px!important;
+ width:max-content!important;max-width:calc(100% - 12px)!important;
+ border-radius:10px!important;border:2px solid #e6d19a!important;
+ background:linear-gradient(145deg,rgba(25,57,40,.97),rgba(11,35,27,.98))!important;
+ box-shadow:0 5px 18px #061b13b8, inset 0 1px #f6e6b047!important;
+ pointer-events:auto!important;
+}
+.arena .table-decision[hidden]{display:none!important}
+.table-decision .react-copy{font-size:12px!important;line-height:1.2;color:#f7edc8!important;white-space:nowrap;font-weight:700}
+.table-decision .react-buttons{display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:wrap!important;gap:5px!important}
+.table-decision .action-btn{min-width:66px;min-height:38px;padding:7px 11px!important;line-height:1.1;font-size:13px!important;border-radius:7px!important;touch-action:manipulation}
+.table-decision .action-btn.subtle{background:#e3e9d8!important;color:#223c2f!important;border-color:#d6e1c8!important}
+.table-decision .action-btn:focus-visible{outline:3px solid #f8e8a5;outline-offset:1px}
+@media(max-width:600px){
+ .arena .table-decision{gap:4px!important;padding:5px 6px!important;border-radius:8px!important;max-width:calc(100% - 10px)!important}
+ .table-decision .react-copy{font-size:11px!important}
+ .table-decision .react-buttons{gap:4px!important}
+ .table-decision .action-btn{min-width:62px;min-height:35px;padding:6px 8px!important;font-size:12px!important}
+}
+@media(max-width:365px){
+ .table-decision .react-copy{display:none}
+ .table-decision .action-btn{min-width:58px!important;padding:6px 7px!important}
+}
 </style>
 </head>
 <body>
@@ -881,6 +910,7 @@ body {
             <div class="center-rim"><div class="center-hole"><div class="bag-glyph">鷲</div><span>牌 袋</span></div></div>
             <div id="centerDora" class="center-dora">ドラ表示 <span class="mini-empty">—</span></div>
           </div>
+          <div id="reactPanel" class="react-panel table-decision" role="group" aria-label="鳴き・和了の選択" hidden></div>
           <div id="seatBottom" class="seat seat-bottom"></div>
           <div id="effectLayer" class="effect-layer" aria-hidden="true"></div>
           <section id="riverZoom" class="river-zoom" hidden role="dialog" aria-modal="false" aria-label="川の拡大表示">
@@ -894,7 +924,6 @@ body {
         <div class="mobile-hand-title"><strong>手牌</strong><span>横にスワイプ</span><button type="button" class="river-view-trigger" data-action="river-seat" data-rel="0">川を見る</button></div>
         <div id="mobileHandRow" class="mobile-hand-row" aria-label="大きく表示した自分の手牌"></div>
       </section>
-      <div id="reactPanel" class="react-panel" hidden></div>
       <div id="actionBar" class="action-bar">
         <div class="selected-copy" id="selectedHint"></div>
         <div id="actionButtons" class="action-buttons"></div>
@@ -911,7 +940,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.28</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.29</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
@@ -1262,8 +1291,9 @@ function chooseSashikomiDiscardIndex(seat){
  return prefer?prefer.i:-1;
 }
 function makeGame(settings){return {settings,halfNo:1,handIndex:0,honba:0,riichiPot:0,dealer:0,turn:0,phase:'setup',wall:[],dora:[],uraIndicators:[],discardCount:0,players:Array.from({length:4},(_,i)=>newPlayer(i)),blood:{0:settings.bloodInit,1:settings.bloodInit},asset:{1:500000},assetWon:0,bloodRecovered:0,foregone:0,recoveryPending:0,logs:[],selectedId:null,riichiReady:false,drawTileId:null,call:null,result:null,sessionEnded:false,lastDiscard:null,lastResult:null,moveCount:0,turnNo:0};}
-function startGame(){if(NET.mode==='guest')return;stopTimers();$('bloodSection').innerHTML='';G=makeGame(NET.mode==='host'?NET.settings:settingsFromForm());ROOT.hidden=true;SETUP.hidden=true;RESULTROOT.hidden=true;RULESROOT.hidden=true;startHand();render();}
+function startGame(){dismissedTsumoKey='';if(NET.mode==='guest')return;stopTimers();$('bloodSection').innerHTML='';G=makeGame(NET.mode==='host'?NET.settings:settingsFromForm());ROOT.hidden=true;SETUP.hidden=true;RESULTROOT.hidden=true;RULESROOT.hidden=true;startHand();render();}
 function startHand(){
+ dismissedTsumoKey='';
  stopTimers();G.bloodAtHandStart={0:G.blood[0],1:G.blood[1]};G.dealer=G.handIndex%4;G.players.forEach((p,i)=>{const fresh=newPlayer(i);Object.assign(p,fresh,{score:p.score});});
  G.wall=L.makeTiles(Math.random,G.settings.clearCount);G.dora=[G.wall.pop().type];G.uraIndicators=[G.wall.pop().type];G.discardCount=0;G.lastDiscard=null;G.moveCount=0;G.turn=G.dealer;G.phase='discard';G.selectedId=null;G.drawTileId=null;G.riichiReady=false;G.call=null;G.result=null;
  // Each seat receives thirteen tiles in rounds of two; dealer receives one extra tile.
@@ -1986,15 +2016,54 @@ function renderActionBar(){
   if(arrange)list.push('<button type="button" class="action-btn subtle" data-action="deselect">解除</button>');
  }
  if(myDiscard){
-  if(p.justDrawn&&winnerEval(seat,null,true))list.unshift('<button type="button" class="action-btn danger" data-action="tsumo">ツモ</button>');
+  // ツモ / キャンセル live on the table in renderReactions().
   if(getAnkanTypes(seat).length)list.unshift('<button type="button" class="action-btn" data-action="ankan">暗槓</button>');
  }
  buttons.innerHTML=list.join('');
  bar.classList.toggle('is-empty',!list.length&&!hint.textContent);
 }
-function renderReactions(){const box=$('reactPanel');if(G.phase!=='react'||!G.call||G.call.seat!==localSeat()){box.hidden=true;box.innerHTML='';return;}
- const call=G.call;box.hidden=false;
- box.innerHTML=`<span class="react-copy">${call.kind==='ron'?'ロン':L.tileName(call.tile.type)}</span><div class="react-buttons">${call.options.map((o,i)=>`<button class="action-btn ${o.kind==='ron'?'danger':'primary'}" data-action="react" data-index="${i}">${esc(o.label)}</button>`).join('')}<button class="action-btn subtle" data-action="pass">見逃す</button></div>`;
+let dismissedTsumoKey='';
+function tsumoOpportunityKey(){
+ if(!G||G.phase!=='discard'||G.turn!==localSeat())return '';
+ const p=G.players[localSeat()];
+ if(!p?.justDrawn||!winnerEval(localSeat(),null,true))return '';
+ return [G.halfNo,G.handIndex,G.moveCount,localSeat(),p.justDrawn.id].join(':');
+}
+function cancelTsumo(){
+ const key=tsumoOpportunityKey();
+ if(!key)return;
+ dismissedTsumoKey=key;
+ renderReactions();
+}
+function positionTableDecision(){
+ const panel=$('reactPanel');if(!panel||panel.hidden)return;
+ const board=panel.closest('.arena'),river=$('riverBottom');
+ if(!board||!river)return;
+ // The origin of the six-by-three river is stable. Draw the choice strip
+ // *after* the river, not below the board or on top of the discard tiles.
+ const a=board.getBoundingClientRect(),r=river.getBoundingClientRect();
+ const top=Math.max(0,Math.min(r.bottom-a.top+4,a.height-panel.offsetHeight-4));
+ panel.style.top=top+'px';
+}
+window.addEventListener('resize',positionTableDecision);
+function renderReactions(){
+ const panel=$('reactPanel');let label='',items='';
+ const call=G?.phase==='react'&&G.call?.seat===localSeat()?G.call:null;
+ if(call){
+  label=call.kind==='ron'?'ロンの確認':L.tileName(call.tile.type);
+  items=call.options.map((o,i)=>`<button type="button" class="action-btn ${o.kind==='ron'?'danger':'primary'}" data-action="react" data-index="${i}">${esc(o.label)}</button>`).join('');
+  items+='<button type="button" class="action-btn subtle" data-action="pass">キャンセル</button>';
+ }else{
+  const key=tsumoOpportunityKey();
+  if(key&&key!==dismissedTsumoKey){
+   label='ツモの確認';
+   items='<button type="button" class="action-btn danger" data-action="tsumo">ツモ</button><button type="button" class="action-btn subtle" data-action="cancel-tsumo">キャンセル</button>';
+  }
+ }
+ if(!items){panel.hidden=true;panel.innerHTML='';return;}
+ panel.innerHTML=`<span class="react-copy">${esc(label)}</span><div class="react-buttons">${items}</div>`;
+ panel.hidden=false;
+ positionTableDecision();
 }
 function render(){if(!G)return;
  $('roundTag').textContent=roundLabel();$('phaseLabel').textContent=G.phase==='result'?'精算':G.phase==='react'?'鳴き選択':G.phase==='drawing'?'ツモ':G.turn===localSeat()?(G.phase==='draw'?'ツモ':'あなたの番'):'相手の番';
@@ -2100,6 +2169,7 @@ function netRenderLobby(){
  if(NET.mode==='host')setLobbyStatus(NET.roomStarted?'対局中。空席はCPUが代行します。':'招待URLを共有して、揃ったら対局開始。空席はCPUになります。');
 }
 function netLeaveRoom(){
+ dismissedTsumoKey='';
  if(NET.timer){clearTimeout(NET.timer);NET.timer=null;}
  try{NET.connection?.close();}catch(_){ }
  try{NET.peer?.destroy();}catch(_){ }
@@ -2246,6 +2316,7 @@ document.addEventListener('click',function(e){const el=e.target.closest('[data-a
  case 'move-right':moveMySelected(1);break;
  case 'deselect':if(G){G.selectedId=null;G.riichiReady=false;render();}break;
  case 'tsumo':userTsumo();break;
+ case 'cancel-tsumo':cancelTsumo();break;
  case 'ankan':userAnkan();break;
  case 'react':useReaction(Number(el.dataset.index));break;
  case 'pass':passReaction();break;
