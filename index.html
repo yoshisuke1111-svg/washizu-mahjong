@@ -499,7 +499,7 @@ body {
 @keyframes result-blood-sweep{from{width:var(--from)}to{width:var(--to)}}
 @media(prefers-reduced-motion:reduce){.result-blood-fill{animation:none}}
 
-/* v0.24 — clear table layout, top-of-table blood, stable deal flights. */
+/* v0.25 — clear table layout, top-of-table blood, stable deal flights. */
 /* Compact, readable blood meters immediately above the felt. */
 .blood-hud{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:4px 0 10px;min-width:0}
 .blood-hud .blood-card{min-height:76px;padding:9px 12px 7px;border-radius:9px;background:linear-gradient(150deg,#263d30,#203124 66%,#17251e)}
@@ -608,7 +608,7 @@ body {
 .status-strip .center-status{max-width:none;color:#d2e3ce!important;text-shadow:none!important;font-size:11px!important;font-weight:600;letter-spacing:.02em;white-space:nowrap}
 @media(max-width:600px){.status-strip .center-status{font-size:10px!important;max-width:66%!important;overflow:hidden;text-overflow:ellipsis}}
 
-/* v0.24: fixed vector tile art. Never allow an inline SVG to determine its own
+/* v0.25: fixed vector tile art. Never allow an inline SVG to determine its own
    percentage size in a grid (WebKit sometimes grows the glyph 2-3x). */
 .tile.v17-face{isolation:isolate}
 .tile.v17-face .face{
@@ -646,7 +646,7 @@ body {
 }
 .tile.v17-face .face::before,.tile.v17-face .face::after{display:none!important}
 
-/* v0.24: River readability: larger physical tiles, larger non-blurred engraving. */
+/* v0.25: River readability: larger physical tiles, larger non-blurred engraving. */
 .arena{--river-tw:clamp(19px,1.7vw,23px);--river-gap:2px;--river-th:calc(var(--river-tw)*1.36)}
 .river .tile.v17-face .face{inset:1px 1px 1px!important;contain:layout size paint!important;}
 .river .tile.v17-face .face > img.v17-art{width:100%!important;height:100%!important;object-fit:contain!important;filter:none!important;}
@@ -672,6 +672,63 @@ body {
   .arena{--river-tw:clamp(14px,4.5vw,15px)}
   .river-bottom{top:62%!important}
 }
+
+/* v0.25: enlarge on-table discards where space permits; for precise reading,
+   tapping any river opens its complete 6x3 grid at full hand-tile size. */
+@media(min-width:981px){
+ .arena{--river-tw:clamp(24px,2.0vw,27px);--river-th:calc(var(--river-tw)*1.36);--river-gap:2px}
+ .river-top{top:19.15%!important}
+ .river-bottom{top:59.1%!important}
+}
+@media(min-width:601px) and (max-width:980px){
+ .arena{--river-tw:clamp(20px,2.65vw,22px);--river-th:calc(var(--river-tw)*1.36);--river-gap:1.5px}
+ .river-top{top:19.9%!important}
+ .river-bottom{top:57.65%!important}
+}
+@media(max-width:600px){
+ .arena{--river-tw:clamp(17px,4.82vw,19px);--river-gap:1px;--river-th:calc(var(--river-tw)*1.36)}
+ .river-top{top:20.8%!important}
+ .river-bottom{top:60.55%!important}
+ .river-left{left:calc(30.5% - var(--river-w)/2)!important}
+ .river-right{left:calc(69.5% - var(--river-w)/2)!important}
+ .river .tile.v17-face .face{inset:.5px .5px!important}
+}
+@media(max-width:365px){
+ .arena{--river-tw:17px;--river-gap:1px}
+ .river-top{top:21%!important}
+ .river-bottom{top:61%!important}
+}
+/* A 6x3 river can never be fully legible at tiny tabletop dimensions.
+   This panel magnifies a whole river, not just one fleeting tile. */
+.river-zoom{
+ position:absolute;z-index:100;left:50%;top:49%;transform:translate(-50%,-50%);
+ width:min(352px,calc(100% - 14px));max-height:calc(100% - 12px);
+ padding:12px;background:linear-gradient(160deg,#2e6949f5,#153e2feF);
+ border:2px solid #d5d1a3;border-radius:12px;
+ box-shadow:0 16px 55px #071a14db,0 0 0 999px #071b1599;
+ color:#f4f6dd;white-space:normal;font-size:13px;font-weight:500;
+ display:flex;flex-direction:column;gap:9px;align-items:stretch;
+ pointer-events:auto!important;overflow-y:auto;
+}
+.river-zoom[hidden]{display:none!important}
+.river-zoom .river-zoom-header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.river-zoom .river-zoom-header strong{font-size:15px;font-weight:700}
+.river-zoom .river-zoom-close{border:1px solid #bdcba7;background:#244636;color:#fffefa;border-radius:8px;min-width:32px;min-height:32px;font-size:21px;line-height:1;cursor:pointer}
+.river-zoom .river-zoom-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.river-zoom .river-zoom-tabs button{border:1px solid #c1cbb47b;background:#172f2491;border-radius:7px;min-height:34px;color:#e9f1e4;padding:4px 2px;font-size:12px;cursor:pointer}
+.river-zoom .river-zoom-tabs button.active{background:#dce8bf;color:#193b29;font-weight:800;border-color:#e5f6c9}
+.river-zoom .river-zoom-grid{display:grid;grid-template-columns:repeat(6,var(--river-preview-tw));grid-auto-rows:calc(var(--river-preview-tw)*1.36);justify-content:center;align-content:start;gap:3px;padding:8px 3px 10px;background:#83b86866;border:1px solid #d5e9ae52;border-radius:8px;min-height:100px;--river-preview-tw:clamp(36px,10.3vw,44px)}
+.river-zoom .river-zoom-grid .tile{--tile-width:var(--river-preview-tw)!important;--tile-height:calc(var(--river-preview-tw)*1.36)!important;width:var(--tile-width)!important;height:var(--tile-height)!important;margin:0!important}
+.river-zoom .river-zoom-grid .tile.v17-face .face{inset:2px!important}
+.river-zoom .river-zoom-grid .tile.v17-face .face>img.v17-art{width:100%!important;height:100%!important}
+.river-zoom .river-zoom-grid .tile[title]{cursor:default}
+.river-zoom .river-zoom-grid:empty:after{content:'まだ捨て牌はない';display:block;grid-column:1/-1;justify-self:center;align-self:center;color:#eaf0dc;font-size:13px}
+.river .tile[data-river-type]{cursor:zoom-in!important}
+.river-view-trigger{border:1px solid #e9f4c0a1;background:#356648;color:#f1f6e8;border-radius:7px;padding:5px 10px;min-height:33px;font-size:12px;font-weight:700;white-space:nowrap;cursor:pointer}
+.river-view-trigger:focus-visible,.river-zoom button:focus-visible{outline:2px solid #fff3b5;outline-offset:2px}
+@media(min-width:601px){.river-view-trigger{display:none}}
+@media(max-width:365px){.river-zoom{padding:9px;gap:7px}.river-zoom .river-zoom-grid{--river-preview-tw:37px;gap:2px}}
+
 </style>
 </head>
 <body>
@@ -710,11 +767,15 @@ body {
           </div>
           <div id="seatBottom" class="seat seat-bottom"></div>
           <div id="effectLayer" class="effect-layer" aria-hidden="true"></div>
-          <div id="riverZoom" class="river-zoom" hidden aria-live="polite"></div>
+          <section id="riverZoom" class="river-zoom" hidden role="dialog" aria-modal="false" aria-label="川の拡大表示">
+            <div class="river-zoom-header"><strong id="riverZoomTitle">川</strong><button type="button" class="river-zoom-close" data-action="close-river" aria-label="川の拡大表示を閉じる">×</button></div>
+            <div class="river-zoom-tabs" id="riverZoomTabs"></div>
+            <div class="river-zoom-grid" id="riverZoomGrid"></div>
+          </section>
         </div>
       </div>
       <section id="mobileHandPanel" class="mobile-hand-panel" aria-label="自分の手牌">
-        <div class="mobile-hand-title"><strong>手牌</strong><span>横にスワイプ</span></div>
+        <div class="mobile-hand-title"><strong>手牌</strong><span>横にスワイプ</span><button type="button" class="river-view-trigger" data-action="river-seat" data-rel="0">川を見る</button></div>
         <div id="mobileHandRow" class="mobile-hand-row" aria-label="大きく表示した自分の手牌"></div>
       </section>
       <div id="reactPanel" class="react-panel" hidden></div>
@@ -734,7 +795,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.24</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.25</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
@@ -1002,7 +1063,7 @@ function stopTimers(){
 }
 function newPlayer(seat){return {seat,name:NET.mode==='host'?(NET.members[seat]?.name||`CPU ${seat+1}`):SEATS[seat].name,score:25000,hand:[],melds:[],discards:[],riichi:false,ippatsu:false,riichiTurn:-1,tempFuriten:false,justDrawn:null};}
 function partnerSeat(seat){return (seat+2)%4;}
-// CPU 理牌: moderately stronger than v0.24. Build some pairs and short
+// CPU 理牌: moderately stronger than v0.25. Build some pairs and short
 // consecutive groups without sorting whole suits into fixed left/right blocks.
 // All operations change tile positions only; tile IDs, values and ownership stay
 // unchanged. A human player's hand is never automatically rearranged.
@@ -1649,17 +1710,34 @@ function renderRivers(){
   $(refs[rel]).innerHTML=p.discards.slice(-30).map(t=>tileHtml(t,{small:true})
    .replace('<div class="tile ',`<div role="button" tabindex="0" data-river-type="${t.type}" class="tile `)).join('');
  });
+ if(!$('riverZoom').hidden)renderRiverOverview();
 }
-function showRiverTile(tile){
- const type=tile.dataset.riverType;if(!type)return;
- const panel=$('riverZoom');
- panel.innerHTML=tileHtml({id:'river-preview',type,clear:false})+`<span>${esc(L.tileName(type))}</span>`;
- panel.hidden=false;
- clearTimeout(showRiverTile.timer);
- showRiverTile.timer=setTimeout(()=>{panel.hidden=true},2000);
+let riverZoomRel=0;
+const RIVER_REF_IDS=['riverBottom','riverRight','riverTop','riverLeft'];
+const RIVER_LABELS=['自分','右家','対面','左家'];
+function showRiverOverview(rel=0){
+ if(!G)return;
+ riverZoomRel=Math.max(0,Math.min(3,Number(rel)||0));
+ $('riverZoom').hidden=false;
+ renderRiverOverview();
 }
-document.addEventListener('click',e=>{const tile=e.target.closest('.river .tile[data-river-type]');if(tile)showRiverTile(tile);});
-document.addEventListener('keydown',e=>{const tile=e.target.closest?.('.river .tile[data-river-type]');if(tile&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showRiverTile(tile);}});
+function renderRiverOverview(){
+ const panel=$('riverZoom');if(panel.hidden||!G)return;
+ const seat=(localSeat()+riverZoomRel)%4,p=G.players[seat];
+ $('riverZoomTitle').textContent=`${RIVER_LABELS[riverZoomRel]}の川 · ${p.discards.length}枚`;
+ $('riverZoomTabs').innerHTML=RIVER_LABELS.map((label,i)=>`<button type="button" data-action="river-seat" data-rel="${i}" class="${i===riverZoomRel?'active':''}" aria-pressed="${i===riverZoomRel}">${label}</button>`).join('');
+ $('riverZoomGrid').innerHTML=p.discards.slice(-18).map(t=>tileHtml(t,{small:false})).join('');
+}
+function closeRiverOverview(){$('riverZoom').hidden=true;}
+document.addEventListener('click',e=>{
+ const tile=e.target.closest('.river .tile[data-river-type]');
+ if(tile){const rel=RIVER_REF_IDS.indexOf(tile.closest('.river')?.id);if(rel>=0)showRiverOverview(rel);}
+});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'&&!$('riverZoom').hidden){closeRiverOverview();return;}
+ const tile=e.target.closest?.('.river .tile[data-river-type]');
+ if(tile&&(e.key==='Enter'||e.key===' ')){e.preventDefault();const rel=RIVER_REF_IDS.indexOf(tile.closest('.river')?.id);if(rel>=0)showRiverOverview(rel);}
+});
 
 function bloodMarkup(key,label,amount,initValue,footer,secondary=false,asset=false){
  const percent=initValue>0?Math.max(0,Math.min(100,amount/initValue*100)):0;
@@ -2019,6 +2097,8 @@ document.addEventListener('click',function(e){const el=e.target.closest('[data-a
  case 'next':nextAfterResult();break;
  case 'rules':RULESROOT.hidden=false;break;
  case 'close-rules':RULESROOT.hidden=true;if(G&&isCpuSeat(G.turn))scheduleAI();break;
+ case 'river-seat':showRiverOverview(Number(el.dataset.rel));break;
+ case 'close-river':closeRiverOverview();break;
  default:break;
  }
 });
