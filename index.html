@@ -499,7 +499,7 @@ body {
 @keyframes result-blood-sweep{from{width:var(--from)}to{width:var(--to)}}
 @media(prefers-reduced-motion:reduce){.result-blood-fill{animation:none}}
 
-/* v0.23 — clear table layout, top-of-table blood, stable deal flights. */
+/* v0.24 — clear table layout, top-of-table blood, stable deal flights. */
 /* Compact, readable blood meters immediately above the felt. */
 .blood-hud{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:4px 0 10px;min-width:0}
 .blood-hud .blood-card{min-height:76px;padding:9px 12px 7px;border-radius:9px;background:linear-gradient(150deg,#263d30,#203124 66%,#17251e)}
@@ -608,7 +608,7 @@ body {
 .status-strip .center-status{max-width:none;color:#d2e3ce!important;text-shadow:none!important;font-size:11px!important;font-weight:600;letter-spacing:.02em;white-space:nowrap}
 @media(max-width:600px){.status-strip .center-status{font-size:10px!important;max-width:66%!important;overflow:hidden;text-overflow:ellipsis}}
 
-/* v0.23: fixed vector tile art. Never allow an inline SVG to determine its own
+/* v0.24: fixed vector tile art. Never allow an inline SVG to determine its own
    percentage size in a grid (WebKit sometimes grows the glyph 2-3x). */
 .tile.v17-face{isolation:isolate}
 .tile.v17-face .face{
@@ -645,6 +645,33 @@ body {
  -webkit-user-drag:none;
 }
 .tile.v17-face .face::before,.tile.v17-face .face::after{display:none!important}
+
+/* v0.24: River readability: larger physical tiles, larger non-blurred engraving. */
+.arena{--river-tw:clamp(19px,1.7vw,23px);--river-gap:2px;--river-th:calc(var(--river-tw)*1.36)}
+.river .tile.v17-face .face{inset:1px 1px 1px!important;contain:layout size paint!important;}
+.river .tile.v17-face .face > img.v17-art{width:100%!important;height:100%!important;object-fit:contain!important;filter:none!important;}
+.river .tile.v17-face{border-width:1px!important;border-radius:3px!important}
+.river-bottom{top:58.5%!important}
+/* Touch a discard to inspect it at a readable size, without disturbing the river. */
+.river{pointer-events:auto!important}
+.river .tile[data-river-type]{pointer-events:auto!important;cursor:zoom-in;touch-action:manipulation;}
+.river .tile[data-river-type]:focus-visible{outline:2px solid #fff0b5;outline-offset:1px;z-index:2;}
+.river-zoom{position:absolute;z-index:75;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:10px;padding:9px 14px;background:#15382cf0;border:1px solid #bad99d;border-radius:12px;box-shadow:0 12px 35px #04180caf;color:#edf6e8;pointer-events:none;font-weight:700;font-size:16px;white-space:nowrap}
+.river-zoom[hidden]{display:none!important}
+.river-zoom .tile{--tile-width:52px!important;--tile-height:72px!important;box-shadow:0 4px 12px #06170d99!important}
+@media(max-width:600px){
+  .arena{--river-tw:clamp(14.4px,4.15vw,17px);--river-gap:1px;--river-th:calc(var(--river-tw)*1.36)}
+  .river-top{top:21.1%!important}
+  .river-bottom{top:61.8%!important}
+  .river-left{left:calc(30.5% - var(--river-w)/2)!important}
+  .river-right{left:calc(69.5% - var(--river-w)/2)!important}
+  .river .tile.v17-face .face{inset:1px .5px 1px!important}
+  .river-zoom .tile{--tile-width:49px!important;--tile-height:68px!important}
+}
+@media(max-width:365px){
+  .arena{--river-tw:clamp(14px,4.5vw,15px)}
+  .river-bottom{top:62%!important}
+}
 </style>
 </head>
 <body>
@@ -683,6 +710,7 @@ body {
           </div>
           <div id="seatBottom" class="seat seat-bottom"></div>
           <div id="effectLayer" class="effect-layer" aria-hidden="true"></div>
+          <div id="riverZoom" class="river-zoom" hidden aria-live="polite"></div>
         </div>
       </div>
       <section id="mobileHandPanel" class="mobile-hand-panel" aria-label="自分の手牌">
@@ -706,7 +734,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.23</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.24</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
@@ -974,7 +1002,7 @@ function stopTimers(){
 }
 function newPlayer(seat){return {seat,name:NET.mode==='host'?(NET.members[seat]?.name||`CPU ${seat+1}`):SEATS[seat].name,score:25000,hand:[],melds:[],discards:[],riichi:false,ippatsu:false,riichiTurn:-1,tempFuriten:false,justDrawn:null};}
 function partnerSeat(seat){return (seat+2)%4;}
-// CPU 理牌: moderately stronger than v0.23. Build some pairs and short
+// CPU 理牌: moderately stronger than v0.24. Build some pairs and short
 // consecutive groups without sorting whole suits into fixed left/right blocks.
 // All operations change tile positions only; tile IDs, values and ownership stay
 // unchanged. A human player's hand is never automatically rearranged.
@@ -1614,7 +1642,25 @@ function renderMobileHand(){
  row.scrollLeft=scroll;
  panel.classList.toggle('is-turn',G.turn===seat&&G.phase==='discard');
 }
-function renderRivers(){const refs=['riverBottom','riverRight','riverTop','riverLeft'];G.players.forEach((p,seat)=>{const rel=relativeSeat(seat);$(refs[rel]).innerHTML=p.discards.slice(-30).map(t=>tileHtml(t,{small:true})).join('');});}
+function renderRivers(){
+ const refs=['riverBottom','riverRight','riverTop','riverLeft'];
+ G.players.forEach((p,seat)=>{
+  const rel=relativeSeat(seat);
+  $(refs[rel]).innerHTML=p.discards.slice(-30).map(t=>tileHtml(t,{small:true})
+   .replace('<div class="tile ',`<div role="button" tabindex="0" data-river-type="${t.type}" class="tile `)).join('');
+ });
+}
+function showRiverTile(tile){
+ const type=tile.dataset.riverType;if(!type)return;
+ const panel=$('riverZoom');
+ panel.innerHTML=tileHtml({id:'river-preview',type,clear:false})+`<span>${esc(L.tileName(type))}</span>`;
+ panel.hidden=false;
+ clearTimeout(showRiverTile.timer);
+ showRiverTile.timer=setTimeout(()=>{panel.hidden=true},2000);
+}
+document.addEventListener('click',e=>{const tile=e.target.closest('.river .tile[data-river-type]');if(tile)showRiverTile(tile);});
+document.addEventListener('keydown',e=>{const tile=e.target.closest?.('.river .tile[data-river-type]');if(tile&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showRiverTile(tile);}});
+
 function bloodMarkup(key,label,amount,initValue,footer,secondary=false,asset=false){
  const percent=initValue>0?Math.max(0,Math.min(100,amount/initValue*100)):0;
  return `<div class="blood-card ${secondary?'secondary ':''}${key==='green'?'team-green':'team-red'}" data-blood-card="${key}">
