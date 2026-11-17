@@ -498,6 +498,115 @@ body {
  animation:result-blood-sweep 1.2s cubic-bezier(.22,.8,.22,1) both}
 @keyframes result-blood-sweep{from{width:var(--from)}to{width:var(--to)}}
 @media(prefers-reduced-motion:reduce){.result-blood-fill{animation:none}}
+
+/* v0.21 — clear table layout, top-of-table blood, stable deal flights. */
+/* Compact, readable blood meters immediately above the felt. */
+.blood-hud{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:4px 0 10px;min-width:0}
+.blood-hud .blood-card{min-height:76px;padding:9px 12px 7px;border-radius:9px;background:linear-gradient(150deg,#263d30,#203124 66%,#17251e)}
+.blood-hud .blood-card.team-red{background:linear-gradient(150deg,#482f30,#322825 69%,#222622)}
+.blood-hud .blood-card:before{display:none}
+.blood-hud .blood-label{font-size:11px;letter-spacing:.03em;font-weight:700;line-height:1.4}
+.blood-hud .blood-amount{font-size:22px;margin-top:1px;line-height:1.22}
+.blood-hud .blood-amount small{font-size:11px}
+.blood-hud .blood-track{height:7px;margin-top:6px}
+.blood-hud .blood-caption{font-size:9px;margin-top:5px}
+.blood-hud .blood-change{font-size:16px;top:14px;right:12px}
+/* Keep seating labels on the outside of the discard area. */
+.seat-top{top:6.6%}
+.seat-bottom{bottom:12.7%}
+.seat-top .seat-head{transform:translateY(-5px)}
+.seat-bottom .seat-head{transform:translateY(3px)}
+.seat-left,.seat-right{top:42.5%}
+.seat-left .seat-head,.seat-right .seat-head{transform:translateY(-8px)}
+.seat-head{position:relative;z-index:6;white-space:nowrap}
+.seat .seat-name,.seat .seat-indicator{line-height:1.2}
+/* Every river has a fixed origin and six positions per row; never centers/reflows
+   earlier discarded tiles as the next tile arrives. */
+.river{display:grid!important;grid-template-columns:repeat(6,max-content)!important;grid-auto-flow:row!important;justify-content:start!important;justify-items:start!important;align-content:start!important;align-items:start!important;gap:1px!important;min-height:0;max-height:none;padding:0!important;background:none!important;border:none!important;box-shadow:none!important;pointer-events:none}
+.river-top{top:25.2%!important;bottom:auto!important;left:29.5%!important;width:41%!important;direction:rtl}
+.river-bottom{top:58.4%!important;bottom:auto!important;left:29.5%!important;width:41%!important;direction:ltr}
+.river-left{top:39.7%!important;bottom:auto!important;left:19.1%!important;right:auto!important;width:31%!important;direction:rtl}
+.river-right{top:39.7%!important;bottom:auto!important;right:19.1%!important;left:auto!important;width:31%!important;direction:rtl}
+/* Deliberate smooth positions, but do not grow tile artwork. */
+.draw-flight,.effect-tile{transform-origin:center center!important;box-sizing:border-box!important}
+.draw-flight .face,.draw-flight .v17-art{transition:none!important;animation:none!important;transform-origin:center center!important}
+.tile.v17-face.just-drawn .face,.tile.v17-face.just-drawn .v17-art{animation:none!important;transition:none!important}
+/* The separated mobile hand rests on the SAME green felt as the table. */
+.mobile-hand-panel{background:radial-gradient(ellipse at 44% 18%,#82c67b 0%,#62ae67 49%,#4e9258 100%)!important;border:4px solid #635038!important;box-shadow:inset 0 0 0 2px #abcb8c8a,inset 0 0 28px #26603e38,0 7px 12px #10281e50!important}
+.mobile-hand-title strong{color:#163e2b!important;text-shadow:0 1px 1px #e9ffe38f}
+.mobile-hand-title span{color:#214930!important;font-weight:700}
+.mobile-hand-row{scrollbar-color:#b8d4a3 #478655!important}
+@media(max-width:600px){
+ .blood-hud{gap:5px;margin:5px 0 8px}
+ .blood-hud .blood-card{padding:7px 8px 6px;min-height:66px}
+ .blood-hud .blood-label{font-size:10px;letter-spacing:-.025em}
+ .blood-hud .blood-amount{font-size:19px}
+ .blood-hud .blood-amount small{font-size:10px;margin-left:2px}
+ .blood-hud .blood-track{height:6px;margin-top:4px}
+ .blood-hud .blood-caption{font-size:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .blood-hud .blood-change{font-size:13px;top:12px;right:6px}
+ .seat-top{top:8.4%!important}
+ .seat-bottom{bottom:10.8%!important}
+ .seat-left,.seat-right{top:43.1%!important}
+ .seat-top .seat-head{transform:translateY(-3px)}
+ .seat-bottom .seat-head{transform:translateY(3px)}
+ .seat-left .seat-head,.seat-right .seat-head{transform:translateY(-7px)}
+ .seat .seat-head{gap:2px;flex-wrap:nowrap!important;min-width:0;justify-content:center}
+ .seat .seat-indicator{font-size:8px!important;padding:1px 2px!important}
+ .seat .seat-name{font-size:10px!important}
+ .seat .team-chip{font-size:7px!important;padding:1px 2px!important}
+ .river .tile{--tile-width:clamp(13px,3.55vw,16px)!important;--tile-height:calc(var(--tile-width)*1.37)!important}
+ .river-top{top:25.1%!important;left:29%!important;width:42%!important}
+ .river-bottom{top:58.5%!important;left:29%!important;width:42%!important}
+ .river-left{left:19%!important;top:40%!important;width:29%!important}
+ .river-right{right:19%!important;top:40%!important;width:29%!important}
+ .mobile-hand-panel{border-radius:11px;padding:9px 7px 7px!important}
+}
+@media(prefers-reduced-motion:reduce){.draw-flight,.effect-tile{filter:none!important}}
+
+/* Fixed mahjong rivers: reserve a 6x3 slot area BEFORE the first discard.
+   The slots do not change location as further tiles are placed. */
+.arena{--river-tw:clamp(16px,1.55vw,19px);--river-th:calc(var(--river-tw)*1.37);--river-gap:2px;--river-w:calc(var(--river-tw)*6 + var(--river-gap)*5);--river-h:calc(var(--river-th)*3 + var(--river-gap)*2)}
+.river{display:grid!important;position:absolute!important;width:var(--river-w)!important;height:var(--river-h)!important;
+ grid-template-columns:repeat(6,var(--river-tw))!important;grid-template-rows:repeat(3,var(--river-th))!important;
+ gap:var(--river-gap)!important;align-content:start!important;justify-content:start!important;direction:ltr!important;
+ padding:0!important;margin:0!important;transform-origin:center center!important;overflow:visible!important}
+.river .tile{--tile-width:var(--river-tw)!important;--tile-height:var(--river-th)!important;width:var(--river-tw)!important;height:var(--river-th)!important;margin:0!important}
+.river-top{left:calc(50% - var(--river-w)/2)!important;right:auto!important;top:19.9%!important;bottom:auto!important;transform:none!important;direction:rtl!important}
+.river-bottom{left:calc(50% - var(--river-w)/2)!important;right:auto!important;top:60.7%!important;bottom:auto!important;transform:none!important}
+.river-left{left:calc(35% - var(--river-w)/2)!important;right:auto!important;top:calc(49% - var(--river-h)/2)!important;bottom:auto!important;transform:rotate(90deg)!important}
+.river-right{left:calc(65% - var(--river-w)/2)!important;right:auto!important;top:calc(49% - var(--river-h)/2)!important;bottom:auto!important;transform:rotate(-90deg)!important}
+.river-top .tile .face{transform:rotate(180deg)!important}
+.center-plate{top:49%!important}
+.center-rim{width:clamp(72px,7.3vw,93px)!important;height:clamp(72px,7.3vw,93px)!important}
+@media(max-width:600px){
+ .arena{--river-tw:clamp(11px,3.2vw,13px);--river-gap:1px;--river-th:calc(var(--river-tw)*1.36)}
+ .river-top{top:21.6%!important}
+ .river-bottom{top:64.2%!important}
+ .river-left{left:calc(34.7% - var(--river-w)/2)!important;top:calc(49.4% - var(--river-h)/2)!important}
+ .river-right{left:calc(65.3% - var(--river-w)/2)!important;top:calc(49.4% - var(--river-h)/2)!important}
+ .center-plate{top:49.5%!important}
+ .center-rim{width:62px!important;height:62px!important}
+ /* Side labels belong at the outer wooden rail rather than between the rivers. */
+ .seat-left .seat-head,.seat-right .seat-head{transform:translateY(65px)!important}
+}
+
+/* Narrow portrait: the center bag shrinks instead of covering the side rivers. */
+@media(max-width:365px){
+ .center-rim{width:44px!important;height:44px!important}
+ .bag-glyph{font-size:17px!important}
+ .center-hole span{font-size:6px!important}
+ .center-status{font-size:8px!important;max-width:100px!important}
+ .center-dora{font-size:8px!important;padding:2px 4px!important}
+}
+/* Mid-size tablet: keep the bottom river above the player's name plate. */
+@media(min-width:601px) and (max-width:980px){
+ .river-bottom{top:58.25%!important}
+}
+
+/* Move the discard counter above the felt; keep only dora and the bag in the middle. */
+.status-strip .center-status{max-width:none;color:#d2e3ce!important;text-shadow:none!important;font-size:11px!important;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+@media(max-width:600px){.status-strip .center-status{font-size:10px!important;max-width:66%!important;overflow:hidden;text-overflow:ellipsis}}
 </style>
 </head>
 <body>
@@ -509,12 +618,13 @@ body {
   </header>
   <main class="game-grid">
     <section class="game-left" aria-label="麻雀卓">
-      <div class="status-strip"><span id="phaseLabel" class="phase-label">対局準備</span><span id="doraLabel" class="dora-label">ドラ表示 <span class="mini-empty">—</span></span></div>
+      <div class="status-strip"><span id="phaseLabel" class="phase-label">対局準備</span><span id="centerStatus" class="center-status">対局準備中</span><span id="doraLabel" class="dora-label">ドラ表示 <span class="mini-empty">—</span></span></div>
       <div class="team-strip" id="teamStrip" aria-label="チーム分け">
         <div id="teamGreen" class="team-flag team-green">緑チーム</div>
         <span class="team-vs">VS</span>
         <div id="teamRed" class="team-flag team-red">赤チーム</div>
       </div>
+      <section id="bloodSection" class="blood-section blood-hud" aria-label="血液量"></section>
       <div class="arena-wrap">
         <div id="tableArena" class="arena">
           <div class="table-underbody" aria-hidden="true"><i class="base-leg base-leg-left"></i><i class="base-leg base-leg-right"></i></div>
@@ -531,7 +641,7 @@ body {
           <div id="riverBottom" class="river river-bottom" aria-label="自分の捨て牌"></div>
           <div id="centerPlate" class="center-plate">
             <div class="center-rim"><div class="center-hole"><div class="bag-glyph">鷲</div><span>牌 袋</span></div></div>
-            <div id="centerStatus" class="center-status">対局準備中</div><div id="centerDora" class="center-dora">ドラ表示 <span class="mini-empty">—</span></div>
+            <div id="centerDora" class="center-dora">ドラ表示 <span class="mini-empty">—</span></div>
           </div>
           <div id="seatBottom" class="seat seat-bottom"></div>
           <div id="effectLayer" class="effect-layer" aria-hidden="true"></div>
@@ -550,7 +660,6 @@ body {
     </section>
     <aside id="infoPanel" class="info-panel" aria-label="公開情報と対局情報">
       <div class="panel-heading"><h2>対局</h2></div>
-      <div id="bloodSection" class="blood-section"></div>
       <section class="info-card" aria-label="持ち点"><h3>点棒</h3><div id="scoreboard"></div></section>
       <section class="info-card log-card" aria-label="進行ログ"><h3>対局ログ</h3><div id="logBox" class="log-list" role="log" aria-live="polite"></div></section>
     </aside>
@@ -559,8 +668,8 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.20</span></div>
-    <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1><p>卓・牌・見え方を現実寄りに寄せた試作版。</p></div></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.21</span></div>
+    <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
       <div class="setup-row">
@@ -831,15 +940,25 @@ function partnerSeat(seat){return (seat+2)%4;}
 // The resulting hand order is intentionally non-deterministic; hand types/values
 // are unchanged and the human player's order is never touched.
 function cpuLayoutScore(hand){
+ // Look for small groups/pairs and adjacent runs, not whole-suit sorting.
  let score=0,run=1;
  for(let i=1;i<hand.length;i++){
-  const prev=hand[i-1],cur=hand[i],same=L.suit(prev.type)===L.suit(cur.type);
-  if(same){
+  const a=hand[i-1],b=hand[i],sameSuit=L.suit(a.type)===L.suit(b.type);
+  if(sameSuit){
    run++;
-   const gap=Math.abs(L.num(prev.type)-L.num(cur.type));
-   score+=gap===0?2.4:gap<=2?1.8:.18;
-   if(run>3)score-=24*(run-3);
+   const gap=Math.abs(L.num(a.type)-L.num(b.type));
+   score+=gap===0?5.5:gap===1?4.2:gap===2?2.2:-1.4;
+   // A group of four or fewer can look natural; a longer block gives away the suit.
+   if(run>4)score-=14*(run-4);
   }else run=1;
+ }
+ // Reward a triplet-like or run-like structure inside short groups.
+ for(let i=2;i<hand.length;i++){
+  const a=hand[i-2],b=hand[i-1],c=hand[i];
+  if(L.suit(a.type)!==L.suit(b.type)||L.suit(b.type)!==L.suit(c.type))continue;
+  const ns=[L.num(a.type),L.num(b.type),L.num(c.type)].sort((x,y)=>x-y);
+  if(ns[0]===ns[2])score+=4.5;
+  else if(ns[0]+1===ns[1]&&ns[1]+1===ns[2])score+=4.0;
  }
  return score;
 }
@@ -848,31 +967,38 @@ function cpuShuffleCopy(hand){
  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
  return a;
 }
+function cpuMutation(a){
+ const next=a.slice(),from=Math.floor(Math.random()*next.length),to=Math.floor(Math.random()*next.length);
+ if(from===to)return next;
+ if(Math.random()<.38)[next[from],next[to]]=[next[to],next[from]];
+ else {const [t]=next.splice(from,1);next.splice(to,0,t);}
+ return next;
+}
 function cpuArrangeOpening(seat){
  if(!isCpuSeat(seat))return;
  const p=G.players[seat];let best=p.hand.slice(),high=-Infinity;
- for(let i=0;i<90;i++){
-  const next=cpuShuffleCopy(p.hand);
-  const value=cpuLayoutScore(next)+Math.random()*3.4;
-  if(value>high){best=next;high=value;}
+ // A few local optimizations give natural 2-4 tile clusters without automatic sort.
+ for(let i=0;i<190;i++){
+  let candidate=i%4===0?cpuShuffleCopy(p.hand):cpuMutation(best);
+  const score=cpuLayoutScore(candidate)+Math.random()*4.0;
+  if(score>high){best=candidate;high=score;}
  }
  p.hand=best;
 }
 function cpuMaybeTidy(seat){
  const p=G.players[seat];
- if(!isCpuSeat(seat)||p.riichi||p.hand.length<5||Math.random()>.43)return;
- const base=cpuLayoutScore(p.hand),candidates=[];
- for(let k=0;k<22;k++){
-  const arr=p.hand.slice(),from=Math.floor(Math.random()*arr.length),to=Math.floor(Math.random()*arr.length);
-  if(from===to)continue;
-  const [tile]=arr.splice(from,1);arr.splice(to,0,tile);
-  const value=cpuLayoutScore(arr)+Math.random()*2.8;
-  // Do not telegraph structure by sorting the entire hand after one draw.
-  if(value>=base-1.6)candidates.push({arr,value});
- }
- if(candidates.length){
-  candidates.sort((a,b)=>b.value-a.value);
-  p.hand=(candidates[Math.floor(Math.random()*Math.min(3,candidates.length))]).arr;
+ if(!isCpuSeat(seat)||p.riichi||p.hand.length<5||Math.random()>.69)return;
+ // One or occasionally two small adjustments after a draw, not a complete reorder.
+ for(let turn=0;turn<(Math.random()<.22?2:1);turn++){
+  const base=cpuLayoutScore(p.hand),candidates=[];
+  for(let i=0;i<50;i++){
+   const arr=cpuMutation(p.hand),score=cpuLayoutScore(arr)+Math.random()*2.2;
+   if(score>=base-1.2)candidates.push({arr,score});
+  }
+  if(candidates.length){
+   candidates.sort((a,b)=>b.score-a.score);
+   p.hand=candidates[Math.floor(Math.random()*Math.min(3,candidates.length))].arr;
+  }
  }
 }
 function chooseSashikomiDiscardIndex(seat){
@@ -916,34 +1042,42 @@ function riichiWaitsForDiscard(seat,tileId){const p=G.players[seat];if(p.riichi|
 }
 function canDeclareRiichi(seat,tileId){const p=G.players[seat];if(!p||p.hand.length===0)return false;return riichiWaitsForDiscard(seat,tileId).length>0;}
 function animateDraw(seat,tile,done){
- const holder=$('centerPlate').querySelector('.center-hole');
- const seatId=['seatBottom','seatRight','seatTop','seatLeft'][seat];
- const target=document.querySelector(`#${seatId} .seat-hand [data-tile-id="${tile.id}"]`);
+ const holder=$('centerPlate')?.querySelector('.center-hole');
+ const seatId=['seatBottom','seatRight','seatTop','seatLeft'][relativeSeat(seat)];
+ const tabletopTarget=document.querySelector(`#${seatId} .seat-hand [data-tile-id="${tile.id}"]`);
+ const mobile=document.documentElement.clientWidth<=600&&seat===localSeat();
+ // On phones, the large lower hand is the real destination. Avoid landing small
+ // on the table and suddenly enlarging when the same tile appears below.
+ const target=(mobile?document.querySelector(`#mobileHandRow [data-tile-id="${tile.id}"]`):null)||tabletopTarget;
  if(!holder||!target||typeof target.animate!=='function'){done();return;}
  const a=holder.getBoundingClientRect(),b=target.getBoundingClientRect();
- // Side seats are rotated. offsetWidth/Height retain their unrotated tile
- // dimensions, unlike getBoundingClientRect() which swaps width and height.
  const naturalW=target.offsetWidth,naturalH=target.offsetHeight;
  const x=a.left+a.width/2-naturalW/2,y=a.top+a.height/2-naturalH/2;
- const dx=b.left+b.width/2-(x+naturalW/2),dy=b.top+b.height/2-(y+naturalH/2);
- const direction=seat===1?-90:seat===3?90:0;
+ const dx=(b.left+b.width/2)-(x+naturalW/2),dy=(b.top+b.height/2)-(y+naturalH/2);
+ const rel=relativeSeat(seat),direction=mobile?0:rel===1?-90:rel===3?90:0;
  const ghost=target.cloneNode(true);
  ghost.classList.remove('arriving','selected','selectable','just-drawn');
  ghost.classList.add('draw-flight');ghost.removeAttribute('data-action');
  ghost.style.left=x+'px';ghost.style.top=y+'px';
  ghost.style.width=naturalW+'px';ghost.style.height=naturalH+'px';
+ ghost.style.minWidth=naturalW+'px';ghost.style.minHeight=naturalH+'px';
+ ghost.style.maxWidth=naturalW+'px';ghost.style.maxHeight=naturalH+'px';
  ghost.style.setProperty('--tile-width',naturalW+'px','important');
  ghost.style.setProperty('--tile-height',naturalH+'px','important');
- const sourceFace=target.querySelector('.face'),ghostFace=ghost.querySelector('.face');
- if(sourceFace&&ghostFace)ghostFace.style.transform=getComputedStyle(sourceFace).transform;
- ghost.style.visibility='visible';
+ const ghostFace=ghost.querySelector('.face'),targetFace=target.querySelector('.face');
+ if(ghostFace&&targetFace){
+  ghostFace.style.width=targetFace.offsetWidth+'px';
+  ghostFace.style.height=targetFace.offsetHeight+'px';
+  ghostFace.style.transform=getComputedStyle(targetFace).transform;
+ }
  document.body.appendChild(ghost);
- const duration=G.settings.speed===110?270:seat===0?550:480;
+ const duration=G.settings.speed===110?230:seat===localSeat()?485:420;
+ // Translation only: no scale(.55) => no changing size of the printed motif.
  const anim=ghost.animate([
-  {transform:'translate(0px, 0px) rotate(8deg) scale(.55)',opacity:.3,offset:0},
-  {transform:`translate(${dx*.48}px,${dy*.48-33}px) rotate(${direction*.35-9}deg) scale(.95)`,opacity:1,offset:.51},
-  {transform:`translate(${dx}px,${dy}px) rotate(${direction}deg) scale(1)`,opacity:1,offset:1}
- ],{duration,easing:'cubic-bezier(.22,.82,.23,1)',fill:'forwards'});
+  {transform:'translate(0,0) rotate(0deg)',opacity:.78,offset:0},
+  {transform:`translate(${dx*.53}px,${dy*.53-18}px) rotate(${direction*.28}deg)`,opacity:1,offset:.55},
+  {transform:`translate(${dx}px,${dy}px) rotate(${direction}deg)`,opacity:1,offset:1}
+ ],{duration,easing:'cubic-bezier(.22,.8,.26,1)',fill:'forwards'});
  drawFlight={ghost,animation:anim};
  let finished=false;
  const finish=()=>{if(finished)return;finished=true;ghost.remove();if(drawFlight?.ghost===ghost)drawFlight=null;done();};
