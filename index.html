@@ -750,6 +750,51 @@ body {
   .river .tile.v17-face .face{inset:1px 0 1px!important}
   .river .tile.v17-face .face>img.v17-art{filter:contrast(1.08) saturate(1.08)!important}
 }
+
+/* v0.27: truly larger discarded tiles. Top and bottom rivers use more felt width;
+   side rivers have their own compact scale to clear the players' hands. */
+@media(max-width:600px){
+ .arena{height:clamp(550px,143vw,615px)!important;min-height:clamp(550px,143vw,615px)!important;
+  max-height:none!important;--river-tw:clamp(19px,5.6vw,23px)!important;
+  --river-th:calc(var(--river-tw)*1.36)!important;--river-gap:2px!important}
+ .table-wood{inset:5.2% 2.4% 4.2%!important}
+ .table-underbody{inset:7% 4% 1.1%!important}
+ .seat-top{top:7.7%!important}
+ .seat-bottom{bottom:4%!important}
+ .seat-left,.seat-right{top:44.5%!important}
+ .river-top,.river-bottom{
+  --river-tw:clamp(24px,6.55vw,28px)!important;
+  --river-th:calc(var(--river-tw)*1.36)!important;
+  --river-gap:2px!important;
+  --river-w:calc(var(--river-tw)*6 + var(--river-gap)*5)!important;
+  --river-h:calc(var(--river-th)*3 + var(--river-gap)*2)!important;
+ }
+ .river-top{top:18.3%!important;left:calc(50% - var(--river-w)/2)!important;right:auto!important}
+ .river-bottom{top:66.1%!important;left:calc(50% - var(--river-w)/2)!important;right:auto!important}
+ .river-left{top:calc(51% - var(--river-h)/2)!important;left:calc(27% - var(--river-w)/2)!important;right:auto!important}
+ .river-right{top:calc(51% - var(--river-h)/2)!important;left:calc(73% - var(--river-w)/2)!important;right:auto!important}
+ .river .tile.v17-face .face{inset:1px .75px 1px!important}
+ .river .tile.v17-face .face>img.v17-art{object-fit:contain!important;image-rendering:auto!important}
+ .river-zoom{top:49%!important}
+ .river-zoom .tile{--tile-width:74px!important;--tile-height:102px!important}
+}
+@media(min-width:601px) and (max-width:980px){
+ /* The tablet river must not touch the center plate or the bottom seat label. */
+ .arena{min-height:610px!important;height:clamp(610px,65vw,685px)!important;max-height:none!important}
+ .river-top{top:19.8%!important}
+ .river-bottom{top:63.2%!important}
+ .river-left,.river-right{top:calc(50% - var(--river-h)/2)!important}
+ .seat-bottom{bottom:8%!important}
+ .center-plate{top:49%!important}
+}
+@media(min-width:981px){
+ .river .tile.v17-face .face{inset:.75px!important}
+}
+/* v0.27 desktop rivers: preserve enough separation from bottom name. */
+@media(min-width:981px){
+ .arena{--river-tw:clamp(23px,1.85vw,25px);--river-th:calc(var(--river-tw)*1.36)}
+ .river-bottom{top:58.2%!important}
+}
 </style>
 </head>
 <body>
@@ -816,7 +861,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.26</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.27</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
