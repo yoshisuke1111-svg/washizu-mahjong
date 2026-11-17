@@ -295,15 +295,15 @@ body {
 .tile .pip-art,.tile .sou-art{filter:drop-shadow(0 0 .25px #0d2725) saturate(1.02)}
 @media(max-width:530px){.seat-body{gap:4px}.seat-top .tile{--tile-width:clamp(16px,4.4vw,24px)!important}.seat-left .tile,.seat-right .tile{--tile-width:clamp(15px,3.7vw,21px)!important}.seat-bottom .tile{--tile-width:clamp(23px,6.45vw,32px)!important}.river .tile{--tile-width:clamp(14px,3.5vw,19px)!important}.meld-pile .tile{--tile-width:16px;--tile-height:23px}.seat-left .meld-pile .tile,.seat-right .meld-pile .tile{--tile-width:14px;--tile-height:21px}}
 
-/* v0.19: normal backs / clearer rivers / title + transparent count + normal pinzu */
+/* v0.20: normal backs / clearer rivers / title + transparent count + normal pinzu */
 .tile.hidden{background:linear-gradient(128deg,#385057,#21343a 48%,#486064)!important;border-color:#8da3a2!important;box-shadow:inset 1px 1px 1px #f6fff25b,1px 2px 1px #081112,0 3px 4px #0009!important}.tile.hidden:after{content:''!important;position:absolute;inset:5px!important;border-radius:3px;border:1px solid rgba(233,242,240,.32);background:radial-gradient(circle at 50% 50%,rgba(244,251,249,.22) 0 16%,transparent 18%),repeating-linear-gradient(45deg,rgba(235,245,244,.08) 0 2px,transparent 2px 6px),linear-gradient(135deg,rgba(255,255,255,.06),rgba(0,0,0,.06))!important;display:block!important}
 .river{background:none!important;border:none!important;box-shadow:none!important;padding:0!important;gap:1px!important}.river .tile{box-shadow:inset 1px 1px 2px #fff8,inset -1px -1px 2px #69674e1c,1px 2px 0 #9ea093,0 2px 3px #0007!important}.peek-legend{font-size:10px;color:#8ea8a0;margin:0 0 6px}
 .setup-crests{font-size:52px}.setup-crests span{font-size:21px;margin-top:34px}.setup-intro h1{margin-bottom:4px}
 
-/* v0.19: standard-ish souzu layouts, smaller suit art to avoid overlap */
+/* v0.20: standard-ish souzu layouts, smaller suit art to avoid overlap */
 .seat-bottom .seat-hand{gap:2px}.seat-opponent .seat-hand{gap:2px}.tile.clear .sou-art,.tile.clear .pip-art{transform:scale(.97);transform-origin:center center}.tile .honor.white::before,.tile .honor.white::after{content:none!important}
 
-/* v0.19: larger side tiles + opponent hand strip below table + tap-to-swap */
+/* v0.20: larger side tiles + opponent hand strip below table + tap-to-swap */
 .peek-card-bottom{margin-top:12px;padding:12px 14px;background:linear-gradient(170deg,#182523,#101c1d);border:1px solid #859b8840;border-radius:12px}
 .peek-card-bottom #peekInfo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .peek-card-bottom .peek-line{margin:0;padding:10px;border:1px solid #2b4541;background:linear-gradient(180deg,#102220,#122726);border-radius:9px}
@@ -318,13 +318,13 @@ body {
 .seat-left,.seat-right{width:52%}
 @media(max-width:980px){.peek-card-bottom #peekInfo{grid-template-columns:1fr}.peek-card-bottom .peek-tiles .tile{--tile-width:26px;--tile-height:37px}.seat-top .tile{--tile-width:clamp(20px,3.2vw,31px)!important}.seat-left .tile,.seat-right .tile{--tile-width:clamp(18px,3vw,28px)!important}.seat-left,.seat-right{width:49%}}
 
-/* v0.19: use user-provided tile sample sheet directly */
+/* v0.20: use user-provided tile sample sheet directly */
 .tile.sprite-card{background:transparent;border:none;box-shadow:0 2px 4px rgba(0,0,0,.45);overflow:visible}.tile.sprite-card::before{display:none}.tile.sprite-card .face{width:100%;height:100%;display:block}.tile-card-img{display:block;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none}.tile.sprite-card.clear .tile-card-img{opacity:.58;filter:saturate(1.06) brightness(1.03)}.tile.sprite-card.clear:after{content:'';position:absolute;inset:1px;border-radius:4px;border:1px solid rgba(196,243,255,.68);background:linear-gradient(120deg,rgba(255,255,255,.12),rgba(103,198,210,.08) 46%,rgba(255,255,255,.14));box-shadow:inset 0 0 0 1px rgba(116,224,229,.16),0 0 0 1px rgba(231,250,255,.12)}.tile.sprite-card.opaque{filter:drop-shadow(0 1px 0 rgba(255,255,255,.2))}.tile.hidden{background:linear-gradient(128deg,#31474d,#20343a 48%,#405860)!important;border:1px solid #879899!important;box-shadow:inset 1px 1px 1px #ecf5ed58,1px 2px 1px #060c0b,0 3px 4px #0009!important}.tile.hidden:after{content:''!important;position:absolute;inset:5px;border-radius:3px;border:1px solid rgba(233,242,240,.32);background:radial-gradient(circle at 50% 50%,rgba(244,251,249,.22) 0 16%,transparent 18%),repeating-linear-gradient(45deg,rgba(235,245,244,.08) 0 2px,transparent 2px 6px),linear-gradient(135deg,rgba(255,255,255,.06),rgba(0,0,0,.06))!important;display:block!important}.tile.hidden .face{display:none!important}
 /* larger readable side hands and opponent strip */
 .seat-top .tile{--tile-width:clamp(24px,3.2vw,40px)!important;--tile-height:calc(var(--tile-width)*1.38)}.seat-left .tile,.seat-right .tile{--tile-width:clamp(22px,3vw,36px)!important;--tile-height:calc(var(--tile-width)*1.38)}.peek-card-bottom #peekInfo{grid-template-columns:1fr}.peek-card-bottom .peek-line{padding:10px 12px}.peek-card-bottom .peek-tiles{gap:4px;flex-wrap:wrap}.peek-card-bottom .peek-tiles .tile{--tile-width:34px;--tile-height:46px}.peek-card-bottom .peek-name{font-size:13px;font-weight:700}.peek-heading h3{font-size:14px}.peek-legend{font-size:11px}
 @media(max-width:980px){.seat-top .tile{--tile-width:clamp(19px,4.6vw,28px)!important}.seat-left .tile,.seat-right .tile{--tile-width:clamp(18px,4.2vw,25px)!important}.peek-card-bottom .peek-tiles .tile{--tile-width:28px;--tile-height:39px}}
 
-/* v0.19 - vector-drawn symbols, clean glass and solid ivory backs. No face veil. */
+/* v0.20 - vector-drawn symbols, clean glass and solid ivory backs. No face veil. */
 .tile.v17-face{border:1px solid #d6d2c4!important;border-radius:5px!important;background:linear-gradient(119deg,#fcfaf3 0%,#f0f1e9 47%,#fffdf8 80%,#d9dbd0 100%)!important;box-shadow:inset 1px 1px 1px #ffffff, inset -2px -2px 2px #92918238,1px 2px 0 #a2a89a,0 3px 5px #0b272760!important;backdrop-filter:none!important;overflow:hidden!important}
 .tile.v17-face.opaque{border-top-color:#ffffff!important;border-left-color:#e6e9df!important}
 .tile.v17-face.clear{border:2px solid #47b5c4!important;border-left-color:#b2f7f0!important;border-top-color:#d1ffff!important;background:linear-gradient(116deg,rgba(240,255,254,.36) 0%,rgba(148,229,227,.26) 23%,rgba(227,255,252,.22) 59%,rgba(110,214,211,.29) 100%)!important;box-shadow:inset 2px 2px 2px #ffffffa8,inset -2px -2px 2px #288b9760,1px 2px 0 #4d9295aa,0 3px 5px #0b26266f!important;backdrop-filter:none!important}
@@ -346,7 +346,7 @@ body {
 
 
 
-/* v0.19: room creator and hosted P2P lobby */
+/* v0.20: room creator and hosted P2P lobby */
 .online-setup{border-top:1px solid #667f756b;margin-top:14px;padding-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:7px 10px}
 .online-setup label{display:block;color:#c9d8ca;font-size:11px;grid-column:span 1}.online-setup input,.online-setup select{min-width:0;width:100%;border:1px solid #6c887a;border-radius:7px;background:#e5f0e3;color:#203729;padding:9px 10px;font-size:13px}
 .online-buttons{grid-column:1/-1;display:flex;gap:10px;margin-top:5px}.online-buttons button,.room-actions button,.room-link-row button{flex:1;min-height:43px;border-radius:8px;border:1px solid #70917e;background:#243d33;color:#e8f2e9;font-weight:700}
@@ -359,7 +359,7 @@ body {
 @media(max-width:550px){.online-setup{grid-template-columns:1fr}.online-setup label,.online-setup input{grid-column:1}.online-setup label:nth-of-type(2){margin-top:4px}.room-lobby{padding:20px 15px}.room-member{padding:8px 6px}.room-lobby h2{font-size:22px}}
 
 
-/* v0.19: smartphone game layout -- readable tiles rather than shrinking 14 cards
+/* v0.20: smartphone game layout -- readable tiles rather than shrinking 14 cards
    onto a single 350px row. Desktop/tabletop interactions stay unchanged. */
 .mobile-hand-panel{display:none}
 @media(max-width:600px){
@@ -429,6 +429,60 @@ body {
   .mobile-hand-row .tile{--tile-width:38px!important}
 }
 
+
+/* v0.20: colored 2v2 squads, steady tile artwork, smooth blood loss */
+.team-strip{display:flex;align-items:stretch;justify-content:center;gap:7px;margin:3px 0 9px;min-width:0}
+.team-flag{flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:8px;
+ padding:7px 11px;border-radius:7px;border:1px solid transparent;font-size:12px}
+.team-flag strong{font-weight:800;white-space:nowrap}
+.team-flag span{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.85}
+.team-flag.team-green{color:#deffd1;background:linear-gradient(115deg,#244f32,#1b3825);border-color:#68ae62a0}
+.team-flag.team-red{color:#ffe1dc;background:linear-gradient(115deg,#573030,#392526);border-color:#d46e71b8}
+.team-vs{align-self:center;color:#aab6a0;font:700 11px Georgia,serif}
+.team-chip{display:inline-flex;align-items:center;border-radius:4px;padding:2px 5px;font-size:10px;font-weight:800;white-space:nowrap;line-height:1.3;border:1px solid transparent}
+.team-chip.team-green{color:#e9ffdf;background:#2d673f;border-color:#83ce74}
+.team-chip.team-red{color:#ffe8e5;background:#813a3a;border-color:#ed8480}
+.seat.team-green .seat-name{color:#d6ffd0!important;text-shadow:0 1px 3px #081b0ca3}
+.seat.team-red .seat-name{color:#ffcbc6!important;text-shadow:0 1px 3px #2b0b0fa3}
+.seat .seat-head{gap:4px}
+.seat .team-chip{font-size:9px;padding:2px 4px}
+.score-line.team-green{border-left:3px solid #75c76c;background:#2c653126}
+.score-line.team-red{border-left:3px solid #e77977;background:#6d2f302a}
+.score-line .score-name{display:flex;align-items:center;gap:5px;min-width:0}
+.peek-card-bottom .peek-line.team-green{border-left:3px solid #75bd67}
+.peek-card-bottom .peek-line.team-red{border-left:3px solid #e27371}
+.room-member.team-green{border-left:4px solid #7bc96f}
+.room-member.team-red{border-left:4px solid #e27b78}
+.blood-card.team-green{border-color:#6db16b70}
+.blood-card.team-red{border-color:#bd6b6870}
+.blood-track{height:10px;position:relative;overflow:hidden}
+.blood-fill{height:100%;transition:width 1.18s cubic-bezier(.22,.75,.22,1);will-change:width}
+.blood-card.team-green .blood-fill{background:linear-gradient(90deg,#812a3a,#df6573 52%,#f2ac9d)}
+.blood-card.team-red .blood-fill:not(.asset){background:linear-gradient(90deg,#8c343d,#df696b 58%,#ffc1a4)}
+.blood-card .blood-change{position:absolute;top:12px;right:13px;pointer-events:none;
+ color:#ffd6d1;font-size:17px;font-weight:800;opacity:0;text-shadow:0 1px 4px #200c15}
+.blood-card.draining{animation:blood-card-drain 1.16s ease-out both}
+.blood-card.draining .blood-change{animation:blood-change-pop 1.16s ease-out both}
+.blood-card.restoring .blood-change{color:#c5f6be;animation:blood-change-pop 1.16s ease-out both}
+@keyframes blood-card-drain{0%,100%{filter:none}16%,38%{filter:brightness(1.25)}60%{filter:brightness(.91)}}
+@keyframes blood-change-pop{0%{opacity:0;transform:translateY(8px)}16%{opacity:1;transform:translateY(0)}66%{opacity:1;transform:translateY(-8px)}100%{opacity:0;transform:translateY(-17px)}}
+/* The cloned moving tile has its own frozen dimensions and viewBox. Never zoom its art separately. */
+.tile.v17-face.just-drawn{animation:none!important}
+.draw-flight .v17-art,.effect-tile .v17-art{width:100%!important;height:100%!important;transform:none!important}
+@media(max-width:600px){
+ .team-strip{gap:5px;margin:3px 0 8px}
+ .team-flag{padding:5px 7px;display:block;text-align:center;font-size:11px}
+ .team-flag strong{display:block;font-size:11px;overflow:hidden;text-overflow:ellipsis}
+ .team-flag span{display:block;font-size:9px;margin-top:2px;line-height:1.35;overflow:hidden;text-overflow:ellipsis}
+ .team-vs{font-size:9px}
+ .seat .team-chip{font-size:8px;letter-spacing:-.02em;padding:1px 3px}
+ .seat-head{flex-wrap:wrap}
+ .blood-card .blood-change{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){
+ .blood-fill{transition:none!important}
+ .blood-card.draining,.blood-card.restoring,.blood-card .blood-change{animation:none!important}
+}
 </style>
 </head>
 <body>
@@ -441,6 +495,11 @@ body {
   <main class="game-grid">
     <section class="game-left" aria-label="麻雀卓">
       <div class="status-strip"><span id="phaseLabel" class="phase-label">対局準備</span><span id="doraLabel" class="dora-label">ドラ表示 <span class="mini-empty">—</span></span></div>
+      <div class="team-strip" id="teamStrip" aria-label="チーム分け">
+        <div id="teamGreen" class="team-flag team-green">緑チーム</div>
+        <span class="team-vs">VS</span>
+        <div id="teamRed" class="team-flag team-red">赤チーム</div>
+      </div>
       <div class="arena-wrap">
         <div id="tableArena" class="arena">
           <div class="table-underbody" aria-hidden="true"><i class="base-leg base-leg-left"></i><i class="base-leg base-leg-right"></i></div>
@@ -485,7 +544,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.19</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.20</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1><p>卓・牌・見え方を現実寄りに寄せた試作版。</p></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
@@ -509,7 +568,7 @@ body {
     <div class="online-setup">
       <label for="onlineName">プレイヤー名</label><input id="onlineName" maxlength="16" placeholder="名前" value="" autocomplete="nickname" />
       <label for="onlineCode">部屋コード（指定しない場合は自動生成）</label><input id="onlineCode" maxlength="12" placeholder="例：TSUKI2026" autocapitalize="characters" autocomplete="off" />
-      <label for="joinSeat">希望する席（参加時）</label><select id="joinSeat"><option value="0">空いている席</option><option value="2">対面・部屋主の味方（補佐）</option><option value="1">右家・対戦相手の代表</option><option value="3">左家・対戦相手の補佐</option></select>
+      <label for="joinSeat">希望する席（参加時）</label><select id="joinSeat"><option value="0">空いている席</option><option value="2">緑チーム・対面の補佐</option><option value="1">赤チーム・右家の代表</option><option value="3">赤チーム・左家の補佐</option></select>
       <div class="online-buttons"><button type="button" class="online-primary" data-action="create-room">部屋を作る</button><button type="button" data-action="join-room">部屋に入る</button></div>
       <div id="onlineError" class="online-error" role="status" aria-live="polite"></div>
     </div>
@@ -729,7 +788,10 @@ root.WashizuLogic=api;
 const L=window.WashizuLogic;
 const $=id=>document.getElementById(id);
 const NUM=L.NUMBER_KANJI;
-const SEATS=[{name:'あなた',team:'挑戦者',label:'代表 · あなた'},{name:'右家 CPU',team:'対戦相手',label:'代表 · CPU'},{name:'対面 CPU',team:'挑戦者',label:'補佐 · CPU'},{name:'左家 CPU',team:'対戦相手',label:'補佐 · CPU'}];
+const SEATS=[{name:'あなた',team:'緑',label:'代表 · あなた'},{name:'右家 CPU',team:'赤',label:'代表 · CPU'},{name:'対面 CPU',team:'緑',label:'補佐 · CPU'},{name:'左家 CPU',team:'赤',label:'補佐 · CPU'}];
+const teamName=seat=>seat%2===0?'緑チーム':'赤チーム';
+const teamClass=seat=>seat%2===0?'team-green':'team-red';
+const sameTeam=(a,b)=>a%2===b%2;
 const ROOT=$('modalRoot'),SETUP=$('setupModal'),RESULTROOT=$('resultRoot'),RULESROOT=$('rulesRoot');
 let G=null,aiTimer=null,clock=0,toastTimer=null,drawFlight=null;
 const NET={mode:'solo',code:null,peer:null,connection:null,members:{},seat:0,settings:null,roomStarted:false,token:null,connections:{},timer:null};
@@ -750,6 +812,54 @@ function stopTimers(){
 }
 function newPlayer(seat){return {seat,name:NET.mode==='host'?(NET.members[seat]?.name||`CPU ${seat+1}`):SEATS[seat].name,score:25000,hand:[],melds:[],discards:[],riichi:false,ippatsu:false,riichiTurn:-1,tempFuriten:false,justDrawn:null};}
 function partnerSeat(seat){return (seat+2)%4;}
+// CPU 理牌: form only occasional 2-3 tile groups, never a suit-wide block.
+// The resulting hand order is intentionally non-deterministic; hand types/values
+// are unchanged and the human player's order is never touched.
+function cpuLayoutScore(hand){
+ let score=0,run=1;
+ for(let i=1;i<hand.length;i++){
+  const prev=hand[i-1],cur=hand[i],same=L.suit(prev.type)===L.suit(cur.type);
+  if(same){
+   run++;
+   const gap=Math.abs(L.num(prev.type)-L.num(cur.type));
+   score+=gap===0?2.4:gap<=2?1.8:.18;
+   if(run>3)score-=24*(run-3);
+  }else run=1;
+ }
+ return score;
+}
+function cpuShuffleCopy(hand){
+ const a=hand.slice();
+ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+ return a;
+}
+function cpuArrangeOpening(seat){
+ if(!isCpuSeat(seat))return;
+ const p=G.players[seat];let best=p.hand.slice(),high=-Infinity;
+ for(let i=0;i<90;i++){
+  const next=cpuShuffleCopy(p.hand);
+  const value=cpuLayoutScore(next)+Math.random()*3.4;
+  if(value>high){best=next;high=value;}
+ }
+ p.hand=best;
+}
+function cpuMaybeTidy(seat){
+ const p=G.players[seat];
+ if(!isCpuSeat(seat)||p.riichi||p.hand.length<5||Math.random()>.43)return;
+ const base=cpuLayoutScore(p.hand),candidates=[];
+ for(let k=0;k<22;k++){
+  const arr=p.hand.slice(),from=Math.floor(Math.random()*arr.length),to=Math.floor(Math.random()*arr.length);
+  if(from===to)continue;
+  const [tile]=arr.splice(from,1);arr.splice(to,0,tile);
+  const value=cpuLayoutScore(arr)+Math.random()*2.8;
+  // Do not telegraph structure by sorting the entire hand after one draw.
+  if(value>=base-1.6)candidates.push({arr,value});
+ }
+ if(candidates.length){
+  candidates.sort((a,b)=>b.value-a.value);
+  p.hand=(candidates[Math.floor(Math.random()*Math.min(3,candidates.length))]).arr;
+ }
+}
 function chooseSashikomiDiscardIndex(seat){
  const p=G.players[seat],mate=G.players[partnerSeat(seat)];
  if(!G.settings.sashikomi||!mate||mate.riichi===false&&L.getWaits(mate.hand.map(t=>t.type),mate.melds).length===0)return -1;
@@ -761,7 +871,7 @@ function chooseSashikomiDiscardIndex(seat){
  return prefer?prefer.i:-1;
 }
 function makeGame(settings){return {settings,halfNo:1,handIndex:0,honba:0,riichiPot:0,dealer:0,turn:0,phase:'setup',wall:[],dora:[],discardCount:0,players:Array.from({length:4},(_,i)=>newPlayer(i)),blood:{0:settings.bloodInit,1:settings.bloodInit},asset:{1:500000},assetWon:0,bloodRecovered:0,foregone:0,recoveryPending:0,logs:[],selectedId:null,riichiReady:false,drawTileId:null,call:null,result:null,sessionEnded:false,lastDiscard:null,lastResult:null,moveCount:0,turnNo:0};}
-function startGame(){if(NET.mode==='guest')return;stopTimers();G=makeGame(NET.mode==='host'?NET.settings:settingsFromForm());ROOT.hidden=true;SETUP.hidden=true;RESULTROOT.hidden=true;RULESROOT.hidden=true;startHand();render();}
+function startGame(){if(NET.mode==='guest')return;stopTimers();$('bloodSection').innerHTML='';G=makeGame(NET.mode==='host'?NET.settings:settingsFromForm());ROOT.hidden=true;SETUP.hidden=true;RESULTROOT.hidden=true;RULESROOT.hidden=true;startHand();render();}
 function startHand(){
  stopTimers();G.dealer=G.handIndex%4;G.players.forEach((p,i)=>{const fresh=newPlayer(i);Object.assign(p,fresh,{score:p.score});});
  G.wall=L.makeTiles(Math.random,G.settings.clearCount);G.dora=[G.wall.pop().type];G.discardCount=0;G.lastDiscard=null;G.moveCount=0;G.turn=G.dealer;G.phase='discard';G.selectedId=null;G.drawTileId=null;G.riichiReady=false;G.call=null;G.result=null;
@@ -769,7 +879,8 @@ function startHand(){
  for(let round=0;round<6;round++){for(let j=0;j<4;j++){const seat=(G.dealer+j)%4;G.players[seat].hand.push(G.wall.pop(),G.wall.pop());}}
  for(let j=0;j<4;j++)G.players[(G.dealer+j)%4].hand.push(G.wall.pop());
  G.players[G.dealer].hand.push(G.wall.pop());
- // Keep the actual dealing order; never rearrange a player's hand automatically.
+ // Humans keep dealing order. CPUs make a partial, non-suit-clustered arrangement.
+ for(let seat=0;seat<4;seat++)cpuArrangeOpening(seat);
  log(`${roundLabel()} 開局。ドラ表示は ${L.tileName(G.dora[0])}。`);
  if(isCpuSeat(G.turn))scheduleAI();
  render();
@@ -795,20 +906,27 @@ function animateDraw(seat,tile,done){
  const target=document.querySelector(`#${seatId} .seat-hand [data-tile-id="${tile.id}"]`);
  if(!holder||!target||typeof target.animate!=='function'){done();return;}
  const a=holder.getBoundingClientRect(),b=target.getBoundingClientRect();
- const x=a.left+a.width/2-b.width/2,y=a.top+a.height/2-b.height/2;
- const dx=b.left-x,dy=b.top-y;
+ // Side seats are rotated. offsetWidth/Height retain their unrotated tile
+ // dimensions, unlike getBoundingClientRect() which swaps width and height.
+ const naturalW=target.offsetWidth,naturalH=target.offsetHeight;
+ const x=a.left+a.width/2-naturalW/2,y=a.top+a.height/2-naturalH/2;
+ const dx=b.left+b.width/2-(x+naturalW/2),dy=b.top+b.height/2-(y+naturalH/2);
  const direction=seat===1?-90:seat===3?90:0;
  const ghost=target.cloneNode(true);
  ghost.classList.remove('arriving','selected','selectable','just-drawn');
  ghost.classList.add('draw-flight');ghost.removeAttribute('data-action');
  ghost.style.left=x+'px';ghost.style.top=y+'px';
- ghost.style.width=b.width+'px';ghost.style.height=b.height+'px';
+ ghost.style.width=naturalW+'px';ghost.style.height=naturalH+'px';
+ ghost.style.setProperty('--tile-width',naturalW+'px','important');
+ ghost.style.setProperty('--tile-height',naturalH+'px','important');
+ const sourceFace=target.querySelector('.face'),ghostFace=ghost.querySelector('.face');
+ if(sourceFace&&ghostFace)ghostFace.style.transform=getComputedStyle(sourceFace).transform;
  ghost.style.visibility='visible';
  document.body.appendChild(ghost);
  const duration=G.settings.speed===110?270:seat===0?550:480;
  const anim=ghost.animate([
   {transform:'translate(0px, 0px) rotate(8deg) scale(.55)',opacity:.3,offset:0},
-  {transform:`translate(${dx*.48}px,${dy*.48-33}px) rotate(${direction*.35-9}deg) scale(1.08)`,opacity:1,offset:.51},
+  {transform:`translate(${dx*.48}px,${dy*.48-33}px) rotate(${direction*.35-9}deg) scale(.95)`,opacity:1,offset:.51},
   {transform:`translate(${dx}px,${dy}px) rotate(${direction}deg) scale(1)`,opacity:1,offset:1}
  ],{duration,easing:'cubic-bezier(.22,.82,.23,1)',fill:'forwards'});
  drawFlight={ghost,animation:anim};
@@ -886,6 +1004,8 @@ function animateDiscard(seat,tile,sourceRect){
  ghost.removeAttribute('data-action');
  ghost.style.left=sourceRect.left+'px';ghost.style.top=sourceRect.top+'px';
  ghost.style.width=sourceRect.width+'px';ghost.style.height=sourceRect.height+'px';
+ ghost.style.setProperty('--tile-width',sourceRect.width+'px','important');
+ ghost.style.setProperty('--tile-height',sourceRect.height+'px','important');
  document.body.appendChild(ghost);
  target.style.visibility='hidden';
  const dx=(targetRect.left+targetRect.width/2)-(sourceRect.left+sourceRect.width/2);
@@ -1020,6 +1140,7 @@ function afterCpuDraw(seat){
 function cpuStep(){if(!G||!isCpuSeat(G.turn))return;const seat=G.turn,p=G.players[seat];
  if(G.phase==='draw'){drawTile(seat,false,()=>afterCpuDraw(seat));return;}
  if(G.phase==='discard'){
+  cpuMaybeTidy(seat);
   let index;
   if(p.riichi){index=p.justDrawn?p.hand.findIndex(x=>x.id===p.justDrawn.id):p.hand.length-1;}
   else {
@@ -1264,7 +1385,8 @@ function renderSeat(seat,id){const p=G.players[seat],yourTurn=G.turn===seat&&['d
  const melds=p.melds.map(renderMeld).join('');
  const el=$(id);el.classList.toggle('active-turn',yourTurn);el.classList.toggle('seat-opponent',!isMe);
  const role=seat===0||seat===1?'代表':'補佐';
- el.innerHTML=`<div class="seat-head"><span class="seat-name ${role==='代表'?'rep':''}">${esc(p.name)}</span><span class="seat-indicator">${seat===G.dealer?'東 · 親':L.HONORS[(seat-G.dealer+4)%4]} / ${role} ${p.riichi?' · 立直':''}</span></div><div class="seat-body"><div class="seat-hand">${tiles}</div>${melds?`<div class="seat-meld">${melds}</div>`:''}</div>`;
+ el.classList.toggle('team-green',seat%2===0);el.classList.toggle('team-red',seat%2===1);
+ el.innerHTML=`<div class="seat-head"><span class="seat-name ${role==='代表'?'rep':''}">${esc(p.name)}</span><span class="team-chip ${teamClass(seat)}">${teamName(seat)}</span><span class="seat-indicator">${seat===G.dealer?'東 · 親':L.HONORS[(seat-G.dealer+4)%4]} / ${role} ${p.riichi?' · 立直':''}</span></div><div class="seat-body"><div class="seat-hand">${tiles}</div>${melds?`<div class="seat-meld">${melds}</div>`:''}</div>`;
 }
 // The smartphone hand is a second view of the same tiles: no sort, no extra game state.
 // The tabletop hand stays in place as the destination for the central draw animation.
@@ -1285,16 +1407,74 @@ function renderMobileHand(){
  panel.classList.toggle('is-turn',G.turn===seat&&G.phase==='discard');
 }
 function renderRivers(){const refs=['riverBottom','riverRight','riverTop','riverLeft'];G.players.forEach((p,seat)=>{const rel=relativeSeat(seat);$(refs[rel]).innerHTML=p.discards.slice(-30).map(t=>tileHtml(t,{small:true})).join('');});}
-function renderBlood(){const blood=G.blood[0],pct=Math.min(100,Math.max(0,blood/G.settings.bloodInit*100)),other=G.blood[1],otherPct=Math.max(0,Math.min(100,other/G.settings.bloodInit*100));
- const my=`<div class="blood-card"><div class="blood-label">挑戦者 · 血液</div><div class="blood-amount">${format(blood)} <small>mL</small></div><div class="blood-track"><div class="blood-fill" style="width:${pct}%"></div></div><div class="blood-caption">初期 ${format(G.settings.bloodInit)} mL</div></div>`;
- const opp=G.settings.mode==='both'?`<div class="blood-card secondary"><div class="blood-label">対戦相手 · 血液</div><div class="blood-amount">${format(other)} <small>mL</small></div><div class="blood-track"><div class="blood-fill" style="width:${otherPct}%"></div></div><div class="blood-caption">回復 ${G.settings.recover?'許可':'禁止'} · レート ${G.settings.bloodRate} mL / 1000点</div></div>`:`<div class="blood-card secondary"><div class="blood-label">対戦相手 · 資産</div><div class="blood-amount">${format(G.asset[1])} <small>pt</small></div><div class="blood-track"><div class="blood-fill asset" style="width:${Math.min(100,Math.max(0,G.asset[1]/500000*100))}%"></div></div><div class="blood-caption"></div></div>`;
- $('bloodSection').innerHTML=my+opp;
- let vignette=document.querySelector('.danger-vignette');if(pct<=30&&pct>0&&G.phase!=='result'){if(!vignette){vignette=document.createElement('div');vignette.className='danger-vignette';vignette.setAttribute('aria-hidden','true');document.body.appendChild(vignette);}}else vignette?.remove();
+function bloodMarkup(key,label,amount,initValue,footer,secondary=false,asset=false){
+ const percent=initValue>0?Math.max(0,Math.min(100,amount/initValue*100)):0;
+ return `<div class="blood-card ${secondary?'secondary ':''}${key==='green'?'team-green':'team-red'}" data-blood-card="${key}">
+  <div class="blood-label">${label}</div>
+  <div class="blood-amount"><span data-meter-number="${key}" data-value="${amount}" data-target="${amount}">${format(amount)}</span> <small>${asset?'pt':'mL'}</small></div>
+  <div class="blood-track"><div class="blood-fill ${asset?'asset':''}" data-meter-bar="${key}" style="width:${percent}%"></div></div>
+  <div class="blood-caption">${footer}</div>
+  <div class="blood-change" data-blood-change="${key}" aria-hidden="true"></div>
+ </div>`;
+}
+function setBloodAmount(key,target,initial,asset=false){
+ const section=$('bloodSection'),el=section.querySelector(`[data-meter-number="${key}"]`),bar=section.querySelector(`[data-meter-bar="${key}"]`);
+ if(!el||!bar)return;
+ const previousTarget=Number(el.dataset.target);
+ if(previousTarget===target)return;
+ const from=Number(el.dataset.display)||Number(el.dataset.value)||0;
+ const duration=1180,started=performance.now(),id=String(1+Number(el.dataset.seq||0));
+ el.dataset.seq=id;el.dataset.target=String(target);
+ const pct=initial>0?Math.max(0,Math.min(100,target/initial*100)):0;
+ // The same DOM node survives every game render, so width genuinely interpolates.
+ bar.style.width=pct+'%';
+ const card=el.closest('[data-blood-card]'),change=card?.querySelector('[data-blood-change]');
+ if(card){
+  const lowered=target<previousTarget;
+  card.classList.remove('draining','restoring');void card.offsetWidth;
+  card.classList.add(lowered?'draining':'restoring');
+  if(change){change.textContent=(lowered?'−':'+')+format(Math.abs(target-previousTarget))+(asset?' pt':' mL');}
+ }
+ const update=(now)=>{
+  if(!el.isConnected||el.dataset.seq!==id)return;
+  const t=Math.min(1,(now-started)/duration),smooth=1-Math.pow(1-t,3);
+  const value=Math.round(from+(target-from)*smooth);
+  el.textContent=format(value);el.dataset.display=String(value);
+  if(t<1)requestAnimationFrame(update);else{
+   el.dataset.value=String(target);
+   if(card){card.classList.remove('draining','restoring');if(change)change.textContent='';}
+  }
+ };
+ requestAnimationFrame(update);
+}
+function renderBlood(){
+ const section=$('bloodSection'),init=G.settings.bloodInit,original=G.settings.mode==='original',mode=original?'original':'both';
+ const opponent=original?G.asset[1]:G.blood[1],opponentInit=original?500000:init;
+ if(section.dataset.mode!==mode||!section.querySelector('[data-meter-number="green"]')){
+  section.dataset.mode=mode;
+  section.innerHTML=bloodMarkup('green','緑チーム · 代表の血液',G.blood[0],init,`初期 ${format(init)} mL`)
+   +bloodMarkup('red',original?'赤チーム · 代表の資産':'赤チーム · 代表の血液',opponent,opponentInit,
+     `回復 ${G.settings.recover?'許可':'禁止'} · レート ${G.settings.bloodRate} mL / 1000点`,true,original);
+ }
+ setBloodAmount('green',G.blood[0],init);
+ setBloodAmount('red',opponent,opponentInit,original);
+ let vignette=document.querySelector('.danger-vignette');
+ const pct=init>0?G.blood[0]/init*100:0;
+ if(pct<=30&&pct>0&&G.phase!=='result'){
+  if(!vignette){vignette=document.createElement('div');vignette.className='danger-vignette';vignette.setAttribute('aria-hidden','true');document.body.appendChild(vignette);}
+ }else vignette?.remove();
 }
 function renderScores(){const names=G.players.map(p=>p.name+(p.seat===localSeat()?'（あなた）':''));
- $('scoreboard').innerHTML=G.players.map((p,i)=>`<div class="score-line ${i%2===0?'team':'enemy'} ${i===localSeat()?'myself':''} ${i===1?'rep-enemy':''}"><span class="score-name">${esc(names[i])} <small>${i===0||i===1?'★':''}</small></span><strong class="score-value">${format(p.score)}</strong></div>`).join('');
+ $('scoreboard').innerHTML=G.players.map((p,i)=>`<div class="score-line ${teamClass(i)} ${i===localSeat()?'myself':''}"><span class="score-name"><span class="team-chip ${teamClass(i)}">${i%2===0?'緑':'赤'}</span> ${esc(names[i])} <small>${i===0||i===1?'★':''}</small></span><strong class="score-value">${format(p.score)}</strong></div>`).join('');
 }
-function renderPeek(){const refs=[1,2,3].map(j=>(localSeat()+j)%4);$('peekInfo').innerHTML=refs.map(seat=>{const p=G.players[seat];return `<div class="peek-line"><div class="peek-name">${esc(p.name)} <span style="color:#758c81">· 透牌 ${p.hand.filter(x=>x.clear).length}/${p.hand.length}</span></div><div class="peek-tiles">${p.hand.map(t=>tileHtml(t,{hide:true,mini:false,opaquePreview:true})).join('')}</div></div>`;}).join('');}
+function renderTeamStrip(){
+ const you=localSeat();
+ for(const [seat,key] of [[0,'teamGreen'],[1,'teamRed']]){
+  const a=G.players[seat],b=G.players[seat+2];
+  $(key).innerHTML=`<strong>${teamName(seat)}${sameTeam(seat,you)?' · あなたのチーム':''}</strong><span>${esc(a.name)} ＋ ${esc(b.name)}</span>`;
+ }
+}
+function renderPeek(){const refs=[1,2,3].map(j=>(localSeat()+j)%4);$('peekInfo').innerHTML=refs.map(seat=>{const p=G.players[seat];return `<div class="peek-line ${teamClass(seat)}"><div class="peek-name"><span class="team-chip ${teamClass(seat)}">${teamName(seat)}${sameTeam(seat,localSeat())?' · 味方':''}</span> ${esc(p.name)} <span style="color:#aebfb4"> · 透牌 ${p.hand.filter(x=>x.clear).length}/${p.hand.length}</span></div><div class="peek-tiles">${p.hand.map(t=>tileHtml(t,{hide:true,mini:false,opaquePreview:true})).join('')}</div></div>`;}).join('');}
 function renderLog(){$('logBox').innerHTML=G.logs.slice(0,10).map((s,i)=>`<div class="log-entry">${esc(s)}</div>`).join('');}
 function renderActionBar(){
  const buttons=$('actionButtons'),hint=$('selectedHint');buttons.innerHTML='';
@@ -1334,7 +1514,7 @@ function render(){if(!G)return;
  $('centerDora').innerHTML=doraHtml;
  renderSeat((localSeat()+2)%4,'seatTop');renderSeat((localSeat()+3)%4,'seatLeft');renderSeat((localSeat()+1)%4,'seatRight');renderSeat(localSeat(),'seatBottom');renderMobileHand();renderRivers();
  $('centerStatus').textContent=`捨て牌 ${G.discardCount}/70 · 残り ${G.wall.length}`;
- renderReactions();renderActionBar();renderBlood();renderScores();renderPeek();renderLog();
+ renderReactions();renderActionBar();renderBlood();renderScores();renderTeamStrip();renderPeek();renderLog();
  if(NET.mode==='host')netBroadcast();
 }
 // Pointer-based manual 理牌. Never sort by type and never move a tile unless the player asks.
@@ -1423,7 +1603,7 @@ function netRenderLobby(){
  const m=NET.members;
  $('roomMembers').innerHTML=[0,1,2,3].map(seat=>{
   const info=m[seat];const label=seat===0||seat===1?'代表':'補佐';
-  return `<div class="room-member ${!info?.online?'offline':''}"><small>${seat+1}番席 · ${label} · ${seat%2===0?'挑戦者':'対戦相手'}</small><strong>${info?esc(info.name):'空席 / CPU'}</strong><small>${info?(info.online?'参加中':'切断 / CPUが代行'):'参加待ち'}</small></div>`;
+  return `<div class="room-member ${teamClass(seat)} ${!info?.online?'offline':''}"><small><span class="team-chip ${teamClass(seat)}">${teamName(seat)}</span> · ${seat+1}番席 · ${label}</small><strong>${info?esc(info.name):'空席 / CPU'}</strong><small>${info?(info.online?'参加中':'切断 / CPUが代行'):'参加待ち'}</small></div>`;
  }).join('');
  const x=NET.settings||settingsFromForm();
  $('roomRuleSummary').textContent=`透明牌 ${x.clearCount}/4・血液 ${x.bloodRate}mL / 1000点・回復 ${x.recover?'あり':'なし'}・${x.halves}半荘`;
@@ -1545,6 +1725,7 @@ function netGuestMessage(msg){
  if(msg.kind==='snapshot'){
   if(NET.seat<1||NET.seat>3)return;
   const selection=G?.selectedId,ready=G?.riichiReady;
+  if(!G)$('bloodSection').innerHTML='';
   G=msg.state;
   G.selectedId=G.players[NET.seat].hand.some(t=>t.id===selection)?selection:null;
   G.riichiReady=Boolean(ready&&G.selectedId!==null&&G.turn===NET.seat);
