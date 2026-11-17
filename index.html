@@ -751,7 +751,7 @@ body {
   .river .tile.v17-face .face>img.v17-art{filter:contrast(1.08) saturate(1.08)!important}
 }
 
-/* v0.27: truly larger discarded tiles. Top and bottom rivers use more felt width;
+/* v0.28: truly larger discarded tiles. Top and bottom rivers use more felt width;
    side rivers have their own compact scale to clear the players' hands. */
 @media(max-width:600px){
  .arena{height:clamp(550px,143vw,615px)!important;min-height:clamp(550px,143vw,615px)!important;
@@ -790,10 +790,60 @@ body {
 @media(min-width:981px){
  .river .tile.v17-face .face{inset:.75px!important}
 }
-/* v0.27 desktop rivers: preserve enough separation from bottom name. */
+/* v0.28 desktop rivers: preserve enough separation from bottom name. */
 @media(min-width:981px){
  .arena{--river-tw:clamp(23px,1.85vw,25px);--river-th:calc(var(--river-tw)*1.36)}
  .river-bottom{top:58.2%!important}
+}
+/* v0.28: shared, mandatory post-hand yaku and dora reveal, phone-friendly. */
+.result-root{z-index:245!important}
+.result-root .result-modal{width:min(680px,100%)!important;max-height:calc(100dvh - 24px)!important;overflow-y:auto!important;padding:21px 22px!important;text-align:center}
+.result-agari{display:flex;flex-direction:column;gap:9px;text-align:left;margin:13px 0;padding:14px;background:linear-gradient(155deg,#203e32,#172a25);border:1px solid #83a88a77;border-radius:11px}
+.result-agari h3{margin:10px 0 1px;font-size:13px;color:#e2d1a7;letter-spacing:.08em}
+.result-agari-heading{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:14px}
+.result-agari-heading strong{font-size:17px;color:#f6f0d9}
+.result-agari-heading>span:last-child{margin-left:auto;font-weight:800;color:#fff0c5;background:#705533;padding:4px 10px;border-radius:5px}
+.result-agari-sub{font-size:11px;color:#b9d3c0}
+.result-hand-layout{display:flex;align-items:flex-end;gap:11px;min-width:0}
+.result-hand-tiles{display:flex;align-items:flex-end;gap:3px;min-width:0;overflow-x:auto;padding:7px 3px 9px;flex:1;scrollbar-color:#83a58a #183a2a}
+.result-winning-tile{flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;border-left:2px solid #d6b679;padding-left:10px}
+.result-winning-tile small{color:#e8d6a8;font-size:10px;white-space:nowrap}
+.result-agari .tile{--tile-width:35px!important;--tile-height:48px!important;flex:none!important;width:var(--tile-width)!important;height:var(--tile-height)!important}
+.result-agari .tile.v17-face .face{inset:2px!important}
+.result-agari .tile.v17-face .face>img.v17-art{width:100%!important;height:100%!important}
+.result-melds{display:flex;flex-wrap:wrap;gap:8px}
+.result-meld{display:flex;align-items:center;gap:5px;padding:4px;background:#122e247a;border-radius:6px}
+.result-meld small{font-size:10px;color:#d5bf91}
+.result-meld>span{display:flex;gap:2px}
+.result-meld .tile{--tile-width:26px!important;--tile-height:36px!important}
+.result-yaku-heading{display:flex;align-items:baseline;justify-content:space-between;gap:7px;flex-wrap:wrap}
+.result-yaku-heading strong{font-size:15px;color:#f5d49e}
+.result-yaku-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 10px}
+.result-yaku-item{display:flex;justify-content:space-between;align-items:center;gap:5px;padding:7px 9px;border-radius:5px;border:1px solid #a1bc9552;background:#10271e81;font-size:12px}
+.result-yaku-item b{white-space:nowrap;color:#f7d6a3}
+.result-dora-row{padding:8px;border:1px solid #89a78e5b;border-radius:8px;background:#0c271e5d}
+.result-dora-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;font-size:12px;color:#e4eedf}
+.result-dora-heading>span{color:#f2d69b;font-weight:800}
+.result-dora-tiles{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.result-dora-item{display:flex;gap:5px;align-items:center;font-size:11px;color:#c9e1d1}
+.result-dora-item .tile{--tile-width:26px!important;--tile-height:36px!important}
+.result-no-ura{font-size:11px;color:#b7c6ba}
+.result-payment{display:grid;gap:5px;font-size:12px}
+.result-payment>div{display:flex;justify-content:space-between;gap:9px;padding:5px 0;border-bottom:1px solid #8baf8f32}
+.result-payment strong{color:#f4ddb4}
+.result-payment-total{font-weight:800;border-top:1px solid #d9bf8d8c;padding-top:9px!important;border-bottom:none!important}
+@media(max-width:600px){
+ .result-root{padding:8px!important;align-items:center!important}
+ .result-root .result-modal{width:100%!important;max-height:calc(100dvh - 16px)!important;padding:15px 10px!important}
+ .result-title{font-size:26px!important;margin:5px 0!important}
+ .result-highlight{padding:9px!important;margin:8px auto!important}
+ .result-highlight strong{font-size:23px!important}
+ .result-agari{padding:10px 8px;gap:6px;margin:9px 0}
+ .result-agari .tile{--tile-width:32px!important;--tile-height:44px!important}
+ .result-meld .tile,.result-dora-item .tile{--tile-width:25px!important;--tile-height:34px!important}
+ .result-yaku-grid{grid-template-columns:1fr 1fr;gap:5px}
+ .result-agari-heading{font-size:12px}
+ .result-agari-heading strong{font-size:15px}
 }
 </style>
 </head>
@@ -861,7 +911,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.27</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.28</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
@@ -1037,6 +1087,10 @@ function candidateEval(concealed,melds,opts,pattern){
  let dora=0;
  for(const d of opts.dora||[]){dora+=all.filter(t=>t===nextDora(d)).length;}
  if(yakuHan>0&&dora){han+=dora;yaku.push({name:'ドラ',han:dora});}
+ // Ura-dora counts only for a closed hand that declared riichi, and only at settlement.
+ let ura=0;
+ if(yakuHan>0&&opts.riichi&&closed){for(const indicator of opts.uraDora||[])ura+=all.filter(t=>t===nextDora(indicator)).length;}
+ if(ura){han+=ura;yaku.push({name:'裏ドラ',han:ura});}
  if(yakuHan===0)return null;
  return {han,fu,yaku,yakuman,pointsBase:baseScore(han,fu,yakuman)};
 }
@@ -1207,11 +1261,11 @@ function chooseSashikomiDiscardIndex(seat){
  const prefer=hits.find(x=>x.t.clear)||hits[0];
  return prefer?prefer.i:-1;
 }
-function makeGame(settings){return {settings,halfNo:1,handIndex:0,honba:0,riichiPot:0,dealer:0,turn:0,phase:'setup',wall:[],dora:[],discardCount:0,players:Array.from({length:4},(_,i)=>newPlayer(i)),blood:{0:settings.bloodInit,1:settings.bloodInit},asset:{1:500000},assetWon:0,bloodRecovered:0,foregone:0,recoveryPending:0,logs:[],selectedId:null,riichiReady:false,drawTileId:null,call:null,result:null,sessionEnded:false,lastDiscard:null,lastResult:null,moveCount:0,turnNo:0};}
+function makeGame(settings){return {settings,halfNo:1,handIndex:0,honba:0,riichiPot:0,dealer:0,turn:0,phase:'setup',wall:[],dora:[],uraIndicators:[],discardCount:0,players:Array.from({length:4},(_,i)=>newPlayer(i)),blood:{0:settings.bloodInit,1:settings.bloodInit},asset:{1:500000},assetWon:0,bloodRecovered:0,foregone:0,recoveryPending:0,logs:[],selectedId:null,riichiReady:false,drawTileId:null,call:null,result:null,sessionEnded:false,lastDiscard:null,lastResult:null,moveCount:0,turnNo:0};}
 function startGame(){if(NET.mode==='guest')return;stopTimers();$('bloodSection').innerHTML='';G=makeGame(NET.mode==='host'?NET.settings:settingsFromForm());ROOT.hidden=true;SETUP.hidden=true;RESULTROOT.hidden=true;RULESROOT.hidden=true;startHand();render();}
 function startHand(){
  stopTimers();G.bloodAtHandStart={0:G.blood[0],1:G.blood[1]};G.dealer=G.handIndex%4;G.players.forEach((p,i)=>{const fresh=newPlayer(i);Object.assign(p,fresh,{score:p.score});});
- G.wall=L.makeTiles(Math.random,G.settings.clearCount);G.dora=[G.wall.pop().type];G.discardCount=0;G.lastDiscard=null;G.moveCount=0;G.turn=G.dealer;G.phase='discard';G.selectedId=null;G.drawTileId=null;G.riichiReady=false;G.call=null;G.result=null;
+ G.wall=L.makeTiles(Math.random,G.settings.clearCount);G.dora=[G.wall.pop().type];G.uraIndicators=[G.wall.pop().type];G.discardCount=0;G.lastDiscard=null;G.moveCount=0;G.turn=G.dealer;G.phase='discard';G.selectedId=null;G.drawTileId=null;G.riichiReady=false;G.call=null;G.result=null;
  // Each seat receives thirteen tiles in rounds of two; dealer receives one extra tile.
  for(let round=0;round<6;round++){for(let j=0;j<4;j++){const seat=(G.dealer+j)%4;G.players[seat].hand.push(G.wall.pop(),G.wall.pop());}}
  for(let j=0;j<4;j++)G.players[(G.dealer+j)%4].hand.push(G.wall.pop());
@@ -1227,7 +1281,7 @@ function currentWind(){return G.handIndex<4?'1z':'2z';}
 function canOperate(){return G&&G.phase!=='result'&&!G.sessionEnded;}
 function winnerEval(seat,extra=null,tsumo=false){
  const p=G.players[seat],types=p.hand.map(x=>x.type);if(extra)types.push(extra.type);
- const opts={riichi:p.riichi,tsumo,winningTile:extra?.type||p.justDrawn?.type||null,dora:G.dora,roundWind:currentWind(),seatWind:L.seatWind(seat,G.dealer)};
+ const opts={riichi:p.riichi,tsumo,winningTile:extra?.type||p.justDrawn?.type||null,dora:G.dora,uraDora:p.riichi&&isClosed(p)?G.uraIndicators:[],roundWind:currentWind(),seatWind:L.seatWind(seat,G.dealer)};
  return L.evaluateHand(types,p.melds,opts);
 }
 function isFuriten(seat){const p=G.players[seat];if(p.tempFuriten)return true;const waits=L.getWaits(p.hand.map(t=>t.type),p.melds);return p.discards.some(t=>waits.includes(t.type));}
@@ -1451,7 +1505,7 @@ function applyCall(seat,option,discarder,tile){
  if(option.kind==='kan'){addDora();drawTile(seat,true,isCpuSeat(seat)?()=>afterCpuDraw(seat):null);return;}
  render();if(isCpuSeat(seat))scheduleAI();
 }
-function addDora(){if(G.wall.length){const ind=G.wall.pop();G.dora.push(ind.type);log(`カンドラ：${L.tileName(ind.type)}。`);}}
+function addDora(){if(G.wall.length>=2){const ind=G.wall.pop(),ura=G.wall.pop();G.dora.push(ind.type);G.uraIndicators.push(ura.type);log(`カンドラ：${L.tileName(ind.type)}。`);}}
 function getAnkanTypes(seat){const p=G.players[seat];if(p.riichi)return [];const c=L.counts(p.hand.map(t=>t.type));return L.TYPES.filter((t,i)=>c[i]===4);}
 function userAnkan(){const seat=localSeat();if(!G||G.phase!=='discard'||G.turn!==seat)return;
  const types=getAnkanTypes(seat);if(!types.length)return;
@@ -1504,15 +1558,25 @@ function stakeTransfer(from,to,points,reason){if(!((from===0&&to===1)||(from===1
 function scoreWinningHand(seat,discarder,tile,tsumo){
  stopTimers();const evaluation=winnerEval(seat,tsumo?null:tile,tsumo);
  if(!evaluation){showToast('今の形には有効な役がないため和了できぬ。');return;}
- const winner=G.players[seat],dealerWin=seat===G.dealer;let total=0;
- if(tsumo){for(let from=0;from<4;from++){if(from===seat)continue;const amount=L.pointsFor(evaluation.pointsBase,dealerWin,true,from===G.dealer)+G.honba*100;transfer(from,seat,amount,'ツモ和了');total+=amount;}}
- else{const amount=L.pointsFor(evaluation.pointsBase,dealerWin,false)+G.honba*300;transfer(discarder,seat,amount,'ロン和了');total=amount;}
+ const winner=G.players[seat],dealerWin=seat===G.dealer,winTile=tsumo?(winner.justDrawn||tile||winner.hand.at(-1)):tile;
+ const concealed=winner.hand.filter(t=>!tsumo||t.id!==winTile?.id).map(t=>({type:t.type,clear:t.clear}));
+ const melds=winner.melds.map(m=>({kind:m.kind,open:m.open,tiles:m.tiles.slice()}));
+ const riichi=Boolean(winner.riichi&&isClosed(winner));
+ const payments=[];let total=0;
+ if(tsumo){for(let from=0;from<4;from++){if(from===seat)continue;const amount=L.pointsFor(evaluation.pointsBase,dealerWin,true,from===G.dealer)+G.honba*100;transfer(from,seat,amount,'ツモ和了');payments.push({seat:from,amount});total+=amount;}}
+ else{const amount=L.pointsFor(evaluation.pointsBase,dealerWin,false)+G.honba*300;transfer(discarder,seat,amount,'ロン和了');payments.push({seat:discarder,amount});total=amount;}
  const sticks=G.riichiPot;winner.score+=sticks;G.riichiPot=0;total+=sticks;
  log(`${winner.name}が${tsumo?'ツモ':'ロン'}！ ${evaluation.han}翻 / ${evaluation.fu}符 / ${format(total)}点獲得。`);
  const labels=evaluation.yaku.map(y=>`${y.name}${y.han}翻`).join(' · ');
  const title=seat===0?'和了！':seat===2?'味方の和了':'対戦相手の和了';
  const desc=`${winner.name}の${tsumo?'ツモ':'ロン'}。${evaluation.han}翻 ${evaluation.fu}符。${labels||'役あり'}。`;
- finishHand({title,desc,total,yaku:labels,winnerSeat:seat},dealerWin);
+ const agari={seat,winnerName:winner.name,tsumo,riichi,round:roundLabel(),dealerWin,
+  han:evaluation.han,fu:evaluation.fu,yakuman:evaluation.yakuman,pointsBase:evaluation.pointsBase,
+  yaku:evaluation.yaku.map(y=>({name:y.name,han:y.han})),
+  concealed,winTile:winTile?{type:winTile.type,clear:winTile.clear}:null,melds,
+  doraIndicators:G.dora.slice(),uraIndicators:riichi?G.uraIndicators.slice():[],
+  payments,sticks,honba:G.honba,total};
+ finishHand({title,desc,total,yaku:labels,winnerSeat:seat,agari},dealerWin);
 }
 function exhaustiveDraw(){stopTimers();const tenpai=G.players.map(p=>L.getWaits(p.hand.map(x=>x.type),p.melds).length>0);let n=tenpai.filter(Boolean).length;
  if(n>=1&&n<=3){const receive=3000/n,pay=3000/(4-n);
@@ -1552,12 +1616,39 @@ function resultBloodTransition(){
   return `<div class="result-blood-entry ${teamClass(seat)}"><div class="result-blood-details"><span class="team-chip ${teamClass(seat)}">${teamName(seat)}</span><span>${format(previous)} → <b>${format(current)} mL</b></span><strong class="${difference<0?'minus':'plus'}">${difference<0?'−':'+'}${format(Math.abs(difference))} mL</strong></div><div class="result-blood-track"><div class="result-blood-fill" style="--from:${beforePct}%;--to:${afterPct}%;"></div></div></div>`;
  }).join('');
 }
+function resultTile(type){return tileHtml({type,clear:false,id:'settlement'},{mini:true});}
+function resultDoraRow(label,indicators,bonus,hidden){
+ const visible=indicators?.length>0;
+ const items=visible?indicators.map(t=>`<span class="result-dora-item">${resultTile(t)}<span>→ ${esc(L.tileName(L.nextDora(t)))}</span></span>`).join('')
+  :`<span class="result-no-ura">${hidden?'リーチ和了時のみ公開':'表示牌なし'}</span>`;
+ return `<div class="result-dora-row"><div class="result-dora-heading"><strong>${label}</strong><span>+${bonus}翻</span></div><div class="result-dora-tiles">${items}</div></div>`;
+}
+function resultLimitLabel(a){return a.yakuman||a.han>=13?'役満':a.han>=11?'三倍満':a.han>=8?'倍満':a.han>=6?'跳満':a.han>=5||a.pointsBase>=2000?'満貫':'';}
+function renderAgariDetail(a){if(!a)return '';
+ const hand=a.concealed.slice().sort((x,y)=>L.TYPES.indexOf(x.type)-L.TYPES.indexOf(y.type));
+ const concealed=hand.map(t=>resultTile(t.type)).join('');
+ const winning=a.winTile?`<div class="result-winning-tile"><small>和了牌</small>${resultTile(a.winTile.type)}</div>`:'';
+ const melds=a.melds.map(m=>`<div class="result-meld"><small>${m.kind==='chi'?'チー':m.kind==='pon'?'ポン':m.open?'明槓':'暗槓'}</small><span>${m.tiles.map(resultTile).join('')}</span></div>`).join('');
+ const roles=a.yaku.map(y=>`<div class="result-yaku-item"><span>${esc(y.name)}</span><b>${y.han} 翻</b></div>`).join('');
+ const dora=a.yaku.find(y=>y.name==='ドラ')?.han||0,ura=a.yaku.find(y=>y.name==='裏ドラ')?.han||0;
+ const pay=a.payments.map(p=>`<div><span>${esc(G.players[p.seat]?.name||'対局者')}</span><strong>${format(p.amount)} 点</strong></div>`).join('');
+ return `<section class="result-agari" aria-label="和了の詳細">
+  <div class="result-agari-heading"><span class="team-chip ${teamClass(a.seat)}">${teamName(a.seat)}</span><strong>${esc(a.winnerName)}</strong><span>${a.tsumo?'ツモ':'ロン'}</span></div>
+  <div class="result-agari-sub">${esc(a.round)} · ${a.dealerWin?'親':'子'} · ${a.riichi?'立直あり':'立直なし'}</div>
+  <h3>和了形</h3><div class="result-hand-layout"><div class="result-hand-tiles">${concealed}</div>${winning}</div>
+  ${melds?`<div class="result-melds">${melds}</div>`:''}
+  <div class="result-yaku-heading"><h3>役・ドラ内訳</h3><strong>${a.yakuman?'役満':a.han+' 翻　'+a.fu+' 符'+(resultLimitLabel(a)?' · '+resultLimitLabel(a):'')}</strong></div>
+  <div class="result-yaku-grid">${roles}</div>
+  <h3>ドラ・裏ドラ</h3>${resultDoraRow('ドラ表示牌',a.doraIndicators,dora,false)}${resultDoraRow('裏ドラ表示牌',a.uraIndicators,ura,!a.riichi)}
+  <h3>点数内訳</h3><div class="result-payment">${pay}${a.sticks?`<div><span>立直供託</span><strong>${format(a.sticks)} 点</strong></div>`:''}<div class="result-payment-total"><span>獲得合計</span><strong>${format(a.total)} 点</strong></div></div>
+ </section>`;
+}
 function renderResult(){if(!G?.result)return;const r=G.result;
  const title=r.winnerSeat===undefined?r.title:r.winnerSeat===localSeat()?'和了！':(r.winnerSeat%2===localSeat()%2?'味方の和了':'対戦相手の和了');
  const hasRecovery=G.settings.recover&&G.recoveryPending>0;
  const recoveryHtml=hasRecovery?`<section class="result-recovery"><h3>血液の回復</h3><p>${format(G.recoveryPending)} mL</p><div class="result-buttons"><button class="action-btn primary" data-action="recover">血液を戻す</button><button class="action-btn subtle" data-action="forgo">今回は戻さない</button></div></section>`:'';
  const nextLabel=NET.mode==='guest'?'部屋主の操作を待機中':r.sessionEnded?'設定に戻る':r.halfEnd?'次の半荘へ':'次の局へ';
- $('resultModal').innerHTML=`<div class="result-overline">${r.halfEnd?'HALF-TIME SETTLEMENT':r.title==='流局'?'EXHAUSTIVE DRAW':'HAND SETTLEMENT'}</div><h2 class="result-title" id="resultTitle">${esc(title)}</h2><p class="result-desc">${esc(r.desc)}</p>${r.total?`<div class="result-highlight"><span>和了点（供託を含む）</span><strong>+${format(r.total)} pt</strong><div class="result-yaku">${esc(r.yaku)}</div></div>`:''}${resultBloodTransition()?`<div class="result-blood-summary">${resultBloodTransition()}</div>`:''}${NET.mode==='guest'?'':recoveryHtml}<div class="result-buttons"><button class="action-btn primary" data-action="next" ${(hasRecovery||NET.mode==='guest')?'disabled':''}>${nextLabel} →</button></div>`;
+ $('resultModal').innerHTML=`<div class="result-overline">${r.halfEnd?'HALF-TIME SETTLEMENT':r.title==='流局'?'EXHAUSTIVE DRAW':'HAND SETTLEMENT'}</div><h2 class="result-title" id="resultTitle">${esc(title)}</h2>${r.agari?'':`<p class="result-desc">${esc(r.desc)}</p>`}${r.total?`<div class="result-highlight"><span>和了点（供託を含む）</span><strong>+${format(r.total)} pt</strong>${r.agari?'':`<div class="result-yaku">${esc(r.yaku)}</div>`}</div>`:''}${renderAgariDetail(r.agari)}${resultBloodTransition()?`<div class="result-blood-summary">${resultBloodTransition()}</div>`:''}${NET.mode==='guest'?'':recoveryHtml}<div class="result-buttons"><button class="action-btn primary" data-action="next" ${(hasRecovery||NET.mode==='guest')?'disabled':''}>${nextLabel} →</button></div>`;
 }
 function chooseRecovery(recover){if(!G||G.phase!=='result'||!G.settings.recover||G.recoveryPending<=0)return;
  const pending=G.recoveryPending;G.recoveryPending=0;
@@ -1976,7 +2067,7 @@ function netCleanStateFor(seat){
   tempFuriten:i===seat?p.tempFuriten:false
  }));
  // The wall is confidential; send count only. An opponent's opaque tile type never leaves host.
- return {...G,wall:Array(G.wall.length).fill(null),players:publicPlayers,
+ return {...G,wall:Array(G.wall.length).fill(null),uraIndicators:[],players:publicPlayers,
   selectedId:null,riichiReady:false,drawTileId:G.turn===seat?G.drawTileId:null,
   call:G.call?.seat===seat?{kind:G.call.kind,seat,discarder:G.call.discarder,tile:G.call.tile,options:G.call.options}:null};
 }
