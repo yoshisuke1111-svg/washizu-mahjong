@@ -483,6 +483,21 @@ body {
  .blood-fill{transition:none!important}
  .blood-card.draining,.blood-card.restoring,.blood-card .blood-change{animation:none!important}
 }
+
+/* Make blood loss visible on the hand settlement overlay too (mobile scroll-safe). */
+.result-blood-summary{display:grid;gap:10px;margin:16px auto 14px;text-align:left}
+.result-blood-entry{background:#202b29;border-radius:9px;border:1px solid #6578718c;padding:10px 12px}
+.result-blood-entry.team-green{border-left:4px solid #80c16b}
+.result-blood-entry.team-red{border-left:4px solid #df7776}
+.result-blood-details{display:flex;align-items:center;flex-wrap:wrap;gap:7px;color:#f1e7e1;font-size:12px;margin-bottom:8px}
+.result-blood-details strong{margin-left:auto;font-size:15px}
+.result-blood-details strong.minus{color:#ffaea8}
+.result-blood-details strong.plus{color:#bdecb4}
+.result-blood-track{height:11px;border-radius:20px;background:#130e13;overflow:hidden}
+.result-blood-fill{height:100%;width:var(--to);background:linear-gradient(90deg,#8a2a42,#d96473 60%,#f7ac9d);
+ animation:result-blood-sweep 1.2s cubic-bezier(.22,.8,.22,1) both}
+@keyframes result-blood-sweep{from{width:var(--from)}to{width:var(--to)}}
+@media(prefers-reduced-motion:reduce){.result-blood-fill{animation:none}}
 </style>
 </head>
 <body>
@@ -873,7 +888,7 @@ function chooseSashikomiDiscardIndex(seat){
 function makeGame(settings){return {settings,halfNo:1,handIndex:0,honba:0,riichiPot:0,dealer:0,turn:0,phase:'setup',wall:[],dora:[],discardCount:0,players:Array.from({length:4},(_,i)=>newPlayer(i)),blood:{0:settings.bloodInit,1:settings.bloodInit},asset:{1:500000},assetWon:0,bloodRecovered:0,foregone:0,recoveryPending:0,logs:[],selectedId:null,riichiReady:false,drawTileId:null,call:null,result:null,sessionEnded:false,lastDiscard:null,lastResult:null,moveCount:0,turnNo:0};}
 function startGame(){if(NET.mode==='guest')return;stopTimers();$('bloodSection').innerHTML='';G=makeGame(NET.mode==='host'?NET.settings:settingsFromForm());ROOT.hidden=true;SETUP.hidden=true;RESULTROOT.hidden=true;RULESROOT.hidden=true;startHand();render();}
 function startHand(){
- stopTimers();G.dealer=G.handIndex%4;G.players.forEach((p,i)=>{const fresh=newPlayer(i);Object.assign(p,fresh,{score:p.score});});
+ stopTimers();G.bloodAtHandStart={0:G.blood[0],1:G.blood[1]};G.dealer=G.handIndex%4;G.players.forEach((p,i)=>{const fresh=newPlayer(i);Object.assign(p,fresh,{score:p.score});});
  G.wall=L.makeTiles(Math.random,G.settings.clearCount);G.dora=[G.wall.pop().type];G.discardCount=0;G.lastDiscard=null;G.moveCount=0;G.turn=G.dealer;G.phase='discard';G.selectedId=null;G.drawTileId=null;G.riichiReady=false;G.call=null;G.result=null;
  // Each seat receives thirteen tiles in rounds of two; dealer receives one extra tile.
  for(let round=0;round<6;round++){for(let j=0;j<4;j++){const seat=(G.dealer+j)%4;G.players[seat].hand.push(G.wall.pop(),G.wall.pop());}}
@@ -1200,12 +1215,23 @@ function finishHand(result,dealerStay){
  G.result={...result,halfEnd,sessionEnded:G.sessionEnded};
  render();RESULTROOT.hidden=false;renderResult();
 }
+function resultBloodTransition(){
+ const start=G.bloodAtHandStart||G.blood,cap=G.settings.bloodInit;
+ return [0,1].filter(seat=>seat===0||G.settings.mode==='both').map(seat=>{
+  const previous=start[seat]??G.blood[seat],current=G.blood[seat];
+  if(Math.round(current)===Math.round(previous))return '';
+  const beforePct=cap?Math.max(0,Math.min(100,previous/cap*100)):0;
+  const afterPct=cap?Math.max(0,Math.min(100,current/cap*100)):0;
+  const difference=current-previous;
+  return `<div class="result-blood-entry ${teamClass(seat)}"><div class="result-blood-details"><span class="team-chip ${teamClass(seat)}">${teamName(seat)}</span><span>${format(previous)} → <b>${format(current)} mL</b></span><strong class="${difference<0?'minus':'plus'}">${difference<0?'−':'+'}${format(Math.abs(difference))} mL</strong></div><div class="result-blood-track"><div class="result-blood-fill" style="--from:${beforePct}%;--to:${afterPct}%;"></div></div></div>`;
+ }).join('');
+}
 function renderResult(){if(!G?.result)return;const r=G.result;
  const title=r.winnerSeat===undefined?r.title:r.winnerSeat===localSeat()?'和了！':(r.winnerSeat%2===localSeat()%2?'味方の和了':'対戦相手の和了');
  const hasRecovery=G.settings.recover&&G.recoveryPending>0;
  const recoveryHtml=hasRecovery?`<section class="result-recovery"><h3>血液の回復</h3><p>${format(G.recoveryPending)} mL</p><div class="result-buttons"><button class="action-btn primary" data-action="recover">血液を戻す</button><button class="action-btn subtle" data-action="forgo">今回は戻さない</button></div></section>`:'';
  const nextLabel=NET.mode==='guest'?'部屋主の操作を待機中':r.sessionEnded?'設定に戻る':r.halfEnd?'次の半荘へ':'次の局へ';
- $('resultModal').innerHTML=`<div class="result-overline">${r.halfEnd?'HALF-TIME SETTLEMENT':r.title==='流局'?'EXHAUSTIVE DRAW':'HAND SETTLEMENT'}</div><h2 class="result-title" id="resultTitle">${esc(title)}</h2><p class="result-desc">${esc(r.desc)}</p>${r.total?`<div class="result-highlight"><span>和了点（供託を含む）</span><strong>+${format(r.total)} pt</strong><div class="result-yaku">${esc(r.yaku)}</div></div>`:''}${NET.mode==='guest'?'':recoveryHtml}<div class="result-buttons"><button class="action-btn primary" data-action="next" ${(hasRecovery||NET.mode==='guest')?'disabled':''}>${nextLabel} →</button></div>`;
+ $('resultModal').innerHTML=`<div class="result-overline">${r.halfEnd?'HALF-TIME SETTLEMENT':r.title==='流局'?'EXHAUSTIVE DRAW':'HAND SETTLEMENT'}</div><h2 class="result-title" id="resultTitle">${esc(title)}</h2><p class="result-desc">${esc(r.desc)}</p>${r.total?`<div class="result-highlight"><span>和了点（供託を含む）</span><strong>+${format(r.total)} pt</strong><div class="result-yaku">${esc(r.yaku)}</div></div>`:''}${resultBloodTransition()?`<div class="result-blood-summary">${resultBloodTransition()}</div>`:''}${NET.mode==='guest'?'':recoveryHtml}<div class="result-buttons"><button class="action-btn primary" data-action="next" ${(hasRecovery||NET.mode==='guest')?'disabled':''}>${nextLabel} →</button></div>`;
 }
 function chooseRecovery(recover){if(!G||G.phase!=='result'||!G.settings.recover||G.recoveryPending<=0)return;
  const pending=G.recoveryPending;G.recoveryPending=0;
