@@ -751,7 +751,7 @@ body {
   .river .tile.v17-face .face>img.v17-art{filter:contrast(1.08) saturate(1.08)!important}
 }
 
-/* v0.29: truly larger discarded tiles. Top and bottom rivers use more felt width;
+/* v0.30: truly larger discarded tiles. Top and bottom rivers use more felt width;
    side rivers have their own compact scale to clear the players' hands. */
 @media(max-width:600px){
  .arena{height:clamp(550px,143vw,615px)!important;min-height:clamp(550px,143vw,615px)!important;
@@ -790,12 +790,12 @@ body {
 @media(min-width:981px){
  .river .tile.v17-face .face{inset:.75px!important}
 }
-/* v0.29 desktop rivers: preserve enough separation from bottom name. */
+/* v0.30 desktop rivers: preserve enough separation from bottom name. */
 @media(min-width:981px){
  .arena{--river-tw:clamp(23px,1.85vw,25px);--river-th:calc(var(--river-tw)*1.36)}
  .river-bottom{top:58.2%!important}
 }
-/* v0.29: shared, mandatory post-hand yaku and dora reveal, phone-friendly. */
+/* v0.30: shared, mandatory post-hand yaku and dora reveal, phone-friendly. */
 .result-root{z-index:245!important}
 .result-root .result-modal{width:min(680px,100%)!important;max-height:calc(100dvh - 24px)!important;overflow-y:auto!important;padding:21px 22px!important;text-align:center}
 .result-agari{display:flex;flex-direction:column;gap:9px;text-align:left;margin:13px 0;padding:14px;background:linear-gradient(155deg,#203e32,#172a25);border:1px solid #83a88a77;border-radius:11px}
@@ -845,7 +845,7 @@ body {
  .result-agari-heading{font-size:12px}
  .result-agari-heading strong{font-size:15px}
 }
-/* v0.29 — table-level call & win decisions, between river and hand.
+/* v0.30 — table-level call & win decisions, between river and hand.
    No secondary reaction strip below the player's large mobile hand. */
 .arena .table-decision{
  position:absolute!important;z-index:28!important;left:50%!important;bottom:auto!important;
@@ -873,6 +873,30 @@ body {
 @media(max-width:365px){
  .table-decision .react-copy{display:none}
  .table-decision .action-btn{min-width:58px!important;padding:6px 7px!important}
+}
+
+/* v0.30: all game decisions (discard/riichi/kan/calls/tsumo) are on the felt.
+   Keep a single interactive strip between the player's river and hand. */
+.arena .table-action{
+ min-height:0!important;max-height:none!important;
+ flex-direction:row!important;justify-content:center!important;
+ gap:6px!important;padding:3px 7px!important;
+}
+.arena .table-action[hidden],.arena .table-action.is-empty{display:none!important}
+.table-action .selected-copy{font-size:11px!important;color:#edebd4!important;line-height:1.2!important;white-space:nowrap}
+.table-action .action-buttons{display:flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;flex-wrap:wrap!important}
+.table-action .move-btn{min-width:36px!important;padding:5px!important}
+.table-action .action-btn{min-height:36px!important}
+@media(max-width:600px){
+ .arena .table-action{gap:3px!important;max-width:calc(100% - 12px)!important;padding:2px 6px!important}
+ .table-action .selected-copy{display:none!important}
+ .table-action .action-buttons{gap:4px!important;flex-wrap:nowrap!important}
+ /* Two tile taps sort the hand on mobile, so arrows are unnecessary there. */
+ .table-action .move-btn{display:none!important}
+ .table-action .action-btn{min-height:36px!important;padding:6px 9px!important;min-width:62px!important;font-size:12px!important}
+}
+@media(max-width:365px){
+ .table-action .action-btn{min-width:57px!important;padding:6px 7px!important}
 }
 </style>
 </head>
@@ -911,6 +935,10 @@ body {
             <div id="centerDora" class="center-dora">ドラ表示 <span class="mini-empty">—</span></div>
           </div>
           <div id="reactPanel" class="react-panel table-decision" role="group" aria-label="鳴き・和了の選択" hidden></div>
+          <div id="actionBar" class="action-bar table-decision table-action" role="group" aria-label="打牌・立直・手牌操作" hidden>
+            <div class="selected-copy" id="selectedHint"></div>
+            <div id="actionButtons" class="action-buttons"></div>
+          </div>
           <div id="seatBottom" class="seat seat-bottom"></div>
           <div id="effectLayer" class="effect-layer" aria-hidden="true"></div>
           <section id="riverZoom" class="river-zoom" hidden role="dialog" aria-modal="false" aria-label="川の拡大表示">
@@ -924,10 +952,6 @@ body {
         <div class="mobile-hand-title"><strong>手牌</strong><span>横にスワイプ</span><button type="button" class="river-view-trigger" data-action="river-seat" data-rel="0">川を見る</button></div>
         <div id="mobileHandRow" class="mobile-hand-row" aria-label="大きく表示した自分の手牌"></div>
       </section>
-      <div id="actionBar" class="action-bar">
-        <div class="selected-copy" id="selectedHint"></div>
-        <div id="actionButtons" class="action-buttons"></div>
-      </div>
       <section class="info-card peek-card peek-card-bottom" aria-label="相手の見える牌"><div class="peek-heading"><h3>相手の手牌</h3></div><div class="peek-legend">青枠＝透明牌 / 濃色の裏面＝不透明牌</div><div id="peekInfo"></div></section>
     </section>
     <aside id="infoPanel" class="info-panel" aria-label="公開情報と対局情報">
@@ -940,7 +964,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.29</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.30</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
@@ -1997,7 +2021,7 @@ function renderPeek(){const refs=[1,2,3].map(j=>(localSeat()+j)%4);$('peekInfo')
 function renderLog(){$('logBox').innerHTML=G.logs.slice(0,10).map((s,i)=>`<div class="log-entry">${esc(s)}</div>`).join('');}
 function renderActionBar(){
  const buttons=$('actionButtons'),hint=$('selectedHint');buttons.innerHTML='';
- const bar=$('actionBar');bar.classList.add('is-empty');
+ const bar=$('actionBar');bar.classList.add('is-empty');bar.hidden=true;
  const seat=localSeat(),p=G.players[seat],myDiscard=G.turn===seat&&G.phase==='discard';
  const sel=p.hand.find(t=>t.id===G.selectedId),arrange=canArrangeMyHand();
  const list=[];
@@ -2016,11 +2040,17 @@ function renderActionBar(){
   if(arrange)list.push('<button type="button" class="action-btn subtle" data-action="deselect">解除</button>');
  }
  if(myDiscard){
-  // ツモ / キャンセル live on the table in renderReactions().
+  // Keep the main button in a stable location, disabled until a tile is selected.
+  if(!sel)list.push('<button type="button" class="action-btn primary" data-action="discard" disabled>打牌</button>');
+  // Tsumo confirmation takes precedence in renderReactions().
   if(getAnkanTypes(seat).length)list.unshift('<button type="button" class="action-btn" data-action="ankan">暗槓</button>');
  }
  buttons.innerHTML=list.join('');
- bar.classList.toggle('is-empty',!list.length&&!hint.textContent);
+ const active=Boolean(list.length||hint.textContent);
+ bar.classList.toggle('is-empty',!active);
+ // Never overlay the call/tsumo confirmation with a second set of buttons.
+ bar.hidden=!active||!$('reactPanel').hidden;
+ if(!bar.hidden)positionTableDecision();
 }
 let dismissedTsumoKey='';
 function tsumoOpportunityKey(){
@@ -2034,16 +2064,23 @@ function cancelTsumo(){
  if(!key)return;
  dismissedTsumoKey=key;
  renderReactions();
+ renderActionBar();
 }
 function positionTableDecision(){
- const panel=$('reactPanel');if(!panel||panel.hidden)return;
- const board=panel.closest('.arena'),river=$('riverBottom');
+ const board=document.querySelector('.arena'),river=$('riverBottom');
  if(!board||!river)return;
- // The origin of the six-by-three river is stable. Draw the choice strip
- // *after* the river, not below the board or on top of the discard tiles.
  const a=board.getBoundingClientRect(),r=river.getBoundingClientRect();
- const top=Math.max(0,Math.min(r.bottom-a.top+4,a.height-panel.offsetHeight-4));
- panel.style.top=top+'px';
+ const style=getComputedStyle(river),gap=parseFloat(style.rowGap)||1;
+ const rows=Math.max(1,Math.min(3,Math.ceil(river.querySelectorAll('.tile').length/6)));
+ const rowH=Math.max(0,(r.height-2*gap)/3);
+ const usedBottom=r.top-a.top+rows*rowH+(rows-1)*gap;
+ for(const panel of [$('reactPanel'),$('actionBar')]){
+  if(!panel||panel.hidden)continue;
+  // Follow occupied rows instead of three reserved empty rows: keep buttons
+  // between the player's discards and hand without covering the hand early.
+  const top=Math.max(0,Math.min(usedBottom+4,a.height-panel.offsetHeight-4));
+  panel.style.top=top+'px';
+ }
 }
 window.addEventListener('resize',positionTableDecision);
 function renderReactions(){
