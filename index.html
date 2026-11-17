@@ -729,6 +729,27 @@ body {
 @media(min-width:601px){.river-view-trigger{display:none}}
 @media(max-width:365px){.river-zoom{padding:9px;gap:7px}.river-zoom .river-zoom-grid{--river-preview-tw:37px;gap:2px}}
 
+
+/* v0.26: allocate enough vertical felt for readable 6x3 rivers on phones.
+   This complements the full-river inspector; users can read more at a glance. */
+@media(max-width:600px){
+  .arena{
+    height:clamp(515px,139vw,540px)!important;
+    min-height:clamp(515px,139vw,540px)!important;
+    --river-tw:clamp(19px,5.8vw,22.5px)!important;
+    --river-gap:1.2px!important;
+    --river-th:calc(var(--river-tw)*1.34)!important;
+  }
+  .river-top{top:18.9%!important}
+  .river-bottom{top:62.8%!important}
+  .river-left{left:calc(29% - var(--river-w)/2)!important;top:calc(49.4% - var(--river-h)/2)!important}
+  .river-right{left:calc(71% - var(--river-w)/2)!important;top:calc(49.4% - var(--river-h)/2)!important}
+  .seat-left{left:-21%!important}
+  .seat-right{right:-21%!important}
+  .seat-bottom{bottom:9%!important}
+  .river .tile.v17-face .face{inset:1px 0 1px!important}
+  .river .tile.v17-face .face>img.v17-art{filter:contrast(1.08) saturate(1.08)!important}
+}
 </style>
 </head>
 <body>
@@ -795,7 +816,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.25</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.26</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
