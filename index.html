@@ -499,7 +499,7 @@ body {
 @keyframes result-blood-sweep{from{width:var(--from)}to{width:var(--to)}}
 @media(prefers-reduced-motion:reduce){.result-blood-fill{animation:none}}
 
-/* v0.21 — clear table layout, top-of-table blood, stable deal flights. */
+/* v0.22 — clear table layout, top-of-table blood, stable deal flights. */
 /* Compact, readable blood meters immediately above the felt. */
 .blood-hud{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:4px 0 10px;min-width:0}
 .blood-hud .blood-card{min-height:76px;padding:9px 12px 7px;border-radius:9px;background:linear-gradient(150deg,#263d30,#203124 66%,#17251e)}
@@ -607,6 +607,44 @@ body {
 /* Move the discard counter above the felt; keep only dora and the bag in the middle. */
 .status-strip .center-status{max-width:none;color:#d2e3ce!important;text-shadow:none!important;font-size:11px!important;font-weight:600;letter-spacing:.02em;white-space:nowrap}
 @media(max-width:600px){.status-strip .center-status{font-size:10px!important;max-width:66%!important;overflow:hidden;text-overflow:ellipsis}}
+
+/* v0.22: fixed vector tile art. Never allow an inline SVG to determine its own
+   percentage size in a grid (WebKit sometimes grows the glyph 2-3x). */
+.tile.v17-face{isolation:isolate}
+.tile.v17-face .face{
+ position:absolute!important;
+ inset:3px 3px 4px!important;
+ display:block!important;
+ width:auto!important;
+ height:auto!important;
+ min-width:0!important;
+ min-height:0!important;
+ overflow:hidden!important;
+ contain:layout size paint!important;
+}
+.tile.v17-face .face>img.v17-art{
+ position:absolute!important;
+ inset:0!important;
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ min-width:0!important;
+ min-height:0!important;
+ max-width:100%!important;
+ max-height:100%!important;
+ aspect-ratio:72 / 100!important;
+ object-fit:contain!important;
+ object-position:center!important;
+ overflow:hidden!important;
+ opacity:1!important;
+ filter:none!important;
+ transform:none!important;
+ transition:none!important;
+ animation:none!important;
+ pointer-events:none!important;
+ -webkit-user-drag:none;
+}
+.tile.v17-face .face::before,.tile.v17-face .face::after{display:none!important}
 </style>
 </head>
 <body>
@@ -668,7 +706,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.21</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.22</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
@@ -1065,11 +1103,7 @@ function animateDraw(seat,tile,done){
  ghost.style.setProperty('--tile-width',naturalW+'px','important');
  ghost.style.setProperty('--tile-height',naturalH+'px','important');
  const ghostFace=ghost.querySelector('.face'),targetFace=target.querySelector('.face');
- if(ghostFace&&targetFace){
-  ghostFace.style.width=targetFace.offsetWidth+'px';
-  ghostFace.style.height=targetFace.offsetHeight+'px';
-  ghostFace.style.transform=getComputedStyle(targetFace).transform;
- }
+ if(ghostFace&&targetFace)ghostFace.style.transform=getComputedStyle(targetFace).transform;
  document.body.appendChild(ghost);
  const duration=G.settings.speed===110?230:seat===localSeat()?485:420;
  // Translation only: no scale(.55) => no changing size of the printed motif.
@@ -1515,13 +1549,24 @@ function v17Sou(n){
  }[n];
  return p.map(([x,y,s,c])=>v17Bamboo(x,y,s,c)).join('');
 }
+// iOS WebKit sometimes lays out percentage-sized *inline* SVGs using their
+// intrinsic 300x150 viewport after repeated DOM renders. That makes every
+// symbol suddenly grow even though the physical tile stays the same size.
+// Render the same custom vector paths as cached standalone SVG *images*.
+// Each image has a fixed native 72x100 viewport, independent of CSS grid,
+// and the image box is anchored to the tile rather than affecting layout.
+const V22_TILE_ART = new Map();
 function v17VectorFace(type){
  const suit=L.suit(type),num=L.num(type),key=`${suit}${num}`;
- let marks='';
- if(suit==='p')marks=v17Pin(num);
- else if(suit==='s')marks=v17Sou(num);
- else marks=V17_GLYPHS[key]||'';
- return `<svg class="v17-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${marks}</svg>`;
+ if(!V22_TILE_ART.has(key)){
+  let marks='';
+  if(suit==='p')marks=v17Pin(num);
+  else if(suit==='s')marks=v17Sou(num);
+  else marks=V17_GLYPHS[key]||'';
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="72" height="100" viewBox="0 0 72 100" preserveAspectRatio="xMidYMid meet">${marks}</svg>`;
+  V22_TILE_ART.set(key,`data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`);
+ }
+ return `<img class="v17-art" src="${V22_TILE_ART.get(key)}" width="72" height="100" alt="" draggable="false" decoding="sync"/>`;
 }
 function mahjongTileFace(type){return `<span class="face v17-icon">${v17VectorFace(type)}</span>`;}
 
