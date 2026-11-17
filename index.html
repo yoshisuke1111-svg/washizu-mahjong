@@ -499,7 +499,7 @@ body {
 @keyframes result-blood-sweep{from{width:var(--from)}to{width:var(--to)}}
 @media(prefers-reduced-motion:reduce){.result-blood-fill{animation:none}}
 
-/* v0.22 — clear table layout, top-of-table blood, stable deal flights. */
+/* v0.23 — clear table layout, top-of-table blood, stable deal flights. */
 /* Compact, readable blood meters immediately above the felt. */
 .blood-hud{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:4px 0 10px;min-width:0}
 .blood-hud .blood-card{min-height:76px;padding:9px 12px 7px;border-radius:9px;background:linear-gradient(150deg,#263d30,#203124 66%,#17251e)}
@@ -608,7 +608,7 @@ body {
 .status-strip .center-status{max-width:none;color:#d2e3ce!important;text-shadow:none!important;font-size:11px!important;font-weight:600;letter-spacing:.02em;white-space:nowrap}
 @media(max-width:600px){.status-strip .center-status{font-size:10px!important;max-width:66%!important;overflow:hidden;text-overflow:ellipsis}}
 
-/* v0.22: fixed vector tile art. Never allow an inline SVG to determine its own
+/* v0.23: fixed vector tile art. Never allow an inline SVG to determine its own
    percentage size in a grid (WebKit sometimes grows the glyph 2-3x). */
 .tile.v17-face{isolation:isolate}
 .tile.v17-face .face{
@@ -706,7 +706,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.22</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.23</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
@@ -974,29 +974,29 @@ function stopTimers(){
 }
 function newPlayer(seat){return {seat,name:NET.mode==='host'?(NET.members[seat]?.name||`CPU ${seat+1}`):SEATS[seat].name,score:25000,hand:[],melds:[],discards:[],riichi:false,ippatsu:false,riichiTurn:-1,tempFuriten:false,justDrawn:null};}
 function partnerSeat(seat){return (seat+2)%4;}
-// CPU 理牌: form only occasional 2-3 tile groups, never a suit-wide block.
-// The resulting hand order is intentionally non-deterministic; hand types/values
-// are unchanged and the human player's order is never touched.
+// CPU 理牌: moderately stronger than v0.23. Build some pairs and short
+// consecutive groups without sorting whole suits into fixed left/right blocks.
+// All operations change tile positions only; tile IDs, values and ownership stay
+// unchanged. A human player's hand is never automatically rearranged.
 function cpuLayoutScore(hand){
- // Look for small groups/pairs and adjacent runs, not whole-suit sorting.
  let score=0,run=1;
  for(let i=1;i<hand.length;i++){
   const a=hand[i-1],b=hand[i],sameSuit=L.suit(a.type)===L.suit(b.type);
   if(sameSuit){
    run++;
    const gap=Math.abs(L.num(a.type)-L.num(b.type));
-   score+=gap===0?5.5:gap===1?4.2:gap===2?2.2:-1.4;
-   // A group of four or fewer can look natural; a longer block gives away the suit.
-   if(run>4)score-=14*(run-4);
+   score+=gap===0?7.0:gap===1?5.3:gap===2?2.6:-1.7;
+   // Up to 4-5 same-suit tiles can sit together, but all-of-a-suit sorting
+   // remains heavily discouraged so see-through hands do not read like charts.
+   if(run>5)score-=14*(run-5);
   }else run=1;
  }
- // Reward a triplet-like or run-like structure inside short groups.
  for(let i=2;i<hand.length;i++){
   const a=hand[i-2],b=hand[i-1],c=hand[i];
   if(L.suit(a.type)!==L.suit(b.type)||L.suit(b.type)!==L.suit(c.type))continue;
   const ns=[L.num(a.type),L.num(b.type),L.num(c.type)].sort((x,y)=>x-y);
-  if(ns[0]===ns[2])score+=4.5;
-  else if(ns[0]+1===ns[1]&&ns[1]+1===ns[2])score+=4.0;
+  if(ns[0]===ns[2])score+=5.6;
+  else if(ns[0]+1===ns[1]&&ns[1]+1===ns[2])score+=5.1;
  }
  return score;
 }
@@ -1015,27 +1015,30 @@ function cpuMutation(a){
 function cpuArrangeOpening(seat){
  if(!isCpuSeat(seat))return;
  const p=G.players[seat];let best=p.hand.slice(),high=-Infinity;
- // A few local optimizations give natural 2-4 tile clusters without automatic sort.
- for(let i=0;i<190;i++){
-  let candidate=i%4===0?cpuShuffleCopy(p.hand):cpuMutation(best);
-  const score=cpuLayoutScore(candidate)+Math.random()*4.0;
+ // More local optimization than before: usually a few useful pairs/runs are
+ // brought together, but random restarts prevent an identical tidy pattern.
+ for(let i=0;i<330;i++){
+  const candidate=i%5===0?cpuShuffleCopy(p.hand):cpuMutation(best);
+  const score=cpuLayoutScore(candidate)+Math.random()*3.2;
   if(score>high){best=candidate;high=score;}
  }
  p.hand=best;
 }
 function cpuMaybeTidy(seat){
  const p=G.players[seat];
- if(!isCpuSeat(seat)||p.riichi||p.hand.length<5||Math.random()>.69)return;
- // One or occasionally two small adjustments after a draw, not a complete reorder.
- for(let turn=0;turn<(Math.random()<.22?2:1);turn++){
+ if(!isCpuSeat(seat)||p.riichi||p.hand.length<5||Math.random()>.83)return;
+ // After draws, make usually 1-2 small moves, occasionally 3. Keep the
+ // randomness needed to avoid telegraphing suits through transparent tiles.
+ const moves=Math.random()<.10?3:(Math.random()<.45?2:1);
+ for(let turn=0;turn<moves;turn++){
   const base=cpuLayoutScore(p.hand),candidates=[];
-  for(let i=0;i<50;i++){
-   const arr=cpuMutation(p.hand),score=cpuLayoutScore(arr)+Math.random()*2.2;
-   if(score>=base-1.2)candidates.push({arr,score});
+  for(let i=0;i<70;i++){
+   const arr=cpuMutation(p.hand),score=cpuLayoutScore(arr)+Math.random()*1.9;
+   if(score>=base-1.6)candidates.push({arr,score});
   }
   if(candidates.length){
    candidates.sort((a,b)=>b.score-a.score);
-   p.hand=candidates[Math.floor(Math.random()*Math.min(3,candidates.length))].arr;
+   p.hand=candidates[Math.floor(Math.random()*Math.min(4,candidates.length))].arr;
   }
  }
 }
