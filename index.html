@@ -751,7 +751,7 @@ body {
   .river .tile.v17-face .face>img.v17-art{filter:contrast(1.08) saturate(1.08)!important}
 }
 
-/* v0.30: truly larger discarded tiles. Top and bottom rivers use more felt width;
+/* v0.31: truly larger discarded tiles. Top and bottom rivers use more felt width;
    side rivers have their own compact scale to clear the players' hands. */
 @media(max-width:600px){
  .arena{height:clamp(550px,143vw,615px)!important;min-height:clamp(550px,143vw,615px)!important;
@@ -790,12 +790,12 @@ body {
 @media(min-width:981px){
  .river .tile.v17-face .face{inset:.75px!important}
 }
-/* v0.30 desktop rivers: preserve enough separation from bottom name. */
+/* v0.31 desktop rivers: preserve enough separation from bottom name. */
 @media(min-width:981px){
  .arena{--river-tw:clamp(23px,1.85vw,25px);--river-th:calc(var(--river-tw)*1.36)}
  .river-bottom{top:58.2%!important}
 }
-/* v0.30: shared, mandatory post-hand yaku and dora reveal, phone-friendly. */
+/* v0.31: shared, mandatory post-hand yaku and dora reveal, phone-friendly. */
 .result-root{z-index:245!important}
 .result-root .result-modal{width:min(680px,100%)!important;max-height:calc(100dvh - 24px)!important;overflow-y:auto!important;padding:21px 22px!important;text-align:center}
 .result-agari{display:flex;flex-direction:column;gap:9px;text-align:left;margin:13px 0;padding:14px;background:linear-gradient(155deg,#203e32,#172a25);border:1px solid #83a88a77;border-radius:11px}
@@ -845,7 +845,7 @@ body {
  .result-agari-heading{font-size:12px}
  .result-agari-heading strong{font-size:15px}
 }
-/* v0.30 — table-level call & win decisions, between river and hand.
+/* v0.31 — table-level call & win decisions, between river and hand.
    No secondary reaction strip below the player's large mobile hand. */
 .arena .table-decision{
  position:absolute!important;z-index:28!important;left:50%!important;bottom:auto!important;
@@ -875,7 +875,7 @@ body {
  .table-decision .action-btn{min-width:58px!important;padding:6px 7px!important}
 }
 
-/* v0.30: all game decisions (discard/riichi/kan/calls/tsumo) are on the felt.
+/* v0.31: all game decisions (discard/riichi/kan/calls/tsumo) are on the felt.
    Keep a single interactive strip between the player's river and hand. */
 .arena .table-action{
  min-height:0!important;max-height:none!important;
@@ -897,6 +897,121 @@ body {
 }
 @media(max-width:365px){
  .table-action .action-btn{min-width:57px!important;padding:6px 7px!important}
+}
+/* v0.31 — original square central console inspired by classic mahjong table layouts,
+   NOT a copy of the reference site's artwork, colors, score panel or controls.
+   Keep the central draw source (.center-hole) for tile-flight animation. */
+.center-console{
+ --console-size:clamp(86px,8.2vw,102px);
+ top:47.6%!important;left:50%!important;width:var(--console-size)!important;
+ transform:translate(-50%,-50%)!important;display:flex!important;
+ flex-direction:column!important;align-items:stretch!important;
+ gap:3px!important;max-width:none!important;pointer-events:none;
+ filter:drop-shadow(0 5px 7px rgba(2,12,9,.5));
+}
+.center-console .console-plate{
+ width:var(--console-size);height:var(--console-size);flex:none;
+ display:grid;grid-template-rows:22% 57% 21%;box-sizing:border-box;
+ border:2px solid #b99c62;border-radius:9px;
+ background:linear-gradient(145deg,#203c35 0%,#0e1f20 38%,#061419 100%);
+ box-shadow:inset 0 0 0 1px rgba(231,206,147,.27),
+    inset 0 4px 9px rgba(121,183,159,.12),0 0 0 2px rgba(17,35,27,.85);
+ color:#f5e9c4;overflow:hidden;position:relative;
+}
+.center-console .console-plate:before{
+ content:'';position:absolute;inset:3px;border:1px solid rgba(126,177,146,.28);
+ border-radius:5px;pointer-events:none;
+}
+.center-console .console-header,
+.center-console .console-footer{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:2px;padding:0 6px;min-width:0;
+ font-variant-numeric:tabular-nums;position:relative;z-index:1;
+}
+.center-console .console-header{border-bottom:1px solid #c9ae7766;background:#13332e99}
+.center-console .console-header strong{font-size:clamp(8px,1.12vw,12px);line-height:1;white-space:nowrap;color:#ffedbd;font-weight:800;letter-spacing:-.03em}
+.center-console #consoleHonba{font-size:clamp(7px,.88vw,10px);font-weight:700;white-space:nowrap;color:#d9e2cd}
+.center-console .console-footer{border-top:1px solid #c9ae7754;background:#0e292599}
+.center-console .console-footer span{font-size:clamp(6.5px,.82vw,9px);font-weight:650;line-height:1;white-space:nowrap;color:#b9d8d0}
+.center-console .console-compass{
+ padding:1px 3px;position:relative;
+ display:grid;grid-template-columns:minmax(0,1fr) 30% minmax(0,1fr);
+ grid-template-rows:23% 54% 23%;gap:0;
+ width:100%;height:100%;align-items:center;justify-items:center;
+}
+.center-console .console-seat{color:#d2e1d5;min-width:0;line-height:1;font-variant-numeric:tabular-nums;
+ display:flex;align-items:center;justify-content:center;gap:1px;white-space:nowrap;
+ padding:1px;border-radius:3px;border:1px solid transparent;
+ font-size:clamp(6px,.75vw,9px);text-shadow:0 1px 2px #061011;
+}
+.center-console .console-seat em{font-weight:800;font-style:normal}
+.center-console .console-seat small{font-family:Arial,sans-serif;font-size:clamp(5.4px,.64vw,7px);font-weight:700;color:#c3d1c8}
+.center-console .console-seat.is-dealer{border-color:rgba(249,219,141,.75);color:#ffe1a1;background:#82652e56}
+.center-console .console-seat.is-active{box-shadow:0 0 5px rgba(240,218,156,.32)}
+.center-console .console-seat.team-green:not(.is-dealer) em{color:#a5e3b2}
+.center-console .console-seat.team-red:not(.is-dealer) em{color:#f4afad}
+.center-console .console-north{grid-column:1/4;grid-row:1}
+.center-console .console-south{grid-column:1/4;grid-row:3}
+.center-console .console-west{grid-column:1;grid-row:2;flex-direction:column}
+.center-console .console-east{grid-column:3;grid-row:2;flex-direction:column}
+.center-console .center-hole.console-bag{
+ grid-column:2;grid-row:2;width:100%;height:auto;aspect-ratio:1;
+ border:1px solid #bcaa7b99;border-radius:50%;display:grid;place-items:center;
+ background:radial-gradient(circle at 45% 28%,#527265,#192d2a 42%,#081817 80%);
+ box-shadow:inset 0 1px 3px #020a0888,0 0 0 1px #0d2220;
+ color:#e9d4a6;overflow:hidden!important;
+}
+.center-console .console-bag-mark{font-family:serif;font-size:clamp(12px,1.6vw,21px);
+ line-height:1!important;letter-spacing:0!important;color:#e1c58a}
+.center-console .center-dora.console-dora{
+ box-sizing:border-box;width:100%;height:27px;max-width:100%;border-radius:5px!important;
+ margin:0!important;padding:2px 3px!important;gap:3px!important;
+ display:flex!important;align-items:center;justify-content:center;
+ white-space:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;
+ border:1px solid #a48c5b9e!important;
+ background:linear-gradient(120deg,#19382c,#081e1d)!important;
+ box-shadow:0 3px 7px #04150d8f;
+}
+.center-console .console-dora::-webkit-scrollbar{display:none}
+.center-console .console-dora-label{font-size:8px;line-height:1;flex:none;color:#eddcaa;font-weight:800}
+.center-console .center-dora .tile.mini{--tile-width:15px!important;--tile-height:21px!important;
+ width:var(--tile-width)!important;height:var(--tile-height)!important;flex:none!important}
+/* A desktop console has room for scores. Phones favor the winds and large discard glyphs. */
+@media (min-width:981px){
+ .center-console{--console-size:100px;top:47.7%!important}
+ .center-console .console-header strong{font-size:12px}
+ .center-console .console-header span{font-size:9px}
+ .center-console .console-footer span{font-size:9px}
+ .center-console .console-seat{font-size:9px}
+ .center-console .console-seat small{font-size:7px}
+}
+@media (min-width:601px) and (max-width:980px){
+ .center-console{--console-size:clamp(76px,9.8vw,94px);top:47.7%!important}
+}
+@media (max-width:600px){
+ .center-console{--console-size:clamp(60px,19.8vw,79px);top:48.6%!important;gap:2px!important}
+ .center-console .console-plate{border-radius:7px;border-width:1.5px}
+ .center-console .console-header,.center-console .console-footer{padding:0 4px}
+ .center-console .console-header strong{font-size:clamp(7px,1.9vw,9px)}
+ .center-console #consoleHonba{font-size:clamp(6px,1.7vw,8px)}
+ .center-console .console-footer span{font-size:clamp(6px,1.4vw,7px)}
+ .center-console .console-seat{font-size:clamp(6px,1.7vw,8px)}
+ .center-console .console-seat small{font-size:clamp(5px,1.4vw,6px)}
+ .center-console .console-bag-mark{font-size:clamp(12px,3.8vw,16px)}
+ .center-console .center-dora.console-dora{height:25px}
+ .center-console .center-dora .tile.mini{--tile-width:14px!important;--tile-height:20px!important}
+ .center-console .console-dora-label{font-size:7px}
+}
+@media(max-width:365px){
+ .center-console{--console-size:55px;top:48.6%!important}
+ .center-console .console-header strong{font-size:7px}
+ .center-console #consoleHonba{font-size:6px}
+ .center-console .console-footer span{font-size:6px}
+ .center-console .console-compass{grid-template-columns:minmax(0,1fr) 29% minmax(0,1fr);padding:0 1px}
+ .center-console .console-seat small{display:none}
+ .center-console .console-seat{font-size:6.5px}
+ .center-console .center-dora.console-dora{height:23px;padding:1px!important}
+ .center-console .center-dora .tile.mini{--tile-width:13px!important;--tile-height:19px!important}
 }
 </style>
 </head>
@@ -930,9 +1045,19 @@ body {
           <div id="riverLeft" class="river river-left" aria-label="左家の捨て牌"></div>
           <div id="riverRight" class="river river-right" aria-label="右家の捨て牌"></div>
           <div id="riverBottom" class="river river-bottom" aria-label="自分の捨て牌"></div>
-          <div id="centerPlate" class="center-plate">
-            <div class="center-rim"><div class="center-hole"><div class="bag-glyph">鷲</div><span>牌 袋</span></div></div>
-            <div id="centerDora" class="center-dora">ドラ表示 <span class="mini-empty">—</span></div>
+          <div id="centerPlate" class="center-plate center-console" aria-label="局情報・供託・親・ドラ">
+            <div class="console-plate">
+              <div class="console-header"><strong id="consoleRound">東1局</strong><span id="consoleHonba">0本</span></div>
+              <div class="console-compass" aria-label="席順と点数">
+                <span class="console-seat console-north" id="consoleSeatTop"></span>
+                <span class="console-seat console-west" id="consoleSeatLeft"></span>
+                <div class="center-hole console-bag" title="牌袋"><span class="console-bag-mark">鷲</span></div>
+                <span class="console-seat console-east" id="consoleSeatRight"></span>
+                <span class="console-seat console-south" id="consoleSeatBottom"></span>
+              </div>
+              <div class="console-footer"><span id="consoleSticks">供託 0</span><span id="consoleRemain">残 82</span></div>
+            </div>
+            <div id="centerDora" class="center-dora console-dora" aria-label="ドラ表示牌">ドラ <span class="mini-empty">—</span></div>
           </div>
           <div id="reactPanel" class="react-panel table-decision" role="group" aria-label="鳴き・和了の選択" hidden></div>
           <div id="actionBar" class="action-bar table-decision table-action" role="group" aria-label="打牌・立直・手牌操作" hidden>
@@ -964,7 +1089,7 @@ body {
 </div>
 <div id="modalRoot" class="modal-root">
   <div id="setupModal" class="modal setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
-    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.30</span></div>
+    <div class="setup-title-row"><span class="label-caps">麻雀</span><span class="test-pill">v0.31</span></div>
     <div class="setup-intro"><div class="setup-crests">麻<span>雀</span></div><div><h1 id="setupTitle">麻雀</h1></div></div>
     <div class="setup-content">
       <div class="setup-block"><span class="setup-num">01</span><div class="setup-block-body"><label for="stakeMode">勝負方式</label><select id="stakeMode"><option value="both" selected>両代表：血液</option><option value="original">挑戦者：血液 / 相手：資産</option></select></div></div>
@@ -2102,11 +2227,31 @@ function renderReactions(){
  panel.hidden=false;
  positionTableDecision();
 }
+// Independent, original square center console: in-game values are authoritative.
+// Scores and wind markers rotate with the local player's view in online rooms.
+function renderCenterConsole(){
+ if(!G)return;
+ const turnWind=G.handIndex<4?'東':'南';
+ $('consoleRound').textContent=turnWind+((G.handIndex%4)+1)+'局';
+ $('consoleHonba').textContent=G.honba+'本';
+ $('consoleSticks').textContent='供託 '+Math.round(G.riichiPot/1000);
+ $('consoleRemain').textContent='残 '+G.wall.length;
+ const positions=[['consoleSeatBottom',0],['consoleSeatRight',1],['consoleSeatTop',2],['consoleSeatLeft',3]];
+ for(const [elementId,relative] of positions){
+  const absolute=(localSeat()+relative)%4,p=G.players[absolute],node=$(elementId);
+  const wind=['東','南','西','北'][(absolute-G.dealer+4)%4];
+  node.className='console-seat '+(['console-south','console-east','console-north','console-west'][relative])+' '+teamClass(absolute)+(absolute===G.dealer?' is-dealer':'')+(absolute===G.turn?' is-active':'');
+  node.title=(absolute===G.dealer?'親 · ':'')+p.name+' · '+format(p.score)+'点';
+  node.innerHTML='<em>'+wind+'</em><small class="console-points">'+(p.score/1000).toFixed(1)+'</small>';
+ }
+}
 function render(){if(!G)return;
  $('roundTag').textContent=roundLabel();$('phaseLabel').textContent=G.phase==='result'?'精算':G.phase==='react'?'鳴き選択':G.phase==='drawing'?'ツモ':G.turn===localSeat()?(G.phase==='draw'?'ツモ':'あなたの番'):'相手の番';
  const doraHtml=`ドラ ${G.dora.map(t=>tileHtml({type:t,clear:false,id:'dora'}, {mini:true})).join('')}`;
  $('doraLabel').innerHTML=`${doraHtml} <span style="font-size:9px;color:#a3b5a9">→ ${G.dora.map(L.nextDora).map(L.tileName).join(' / ')}</span>`;
- $('centerDora').innerHTML=doraHtml;
+ $('centerDora').innerHTML='<span class="console-dora-label">ドラ</span>'+G.dora.map(t=>tileHtml({type:t,clear:false,id:'dora'}, {mini:true})).join('');
+ $('centerDora').title='ドラ '+G.dora.map(L.nextDora).map(L.tileName).join(' / ');
+ renderCenterConsole();
  renderSeat((localSeat()+2)%4,'seatTop');renderSeat((localSeat()+3)%4,'seatLeft');renderSeat((localSeat()+1)%4,'seatRight');renderSeat(localSeat(),'seatBottom');renderMobileHand();renderRivers();
  $('centerStatus').textContent=`捨て牌 ${G.discardCount}/70 · 残り ${G.wall.length}`;
  renderReactions();renderActionBar();renderBlood();renderScores();renderTeamStrip();renderPeek();renderLog();
